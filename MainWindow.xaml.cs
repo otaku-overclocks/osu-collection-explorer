@@ -23,7 +23,7 @@ namespace osu_collection_manager
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         OsuDb mapList = OsuDb.Read(@"C:\Users\Jérémy\AppData\Local\osu!\osu!.db");
