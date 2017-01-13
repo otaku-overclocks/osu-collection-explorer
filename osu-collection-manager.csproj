@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="osu-database-reader\osu-database-reader\osu-database-reader.csproj">
+      <Project>{c3078606-8055-4122-845d-7f9a0154883d}</Project>
+      <Name>osu-database-reader</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
