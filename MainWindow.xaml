@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="osu! collections manager" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!-- Collections -->
+        <Button x:Name="readCollection" Content="Button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="readCollection_Click"/>
+        <TreeView x:Name="CollectionTreeView" Margin="10,40,10,35"/>
+        <TextBlock x:Name="version" HorizontalAlignment="Left" Margin="90,0,0,12" TextWrapping="Wrap" Height="16" VerticalAlignment="Bottom"/>
+        <Label Content="Collections" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top"/>
+        <!-- osu! map list -->
+        <Button x:Name="readOsuDatabase" Content="Button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="readOsuDatabase_Click" Grid.Column="1"/>
+        <TreeView x:Name="OsuDatabaseTreeView" Margin="10,40,11,35" Grid.Column="1"/>
+        <TextBlock x:Name="OsuDatabaseVersion" HorizontalAlignment="Left" Margin="90,0,0,12" TextWrapping="Wrap" Height="16" VerticalAlignment="Bottom" Grid.Column="1"/>
+        <Label Content="Map list" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+
     </Grid>
 </Window>
