@@ -22,7 +22,7 @@ namespace osu_collection_manager
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
     }
 }
