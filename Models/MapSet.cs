@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace osu_collection_manager.Models
 {
+    [DataContract]
     public class MapSet
     {
+        [DataMember]
         public string Artist { get; set; }
+        [DataMember]
         public string Title { get; set; }
+        [DataMember]
         public int SetID { get; set; }
         public List<Beatmap> Maps { get; set; }
 
