@@ -73,6 +73,7 @@
     <Compile Include="Managers\LocalSongManager.cs" />
     <Compile Include="Models\Beatmap.cs" />
     <Compile Include="Models\Collection.cs" />
+    <Compile Include="Models\MapSet.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

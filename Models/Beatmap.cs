@@ -11,10 +11,14 @@ namespace osu_collection_manager.Models
 {
     public class Beatmap
     {
+        [Obsolete]
         public string Artist { get; set; }
+        [Obsolete]
         public string Title { get; set; }
+
+        public BeatmapEntry Entry { get; set; }
         public string Difficulty { get; set; }
-        public int SongID { get; set; }
+        public int MapID { get; set; }
 
         public string MD5Hash { get; set; } //TODO: if newly added, calc from file
 
@@ -22,8 +26,9 @@ namespace osu_collection_manager.Models
         {
             Artist = entry.Artist;
             Title = entry.Title;
+            Entry = entry;
             Difficulty = entry.Difficulty;
-            SongID = entry.BeatmapSetId;
+            MapID = entry.BeatmapId;
             MD5Hash = entry.BeatmapChecksum;
         }
 
