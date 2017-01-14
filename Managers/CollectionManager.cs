@@ -69,10 +69,13 @@ namespace osu_collection_manager.Managers
                     foreach (var collection in _collections)
                     {
                         w.Write(collection.Name);
-                        w.Write(collection.Beatmaps.Count);
-                        foreach (var map in collection.Beatmaps)
+                        w.Write(collection.MapSets.Count);
+                        foreach (var mapSet in collection.MapSets)
                         {
-                            w.Write(map.MD5Hash);
+                            foreach (var map in mapSet.Maps)
+                            {
+                                w.Write(map.MD5Hash);
+                            }
                         }
                     }
                 }
