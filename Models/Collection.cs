@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace osu_collection_manager.Models
 {
+    [DataContract]
     public class Collection
     {
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public List<MapSet> MapSets { get; set; }
 
         public Collection(string name, List<Beatmap> beatmaps)
