@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using osu_collection_manager.Models;
@@ -34,16 +35,16 @@ namespace osu_collection_manager.Managers
             _collections = new List<Collection>();
             try
             {
-                using (CustomReader r = new CustomReader(File.OpenRead(Preferences.CollectionsDBPath)))
+                using (var r = new CustomReader(File.OpenRead(Preferences.CollectionsDBPath)))
                 {
                     _osuVersion = r.ReadInt32();
-                    int amount = r.ReadInt32();
-                    for (int i = 0; i < amount; i++)
+                    var amount = r.ReadInt32();
+                    for (var i = 0; i < amount; i++)
                     {
                         var name = r.ReadString();
-                        int size = r.ReadInt32();
+                        var size = r.ReadInt32();
                         var beatmaps = new List<Beatmap>(size);
-                        for (int j = 0; j < size; j++)
+                        for (var j = 0; j < size; j++)
                         {
                             var map = LocalSongManager.FindByHash(r.ReadString());
                             if (map != null) beatmaps.Add(new Beatmap(map));
@@ -62,7 +63,7 @@ namespace osu_collection_manager.Managers
         {
             try
             {
-                using (CustomWriter w = new CustomWriter(File.Open(Preferences.CollectionsDBPath, FileMode.Create)))
+                using (var w = new CustomWriter(File.Open(Preferences.CollectionsDBPath, FileMode.Create)))
                 {
                     w.Write(_osuVersion);
                     w.Write(_collections.Count);
@@ -86,6 +87,15 @@ namespace osu_collection_manager.Managers
             }
         }
 
-
+        //TODO: make it write to file or automatically upload somewhere
+        public static string WriteToString(CollectionsFile fileModel)
+        {
+            var stream1 = new MemoryStream();
+            var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
+            ser.WriteObject(stream1, fileModel);
+            stream1.Position = 0;
+            var sr = new StreamReader(stream1);
+            return sr.ReadToEnd();
+        }
     }
 }
