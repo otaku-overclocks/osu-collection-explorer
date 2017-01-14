@@ -23,13 +23,13 @@ namespace osu_collection_manager.Managers
             {
                 if (_collections == null)
                 {
-                    ReadCollections();
+                    ReadCollectionsDB();
                 }
                 return _collections;
             }
         }
 
-        private static void ReadCollections()
+        private static void ReadCollectionsDB()
         {
             _collections = new List<Collection>();
             try
@@ -58,7 +58,7 @@ namespace osu_collection_manager.Managers
             }
         }
 
-        public static void WriteCollections()
+        public static void WriteCollectionsDB()
         {
             try
             {
@@ -85,5 +85,7 @@ namespace osu_collection_manager.Managers
                 Debug.Fail(e.Message);
             }
         }
+
+
     }
 }
