@@ -67,7 +67,7 @@ namespace UnitTests
         public void TestBloodcat()
         {
             DownloadManager.StartDownload(new MapSet("me", "me", 385427, new List<Beatmap>()));
-            Debug.WriteLine("Downlaoded");
+            Debug.WriteLine("Downlaodededzxczxzzx");
         }
     }
 }

@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using osu_database_reader;
 
-
 namespace osu_collection_manager
 {
     /// <summary>
@@ -125,6 +124,8 @@ namespace osu_collection_manager
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Preferences.OsuInstallationPath = path.Text;
+        }
+
         }
     }
 }
