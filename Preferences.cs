@@ -14,5 +14,8 @@ namespace osu_collection_manager
         public static string OsuInstallationPath = $@"G:\Games\OsuTest\";
         public static string CollectionsDBPath { get { return OsuInstallationPath + "collection.db"; } }
         public static string OsuDBPath { get { return OsuInstallationPath + "osu!.db"; } }
+
+        public static int BloodcatThreadCount = 8;
+        public static string BloodcatDownloadLink = "http://bloodcat.com/osu/s/";
     }
 }
