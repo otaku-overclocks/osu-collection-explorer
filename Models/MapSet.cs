@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace osu_collection_manager.Models
 {
+    [DataContract]
     public class MapSet
     {
+        [DataMember]
         public string Artist { get; set; }
+        [DataMember]
         public string Title { get; set; }
+        [DataMember]
         public int SetID { get; set; }
+        /// <summary>
+        /// Not present when read from file
+        /// </summary>
         public List<Beatmap> Maps { get; set; }
+        public string Folder { get; set; }
 
         public MapSet(List<Beatmap> beatmaps)
         {
@@ -22,6 +31,7 @@ namespace osu_collection_manager.Models
             Title = beatmaps[0].Entry.Title;
             SetID = beatmaps[0].Entry.BeatmapSetId;
             Maps = beatmaps;
+            Folder = beatmaps[0].Entry.FolderName;
         }
 
         public MapSet(string artist, string title, int setId, List<Beatmap> maps)
@@ -30,6 +40,11 @@ namespace osu_collection_manager.Models
             Title = title;
             SetID = setId;
             Maps = maps;
+        }
+
+        public string GetBloodcatLink()
+        {
+            return $"{Preferences.BloodcatDownloadLink}{SetID}";
         }
     }
 }

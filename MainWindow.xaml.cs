@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using osu_database_reader;
 
+
 namespace osu_collection_manager
 {
     /// <summary>
@@ -35,14 +36,45 @@ namespace osu_collection_manager
         {
             CollectionDb db = CollectionDb.Read(Preferences.CollectionsDBPath);
             version.Text = Convert.ToString(db.OsuVersion);
+            List<Collection> collections = new List<Collection>();
             foreach (Collection dbCollec in db.Collections)
             {
                 TreeViewItem listBoxCollec = new TreeViewItem();
                 listBoxCollec.Header = dbCollec.Name;
+                Dictionary<int, List<BeatmapEntry>> mapsets = new Dictionary<int, List<BeatmapEntry>>();
+                bool isMapsetInCollection = false;
                 foreach (string map in dbCollec.Md5Hashes)
                 {
+                    int mapsetId = 0;
                     BeatmapEntry beatmap = Managers.LocalSongManager.FindByHash(map);
-                    listBoxCollec.Items.Add(beatmap.Artist + " - " + beatmap.Title + " [" + beatmap.Difficulty + "] (mapped by " + beatmap.Creator + ")");
+                    // listBoxCollec.Items.Add(beatmap.Artist + " - " + beatmap.Title + " [" + beatmap.Difficulty + "] (mapped by " + beatmap.Creator + ")");
+                    foreach (KeyValuePair<int,List<BeatmapEntry>> key in mapsets)
+                    {
+                        if (Convert.ToInt32(beatmap.BeatmapSetId)==key.Key)
+                        {
+                            isMapsetInCollection = true;
+                            mapsetId = Convert.ToInt32(beatmap.BeatmapSetId);
+                        }
+                    }
+                    if (!isMapsetInCollection)
+                    {
+                        mapsets.Add(Convert.ToInt32(beatmap.BeatmapSetId), new List<BeatmapEntry> { beatmap });
+                    }
+                    else
+                    {
+                        mapsets[mapsetId].Add(beatmap);
+                    }                    
+                }
+                foreach (KeyValuePair<int, List<BeatmapEntry>> mapset in mapsets)
+                {
+                    TreeViewItem collecMapset = new TreeViewItem();
+                    BeatmapEntry temp = mapset.Value[0];
+                    collecMapset.Header = temp.Artist + " - " + temp.Title + " (mapped by " + temp.Creator + ")";
+                    foreach (BeatmapEntry map in mapset.Value)
+                    {
+                        collecMapset.Items.Add(map.Difficulty);
+                    }
+                    listBoxCollec.Items.Add(collecMapset);
                 }
                 CollectionTreeView.Items.Add(listBoxCollec);
             }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using osu_collection_manager.Models;
 using osu_database_reader;
 using Collection = osu_collection_manager.Models.Collection;
@@ -23,27 +25,27 @@ namespace osu_collection_manager.Managers
             {
                 if (_collections == null)
                 {
-                    ReadCollections();
+                    ReadCollectionsDB();
                 }
                 return _collections;
             }
         }
 
-        private static void ReadCollections()
+        private static void ReadCollectionsDB()
         {
             _collections = new List<Collection>();
             try
             {
-                using (CustomReader r = new CustomReader(File.OpenRead(Preferences.CollectionsDBPath)))
+                using (var r = new CustomReader(File.OpenRead(Preferences.CollectionsDBPath)))
                 {
                     _osuVersion = r.ReadInt32();
-                    int amount = r.ReadInt32();
-                    for (int i = 0; i < amount; i++)
+                    var amount = r.ReadInt32();
+                    for (var i = 0; i < amount; i++)
                     {
                         var name = r.ReadString();
-                        int size = r.ReadInt32();
+                        var size = r.ReadInt32();
                         var beatmaps = new List<Beatmap>(size);
-                        for (int j = 0; j < size; j++)
+                        for (var j = 0; j < size; j++)
                         {
                             var map = LocalSongManager.FindByHash(r.ReadString());
                             if (map != null) beatmaps.Add(new Beatmap(map));
@@ -58,11 +60,11 @@ namespace osu_collection_manager.Managers
             }
         }
 
-        public static void WriteCollections()
+        public static void WriteCollectionsDB()
         {
             try
             {
-                using (CustomWriter w = new CustomWriter(File.Open(Preferences.CollectionsDBPath, FileMode.Create)))
+                using (var w = new CustomWriter(File.Open(Preferences.CollectionsDBPath, FileMode.Create)))
                 {
                     w.Write(_osuVersion);
                     w.Write(_collections.Count);
