@@ -28,6 +28,7 @@ namespace osu_collection_manager.Managers
         public static void StartDownload(MapSet set)
         {
             TestTask(set).Wait();
+            //TODO: Only for tests
         }
 
         private static Task TestTask(MapSet set)
