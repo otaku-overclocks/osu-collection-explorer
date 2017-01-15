@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using osu_collection_manager.Models;
 using osu_database_reader;
 using Collection = osu_collection_manager.Models.Collection;
@@ -85,17 +86,6 @@ namespace osu_collection_manager.Managers
             {
                 Debug.Fail(e.Message);
             }
-        }
-
-        //TODO: make it write to file or automatically upload somewhere
-        public static string WriteToString(CollectionsFile fileModel)
-        {
-            var stream1 = new MemoryStream();
-            var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
-            ser.WriteObject(stream1, fileModel);
-            stream1.Position = 0;
-            var sr = new StreamReader(stream1);
-            return sr.ReadToEnd();
         }
     }
 }
