@@ -21,6 +21,7 @@ namespace osu_collection_manager.Models
         /// Not present when read from file
         /// </summary>
         public List<Beatmap> Maps { get; set; }
+        public string Folder { get; set; }
 
         public MapSet(List<Beatmap> beatmaps)
         {
@@ -30,6 +31,7 @@ namespace osu_collection_manager.Models
             Title = beatmaps[0].Entry.Title;
             SetID = beatmaps[0].Entry.BeatmapSetId;
             Maps = beatmaps;
+            Folder = beatmaps[0].Entry.FolderName;
         }
 
         public MapSet(string artist, string title, int setId, List<Beatmap> maps)
