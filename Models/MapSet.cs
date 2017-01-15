@@ -39,5 +39,10 @@ namespace osu_collection_manager.Models
             SetID = setId;
             Maps = maps;
         }
+
+        public string GetBloodcatLink()
+        {
+            return $"{Preferences.BloodcatDownloadLink}{SetID}";
+        }
     }
 }
