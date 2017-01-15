@@ -17,6 +17,9 @@ namespace osu_collection_manager.Models
         public string Title { get; set; }
         [DataMember]
         public int SetID { get; set; }
+        /// <summary>
+        /// Not present when read from file
+        /// </summary>
         public List<Beatmap> Maps { get; set; }
 
         public MapSet(List<Beatmap> beatmaps)
