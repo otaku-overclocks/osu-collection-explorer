@@ -36,13 +36,13 @@ namespace UnitTests
         {
             var collections = CollectionManager.Collections;
             var file = new CollectionsFile(collections);
-            file.WriteToFile( Preferences.OsuInstallationPath + "export.txt");
+            file.WriteToFile( Preferences.OsuInstallationPath + "\\export.txt");
         }
 
         [TestMethod]
         public void TestCollectionsFromFile()
         {
-            var file = CollectionsFile.ReadFromFile(Preferences.OsuInstallationPath + "export.txt");
+            var file = CollectionsFile.ReadFromFile(Preferences.OsuInstallationPath + "\\export.txt");
             var collections = file.Collections;
             LogCollections(collections);
         }
@@ -67,15 +67,10 @@ namespace UnitTests
         [TestMethod]
         public void TestYeahBoi()
         {
-<<<<<<< HEAD
-            DownloadManager.StartDownload(new MapSet("me", "me", 385427, new List<Beatmap>()));
-            Debug.WriteLine("Downlaodededzxczxzzx");
-=======
             while (true)
             {
                 Debug.Write("i");
             }
->>>>>>> refs/remotes/origin/egor-dev
         }
     }
 }
