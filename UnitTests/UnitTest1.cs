@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using osu_collection_manager;
 using osu_collection_manager.Managers;
 using osu_collection_manager.Models;
+using OsuMapDownload.Models;
 
 namespace UnitTests
 {
@@ -72,5 +73,49 @@ namespace UnitTests
                 Debug.Write("i");
             }
         }
+
+        [TestMethod]
+        public void TestAsyncDownload()
+        {
+            CreateTempDlPath();
+            var download = new MapSetDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
+            var task = download.CreateTask(Preferences.SongsPath);
+            task.Start();
+            while (!task.IsCompleted)
+            {
+                Debug.WriteLine(download.Progress + " with speed " + download.Speed);
+                Thread.Sleep(100);
+            }
+            Debug.WriteLine(download.Completed);
+            Debug.WriteLine(download.Failed);
+        }
+
+        [TestMethod]
+        public void TestAsyncDownloadMultiple()
+        {
+            CreateTempDlPath();
+            var download = new MapSetDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
+            var task = download.CreateTask(Preferences.SongsPath);
+            var download2 = new MapSetDownload("http://bloodcat.com/osu/s/553711", Preferences.DownloadsPath);
+            var task2 = download2.CreateTask(Preferences.SongsPath);
+            task.Start();
+            task2.Start();
+            while (!task.IsCompleted || !task2.IsCompleted)
+            {
+                Debug.WriteLine($"Download 1 - Progress: {download.Progress} Speed: {download.Speed} kb/s");
+                Debug.WriteLine($"Download 2 - Progress: {download2.Progress} Speed: {download2.Speed} kb/s");
+                Thread.Sleep(100);
+            }
+            Debug.WriteLine($"Download 1 Completed: {download.Completed} or Failed: {download.Failed}");
+            Debug.WriteLine($"Download 2 Completed: {download2.Completed} or Failed: {download2.Failed}");
+        }
+
+        private static void CreateTempDlPath()
+        {
+            if (!Directory.Exists(Preferences.DownloadsPath))
+            {
+                var di = Directory.CreateDirectory(Preferences.DownloadsPath);
+            }
+        } 
     }
 }

@@ -60,6 +60,10 @@
       <Project>{FB26757E-0B33-4F6F-AE9A-A2084734AAA5}</Project>
       <Name>osu-collection-manager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OsuBeatmapDownloadLib\OsuMapDownload\OsuMapDownload.csproj">
+      <Project>{AD434192-71B3-4910-ACD1-F1B56C633B2F}</Project>
+      <Name>OsuMapDownload</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
