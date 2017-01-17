@@ -67,10 +67,15 @@ namespace UnitTests
         [TestMethod]
         public void TestYeahBoi()
         {
+<<<<<<< HEAD
+            DownloadManager.StartDownload(new MapSet("me", "me", 385427, new List<Beatmap>()));
+            Debug.WriteLine("Downlaodededzxczxzzx");
+=======
             while (true)
             {
                 Debug.Write("i");
             }
+>>>>>>> refs/remotes/origin/egor-dev
         }
     }
 }
