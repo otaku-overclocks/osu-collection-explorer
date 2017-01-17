@@ -47,6 +47,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -97,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\CollectionManager.cs" />
-    <Compile Include="Managers\DownloadManager.cs" />
     <Compile Include="Managers\ImportExportManager.cs" />
     <Compile Include="Managers\LocalSongManager.cs" />
     <Compile Include="Models\Beatmap.cs" />
