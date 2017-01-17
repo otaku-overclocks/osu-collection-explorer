@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Json;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using osu_collection_manager;
 using osu_collection_manager.Managers;
@@ -64,10 +65,12 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestBloodcat()
+        public void TestYeahBoi()
         {
-            DownloadManager.StartDownload(new MapSet("me", "me", 385427, new List<Beatmap>()));
-            Debug.WriteLine("Downlaoded");
+            while (true)
+            {
+                Debug.Write("i");
+            }
         }
     }
 }
