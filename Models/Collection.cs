@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace osu_collection_manager.Models
 {
+    /// <summary>
+    /// Using DataContract here to be able to serialize it to json
+    /// </summary>
     [DataContract]
     public class Collection
     {
@@ -18,6 +21,8 @@ namespace osu_collection_manager.Models
         public Collection(string name, List<Beatmap> beatmaps)
         {
             Name = name;
+            // Loops through all the beatmaps and adds the ones with a same mapset id to the same list to create a
+            // Mapset out of it
             var mapSets = new Dictionary<int, MapSet>();
             foreach (var beatmap in beatmaps)
             {
@@ -30,7 +35,7 @@ namespace osu_collection_manager.Models
             }
             MapSets = mapSets.Values.ToList();
         }
-
+        
         public Collection(string name, List<MapSet> mapSets)
         {
             Name = name;
