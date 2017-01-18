@@ -11,11 +11,10 @@ namespace osu_collection_manager.Models
 {
     public class Beatmap
     {
-        [Obsolete]
-        public string Artist { get; set; }
-        [Obsolete]
-        public string Title { get; set; }
-
+        /// <summary>
+        /// An entry in osu.db. Contains all the data bout the map. 
+        /// May not be present if the instance was created manually.
+        /// </summary>
         public BeatmapEntry Entry { get; set; }
         public string Difficulty { get; set; }
         public int MapID { get; set; }
@@ -24,14 +23,17 @@ namespace osu_collection_manager.Models
 
         public Beatmap(BeatmapEntry entry)
         {
-            Artist = entry.Artist;
-            Title = entry.Title;
             Entry = entry;
             Difficulty = entry.Difficulty;
             MapID = entry.BeatmapId;
             MD5Hash = entry.BeatmapChecksum;
         }
 
+        /// <summary>
+        /// Calculate md5 hash from a file
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string GetHashFromFile(string path)
         {
             using (var md5 = MD5.Create())
