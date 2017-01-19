@@ -23,7 +23,9 @@ namespace osu_collection_manager
     {
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            var wind = new TestCollectionSelectWindow();
+            wind.Show();
         }
 
         private void think_running_Click(object sender, RoutedEventArgs e)
