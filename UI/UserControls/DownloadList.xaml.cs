@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using osu_collection_manager.UI.UserControls.Models;
 
 namespace osu_collection_manager.UI.UserControls
 {
@@ -20,9 +22,13 @@ namespace osu_collection_manager.UI.UserControls
     /// </summary>
     public partial class DownloadList : UserControl
     {
+        public BindingList<MapsetDownloadHolder> Downloads { get; set; }
+
         public DownloadList()
         {
             InitializeComponent();
+            Downloads = new BindingList<MapsetDownloadHolder>();
+            DownloadsListView.ItemsSource = Downloads;
         }
     }
 }

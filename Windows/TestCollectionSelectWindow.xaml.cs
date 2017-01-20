@@ -34,14 +34,24 @@ namespace osu_collection_manager
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var cols = CollectionManager.Collections;
+            /*var cols = CollectionManager.Collections;
            
             foreach (var collection in cols)
             {
                 var tn = new CollectionHolder(collection, true);
-                Tree.Collections.Add(tn);
+                //Tree.Collections.Add(tn);
                 Debug.WriteLine("Added");
-            }
+            }*/
+
+            var cols = CollectionManager.Collections;
+            var download = new MapsetDownloadHolder(cols[0].MapSets[2], cols[0].MapSets[2].GetBloodcatLink(), Preferences.DownloadsPath);
+            DownloadList.Downloads.Insert(0, download);
+            /*var download2 = new MapsetDownloadHolder(cols[0].MapSets[3], cols[0].MapSets[3].GetBloodcatLink(), Preferences.DownloadsPath);
+            DownloadList.Downloads.Insert(0, download2);*/
+            var task = download.CreateTask(Preferences.SongsPath);
+            //var task2 = download2.CreateTask(Preferences.SongsPath);
+            task.Start();
+            //task2.Start();
         }
     }
 }

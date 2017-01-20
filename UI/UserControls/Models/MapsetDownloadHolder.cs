@@ -6,16 +6,41 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using osu_collection_manager.Annotations;
+using osu_collection_manager.Models;
 using OsuMapDownload.Models;
 
 namespace osu_collection_manager.UI.UserControls.Models
 {
     public class MapsetDownloadHolder : MapSetDownload, INotifyPropertyChanged
     {
-        //public override float Progress { get; set; }
+        private float _progress = 0;
+        private bool _extracted = false;
 
-        public MapsetDownloadHolder(string url, string path, string name = null) : base(url, path, name)
+        public override float Progress
         {
+            get { return _progress; }
+            set
+            {
+                _progress = value;
+                OnPropertyChanged(nameof(Progress));
+            }
+        }
+        public MapSet Mapset { get; set; }
+        public string Title => $"{Mapset.Artist} - {Mapset.Title}";
+        public override bool Extracted
+        {
+            get { return _extracted; }
+            set
+            {
+                _extracted = value;
+                OnPropertyChanged(nameof(Extracted));
+            }
+        }
+
+
+        public MapsetDownloadHolder(MapSet mapset, string url, string path, string name = null) : base(url, path, name)
+        {
+            Mapset = mapset;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

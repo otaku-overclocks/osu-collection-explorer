@@ -13,22 +13,7 @@
                          Color="{Binding Source={StaticResource SecondaryAccentBrush},Path=Color}" Opacity="0.4" />
     </Window.Resources>
     <Grid>
-        <!--<controls:CollectionsTree x:Name="Tree"></controls:CollectionsTree>-->
-        <Grid Height="34" Margin="4,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="22"></RowDefinition>
-                <RowDefinition Height="4"></RowDefinition>
-                <RowDefinition Height="8"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Height="10" Foreground="White" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Text="Hello world " Opacity="0.83" FontSize="10" FontFamily="Roboto" TextTrimming="CharacterEllipsis"></TextBlock>
-            <TextBlock Height="12" Foreground="White" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Text="100.0%" Width="50" FontSize="12" TextAlignment="Right" FontFamily="Roboto"></TextBlock>
-            <ProgressBar Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" Height="4" Background="{StaticResource SecondaryAccentOpaciteBrush}"
-                         BorderBrush="{StaticResource SecondaryAccentOpaciteBrush}"
-                         Foreground="{StaticResource SecondaryAccentBrush}" Value="20" />
-        </Grid>
+       <!-- <controls:CollectionsTree x:Name="Tree"></controls:CollectionsTree>-->
+       <controls:DownloadList x:Name="DownloadList" HorizontalAlignment="Stretch"></controls:DownloadList>
     </Grid>
 </Window>
