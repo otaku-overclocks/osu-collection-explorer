@@ -90,15 +90,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
     <Page Include="Pages\RandomTestsPage.xaml">
-=======
+	  <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UserControls\DownloadList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\TestCollectionSelectWindow.xaml">
->>>>>>> refs/remotes/origin/egor-dev
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,13 +119,11 @@
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Pages\RandomTestsPage.xaml.cs">
       <DependentUpon>RandomTestsPage.xaml</DependentUpon>
-=======
+	</Compile>
     <Compile Include="Windows\TestCollectionSelectWindow.xaml.cs">
       <DependentUpon>TestCollectionSelectWindow.xaml</DependentUpon>
->>>>>>> refs/remotes/origin/egor-dev
     </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
