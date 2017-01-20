@@ -74,13 +74,21 @@
     <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
       <DependentUpon>CollectionsTree.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\DownloadList.xaml.cs">
+      <DependentUpon>DownloadList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\Models\CollectionHolder.cs" />
+    <Compile Include="UI\UserControls\Models\MapsetDownloadHolder.cs" />
     <Compile Include="UI\UserControls\Models\MapsetHolder.cs" />
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UserControls\DownloadList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +162,10 @@
     <ProjectReference Include="osu-database-reader\osu-database-reader\osu-database-reader.csproj">
       <Project>{c3078606-8055-4122-845d-7f9a0154883d}</Project>
       <Name>osu-database-reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="OsuBeatmapDownloadLib\OsuMapDownload\OsuMapDownload.csproj">
+      <Project>{AD434192-71B3-4910-ACD1-F1B56C633B2F}</Project>
+      <Name>OsuMapDownload</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
