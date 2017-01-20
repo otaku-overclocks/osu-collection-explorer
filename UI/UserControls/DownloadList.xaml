@@ -42,6 +42,9 @@
                                     <DataTrigger  Binding="{Binding Extracted}" Value="True">
                                         <Setter Property="Foreground" Value="#4CAF50"/>
                                     </DataTrigger>
+                                    <DataTrigger  Binding="{Binding Failed}" Value="True">
+                                        <Setter Property="Foreground" Value="#F44336"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </ProgressBar.Style>

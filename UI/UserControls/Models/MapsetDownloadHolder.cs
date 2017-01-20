@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using osu_collection_manager.Annotations;
 using osu_collection_manager.Models;
 using OsuMapDownload.Models;
@@ -15,6 +17,7 @@ namespace osu_collection_manager.UI.UserControls.Models
     {
         private float _progress = 0;
         private bool _extracted = false;
+        private bool _failed = false;
 
         public override float Progress
         {
@@ -36,7 +39,16 @@ namespace osu_collection_manager.UI.UserControls.Models
                 OnPropertyChanged(nameof(Extracted));
             }
         }
-
+        public override bool Failed
+        {
+            get { return _failed; }
+            set
+            {
+                _failed = value;
+                Progress = 100f;
+                OnPropertyChanged(nameof(Failed));
+            }
+        }
 
         public MapsetDownloadHolder(MapSet mapset, string url, string path, string name = null) : base(url, path, name)
         {
