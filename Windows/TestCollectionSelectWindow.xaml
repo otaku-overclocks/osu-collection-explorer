@@ -10,20 +10,6 @@
         Title="TestCollectionSelectWindow" Height="300" Width="300" Background="Black">
 
     <Grid>
-        <!--<controls:CollectionsTree x:Name="Tree"></controls:CollectionsTree>-->
-        <TreeView x:Name="test" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type models:CollectionHolder}" ItemsSource="{Binding Mapsets}">
-                    <CheckBox IsChecked="{Binding Selected}">
-                        <TextBlock Text="{Binding Data.Name}" />
-                    </CheckBox>
-                </HierarchicalDataTemplate>
-                <DataTemplate DataType="{x:Type models:MapsetHolder}">
-                    <CheckBox IsChecked="{Binding Selected}">
-                        <TextBlock Text="{Binding Data.Artist}" />
-                    </CheckBox>
-                </DataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+        <controls:CollectionsTree x:Name="Tree"></controls:CollectionsTree>
     </Grid>
 </Window>

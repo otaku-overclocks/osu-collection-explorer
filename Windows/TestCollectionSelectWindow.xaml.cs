@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,8 @@ namespace osu_collection_manager
             foreach (var collection in cols)
             {
                 var tn = new CollectionHolder(collection, true);
-                test.Items.Add(tn);
+                Tree.Collections.Add(tn);
+                Debug.WriteLine("Added");
             }
         }
     }

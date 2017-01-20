@@ -70,20 +70,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TreesViewModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
       <DependentUpon>CollectionsTree.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\Models\CollectionHolder.cs" />
     <Compile Include="UI\UserControls\Models\MapsetHolder.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\CollectionSelectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,7 +84,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TestCollectionSelectWindow.xaml">
+    <Page Include="Windows\TestCollectionSelectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,13 +100,10 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CollectionSelectPage.xaml.cs">
-      <DependentUpon>CollectionSelectPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestCollectionSelectWindow.xaml.cs">
+    <Compile Include="Windows\TestCollectionSelectWindow.xaml.cs">
       <DependentUpon>TestCollectionSelectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestWindow.xaml.cs">
@@ -121,10 +111,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\UserControls\CollectionsTree.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,9 +159,7 @@
   <ItemGroup>
     <Resource Include="thinking.svf %281%29.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\osu-full logo.png" />
     <Resource Include="Images\osu-inner text.png" />
