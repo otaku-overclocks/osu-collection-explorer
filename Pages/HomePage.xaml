@@ -5,10 +5,28 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:osu_collection_manager.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="HomePage">
-
+      d:DesignHeight="420" d:DesignWidth="666"
+      Title="HomePage"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}">
+    <!-- add this to the control you're setting to give them accent color
+           BorderBrush="{StaticResource SecondaryAccentBrush}" Background="{StaticResource SecondaryAccentBrush}" Foreground="{StaticResource SecondaryAccentForegroundBrush}" -->
     <Grid>
-        
+        <Label Content="Hey there! Here's what you can do in here:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="linkOsu" Content="Link an osu! installation" BorderBrush="{StaticResource SecondaryAccentBrush}" Background="{StaticResource SecondaryAccentBrush}" Foreground="{StaticResource SecondaryAccentForegroundBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" d:LayoutOverrides="Height" Margin="20,50,0,0" Width="200" Click="linkOsu_Click"/>
+        <Label x:Name="link_hint" Content="We need to know where your game is to make sure the program works." HorizontalAlignment="Left" Margin="225,53.5,0,0" VerticalAlignment="Top"/>
+        <Grid Margin="20,92,20,0" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" IsEnabled="False">
+            <Button Content="Manage your collections" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" d:LayoutOverrides="Height"/>
+            <Label Content="placeholder" HorizontalAlignment="Left" Margin="205,3.5,0,0" VerticalAlignment="Top"/>
+            <Button Content="Manage tournaments" HorizontalAlignment="Left" Margin="0,37,0,0" Width="200" VerticalAlignment="Top" d:LayoutOverrides="Height"/>
+            <Label Content="placeholder" HorizontalAlignment="Left" Margin="205,40.5,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
     </Grid>
 </Page>

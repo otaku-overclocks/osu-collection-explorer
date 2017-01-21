@@ -15,7 +15,12 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" Height="420" Width="666">
     <!-- copy lines 8 to 15 to each page/window -->
-    <DockPanel Margin="0">
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="WindowContent" Source="Pages/HomePage.xaml"  NavigationUIVisibility="Hidden" Grid.Row="1"/>
         <Border DockPanel.Dock="Top" Margin="-5,0" Background="{DynamicResource MaterialDesignPaper}">
             <Border.Effect>
                 <DropShadowEffect Direction="270" BlurRadius="10" Opacity="0.25" RenderingBias="Quality"/>
@@ -55,6 +60,5 @@
                 </MenuItem>
             </Menu>
         </Border>
-        <Frame x:Name="WindowContent" Source="Pages/HomePage.xaml" NavigationUIVisibility="Hidden"/>
-    </DockPanel>
+    </Grid>
 </Window>

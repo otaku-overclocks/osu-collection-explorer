@@ -56,5 +56,32 @@ namespace osu_collection_manager.Managers {
                 return -1;
             }
         }
+
+        // adjusted copypaste of getOsuInstanceCount
+        public object getPathOfRunningOsu()
+        {
+            Process[] pname = Process.GetProcessesByName("osu!.exe");
+            string path = null;
+
+            if (pname.Length == 0)
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    path = pname[0].MainModule.FileName;
+                    OsuFilePath osuPath = new OsuFilePath();
+                    osuPath.osuExePath = path;
+                    //TODO Write path to config file
+                }
+                catch
+                {
+                    MessageBox.Show("Unable to receive osu! process path. Try running as an administrator.");
+                }
+                return pname;
+            }
+        }
     }
 }

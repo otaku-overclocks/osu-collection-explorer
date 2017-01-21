@@ -83,7 +83,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TestWindow.xaml">
+    <Page Include="Windows\TestWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,7 +103,7 @@
     <Compile Include="Pages\RandomTestsPage.xaml.cs">
       <DependentUpon>RandomTestsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestWindow.xaml.cs">
+    <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -153,9 +153,7 @@
   <ItemGroup>
     <Resource Include="thinking.svf %281%29.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\osu-full logo.png" />
     <Resource Include="Images\osu-inner text.png" />
