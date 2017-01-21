@@ -11,7 +11,7 @@ using System.IO;
 /// Custom Configuration Manager for different kinds of Variables that are needed upon startup
 /// </summary>
 namespace osu_collection_manager.Managers {
-    class ConfigurationManager : ConfigurationSection {
+    class ToolConfigurationManager : ConfigurationSection {
 
         [ConfigurationProperty("osuFilePath")]
         public OsuFilePath OsuPath {
@@ -20,7 +20,7 @@ namespace osu_collection_manager.Managers {
             }
             set {
                 this["osuFilePath"] = value;
-            }       
+            }
         }
     }
 
