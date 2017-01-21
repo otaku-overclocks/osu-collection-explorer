@@ -18,6 +18,8 @@ namespace osu_collection_manager.Models
         [DataMember]
         public List<MapSet> MapSets { get; set; }
 
+        public int BeatmapCount => MapSets.Sum(mapSet => mapSet.Maps.Count);
+
         public Collection(string name, List<Beatmap> beatmaps)
         {
             Name = name;

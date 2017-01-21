@@ -49,7 +49,7 @@ namespace osu_collection_manager.Managers
         /// <remarks>
         /// It throws some exceptions if file is not found, not readable or does not contain the expected data.
         /// </remarks>  
-        private static void ReadCollectionsDB()
+        public static void ReadCollectionsDB()
         {
             //Create an empty list
             _collections = new List<Collection>();
@@ -70,7 +70,8 @@ namespace osu_collection_manager.Managers
                     var beatmaps = new List<Beatmap>(size);
                     for (var j = 0; j < size; j++)
                     {
-                        var map = LocalSongManager.FindByHash(r.ReadString());
+                        var hash = r.ReadString();
+                        var map = LocalSongManager.FindByHash(hash);
                         if (map != null) beatmaps.Add(new Beatmap(map));
                     }
                     _collections.Add(new Collection(name, beatmaps));
@@ -96,7 +97,7 @@ namespace osu_collection_manager.Managers
                 foreach (var collection in _collections)
                 {
                     w.Write(collection.Name);
-                    w.Write(collection.MapSets.Count);
+                    w.Write(collection.BeatmapCount);
                     // Write hashes from all beatmaps in the hash. Osu does it too
                     foreach (var mapSet in collection.MapSets)
                     {
@@ -106,6 +107,31 @@ namespace osu_collection_manager.Managers
                         }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Adds all collections to local collections. Merges if a collectiosn with same name exists
+        /// </summary>
+        /// <param name="cols"></param>
+        public static void AddCollections(IEnumerable<Collection> cols)
+        {
+            foreach (var collection in cols)
+            {
+                //Check for existing collections with same name
+                var existing = Collections.Find(col => col.Name.Equals(collection.Name));
+                if (existing != null)
+                {
+                    //Check for existing mapsets so we dont place duplicates
+                    foreach (var mapSet in collection.MapSets)
+                    {
+                        if(mapSet.Maps.Count == 0) continue;
+                        if(existing.MapSets.Find(set => set.SetID.Equals(mapSet.SetID)) == null)
+                            existing.MapSets.Add(mapSet);
+                    }
+                    continue;
+                }
+                Collections.Add(collection);
             }
         }
     }
