@@ -33,5 +33,29 @@ namespace osu_collection_manager.UI.UserControls
             Collections = new BindingList<CollectionHolder>();
             TreeViewCollections.ItemsSource = Collections;
         }
+
+        public List<Collection> GetSelected()
+        {
+            var ret = new List<Collection>();
+            foreach (var collectionHolder in Collections)
+            {
+                if (collectionHolder.Selected == true)
+                {
+                    ret.Add(collectionHolder.Data);
+                }
+                else if (collectionHolder.Selected == null)
+                {
+                    var col = collectionHolder.Data;
+                    col.MapSets.Clear();
+                    foreach (var mapsetHolder in collectionHolder.Mapsets)
+                    {
+                        if (mapsetHolder.Selected)
+                            col.MapSets.Add(mapsetHolder.Data);
+                    }
+                    ret.Add(col);
+                }
+            }
+            return ret;
+        }
     }
 }
