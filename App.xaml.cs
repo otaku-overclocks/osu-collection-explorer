@@ -20,7 +20,7 @@ namespace osu_collection_manager
             {
                 arglist += arg + "\n";
             }
-            System.Windows.Forms.MessageBox.Show(arglist);
+            //System.Windows.Forms.MessageBox.Show(arglist);
         }
     }
 }

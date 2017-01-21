@@ -28,8 +28,8 @@
             </Border.Effect>
                 <Menu IsMainMenu="True" FlowDirection="LeftToRight" Height="48" Background="{DynamicResource MaterialDesignPaper}" Margin="5,0">
                     <MenuItem Header="_File">
-                        <MenuItem Header="Open .osc file" />
-                        <MenuItem Header="Export .osc file" Click="NewMapPack_OnClick" />
+                        <MenuItem Header="Open .osc file"  Click="ImportCollections_OnClick" />
+                        <MenuItem Header="Export .osc file" Click="ExportCollections_OnClick" />
                         <Separator />
                         <MenuItem Header="Open osu!.exe file"/>
                         <Separator/>
