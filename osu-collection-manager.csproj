@@ -49,6 +49,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
@@ -71,6 +72,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
+      <DependentUpon>CollectionsTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\DownloadList.xaml.cs">
+      <DependentUpon>DownloadList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\Models\CollectionHolder.cs" />
+    <Compile Include="UI\UserControls\Models\MapsetDownloadHolder.cs" />
+    <Compile Include="UI\UserControls\Models\MapsetHolder.cs" />
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +91,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RandomTestsPage.xaml">
+	  <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UserControls\DownloadList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TestCollectionSelectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,11 +121,18 @@
     </Compile>
     <Compile Include="Pages\RandomTestsPage.xaml.cs">
       <DependentUpon>RandomTestsPage.xaml</DependentUpon>
+	</Compile>
+    <Compile Include="Windows\TestCollectionSelectWindow.xaml.cs">
+      <DependentUpon>TestCollectionSelectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\UserControls\CollectionsTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\CollectionManager.cs" />
@@ -148,13 +174,15 @@
       <Project>{c3078606-8055-4122-845d-7f9a0154883d}</Project>
       <Name>osu-database-reader</Name>
     </ProjectReference>
+    <ProjectReference Include="OsuBeatmapDownloadLib\OsuMapDownload\OsuMapDownload.csproj">
+      <Project>{AD434192-71B3-4910-ACD1-F1B56C633B2F}</Project>
+      <Name>OsuMapDownload</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="thinking.svf %281%29.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\osu-full logo.png" />
     <Resource Include="Images\osu-inner text.png" />
