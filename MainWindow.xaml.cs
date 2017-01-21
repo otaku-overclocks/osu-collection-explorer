@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using osu_collection_manager.Managers;
+using osu_collection_manager.UI.Pages;
 
 
 namespace osu_collection_manager
@@ -24,8 +26,11 @@ namespace osu_collection_manager
         public MainWindow()
         {
             InitializeComponent();
-            var wind = new TestCollectionSelectWindow();
-            wind.Show();
+            new Task(() =>
+            {
+                var col = CollectionManager.Collections; // First time read.
+            }).Start();
+           
         }
 
         // BEGIN menubar code
@@ -36,5 +41,20 @@ namespace osu_collection_manager
         }
 
         // END menubar code
+        private void NewMapPack_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenPage(new Pages.SelectCollectionsPage(CollectionManager.Collections));
+        }
+
+        public void DisplayLoadingOverlay(bool display)
+        {
+            LoadingOverlay.Visibility = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        public void OpenPage(BaseMainPage page)
+        {
+            DisplayLoadingOverlay(true);
+            WindowContent.Content = page;
+        }
     }
 }

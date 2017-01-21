@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:osu_collection_manager"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -30,35 +30,32 @@
                     <MenuItem Header="Open _osu!.exe file"/>
                     <MenuItem Header="Open ._osc file" />
                     <Separator />
-                    <MenuItem Header="Create new _mappack" />
+                    <MenuItem Header="Create new _mappack" Click="NewMapPack_OnClick" />
                     <MenuItem Header="_Exit">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="WindowClose" />
                         </MenuItem.Icon>
                     </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_Edit">
-                    <MenuItem Header="Edit existing _mappack" />
-                    <MenuItem Header="Edit local _collection" />
-                    <MenuItem Header="Edit existing ._osc file" />
-                </MenuItem>
-                <MenuItem Header="_Hlep">
-                    <MenuItem Header="How 2 use _tutorail"/>
-                    <MenuItem Header="_geethub link">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="GithubCircle" />
-                        </MenuItem.Icon>
+                    <MenuItem Header="_Edit">
+                        <MenuItem Header="Edit existing _mappack" />
+                        <MenuItem Header="Edit local _collection" />
+                        <MenuItem Header="Edit existing ._osc file" />
                     </MenuItem>
-                    <MenuItem Header="_dicksord server"/>
-                </MenuItem>
-                <MenuItem Header="Debug">
-                    <MenuItem x:Name="goToTestPage" Header="Tests page" Click="goToTestPage_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="TestTube" />
-                        </MenuItem.Icon>
+                    <MenuItem Header="_Hlep">
+                        <MenuItem Header="How 2 use _tutorail" />
+                        <MenuItem Header="_geethub link">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="GithubCircle" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_dicksord server" />
                     </MenuItem>
-                </MenuItem>
-            </Menu>
-        </Border>
+                </Menu>
+            </Border>
+            <Frame x:Name="WindowContent" Source="Pages/HomePage.xaml" NavigationUIVisibility="Hidden" />
+        </DockPanel>
+        <Grid x:Name="LoadingOverlay" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignPaper}">
+            <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54" Style="{DynamicResource MaterialDesignCircularProgressBar}" Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True"></ProgressBar>
+        </Grid>
     </Grid>
 </Window>

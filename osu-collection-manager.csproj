@@ -72,7 +72,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\SelectCollectionsPage.xaml.cs">
+      <DependentUpon>SelectCollectionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="UI\Pages\BaseMainPage.cs" />
     <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
       <DependentUpon>CollectionsTree.xaml</DependentUpon>
     </Compile>
@@ -91,7 +95,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RandomTestsPage.xaml">
-	  <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectCollectionsPage.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UserControls\DownloadList.xaml">
@@ -121,7 +129,7 @@
     </Compile>
     <Compile Include="Pages\RandomTestsPage.xaml.cs">
       <DependentUpon>RandomTestsPage.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="Windows\TestCollectionSelectWindow.xaml.cs">
       <DependentUpon>TestCollectionSelectWindow.xaml</DependentUpon>
     </Compile>
