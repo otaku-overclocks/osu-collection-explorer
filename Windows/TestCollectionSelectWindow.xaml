@@ -7,7 +7,15 @@
         xmlns:controls="clr-namespace:osu_collection_manager.UI.UserControls"
         xmlns:models="clr-namespace:osu_collection_manager.UI.UserControls.Models"
         mc:Ignorable="d"
-        Title="TestCollectionSelectWindow" Height="300" Width="300" Background="Black">
+        Title="TestCollectionSelectWindow" Height="300" Width="300" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.Resources>
         <SolidColorBrush x:Key="SecondaryAccentOpaciteBrush"
                          Color="{Binding Source={StaticResource SecondaryAccentBrush},Path=Color}" Opacity="0.4" />
