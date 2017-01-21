@@ -29,20 +29,9 @@ namespace osu_collection_manager.Models
             MD5Hash = entry.BeatmapChecksum;
         }
 
-        /// <summary>
-        /// Calculate md5 hash from a file
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static string GetHashFromFile(string path)
+        public Beatmap(string hash)
         {
-            using (var md5 = MD5.Create())
-            {
-                using (var stream = File.OpenRead(path))
-                {
-                    return md5.ComputeHash(stream).ToString();
-                }
-            }
+            MD5Hash = hash;
         }
     }
 }

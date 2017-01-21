@@ -16,6 +16,8 @@ using osu_collection_manager.Managers;
 using osu_collection_manager.UI.Pages;
 using System.Diagnostics;
 using Microsoft.Win32;
+using osu_collection_manager.Models;
+using osu_collection_manager.Pages;
 
 namespace osu_collection_manager
 {
@@ -65,9 +67,17 @@ namespace osu_collection_manager
         }
 
         // END menubar code
-        private void NewMapPack_OnClick(object sender, RoutedEventArgs e)
+        private void ExportCollections_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenPage(new Pages.SelectCollectionsPage(CollectionManager.Collections));
+            OpenPage(new Pages.SelectCollectionsPage(CollectionManager.Collections, SelectCollectionsPage.SelectPurpose.Export));
+        }
+
+        private void ImportCollections_OnClick(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() != true) return;
+            var collections = CollectionsFile.ReadFromFile(openFileDialog.FileName);
+            OpenPage(new Pages.SelectCollectionsPage(collections.Collections, SelectCollectionsPage.SelectPurpose.Import));
         }
 
         public void DisplayLoadingOverlay(bool display)

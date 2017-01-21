@@ -23,7 +23,7 @@ namespace osu_collection_manager.UI.UserControls.Models
             set
             {
                 _selected = value;
-                Parent.UpdateSelected();
+                Parent?.UpdateSelected();
                 OnPropertyChanged(nameof(Selected));
             }
         }

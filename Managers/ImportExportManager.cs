@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using osu_collection_manager.Models;
+using osu_collection_manager.UI.UserControls.Models;
+using OsuMapDownload.Models;
 
 namespace osu_collection_manager.Managers
 {
@@ -27,6 +31,36 @@ namespace osu_collection_manager.Managers
                 }
             }
             return ret;
+        }
+
+        public static void ProcessDownloads(IEnumerable<MapsetDownloadHolder> downloads)
+        {
+            foreach (var mapSetDownload in downloads)
+            {
+                var extractedPath = $"{Preferences.SongsPath}/{MapSetDownload.MakeOsuFolderName(mapSetDownload.Name)}";
+                var files = System.IO.Directory.GetFiles(extractedPath, "*.osu");
+                foreach (var file in files)
+                {
+                    var beatmap = new Beatmap(GetHashFromFile(file));
+                    mapSetDownload.Mapset.Maps.Add(beatmap);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Calculate md5 hash from a file
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetHashFromFile(string path)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(path))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty).ToLower();
+                }
+            }
         }
     }
 }
