@@ -28,10 +28,11 @@
             </Border.Effect>
                 <Menu IsMainMenu="True" FlowDirection="LeftToRight" Height="48" Background="{DynamicResource MaterialDesignPaper}" Margin="5,0">
                     <MenuItem Header="_File">
-                        <MenuItem Header="Open _osu!.exe file"/>
-                        <MenuItem Header="Open ._osc file" />
+                        <MenuItem Header="Open .osc file" />
+                        <MenuItem Header="Export .osc file" Click="NewMapPack_OnClick" />
                         <Separator />
-                        <MenuItem Header="Create new _mappack" Click="NewMapPack_OnClick" />
+                        <MenuItem Header="Open osu!.exe file"/>
+                        <Separator/>
                         <MenuItem Header="_Exit">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="WindowClose" />
@@ -39,9 +40,19 @@
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_Edit">
-                        <MenuItem Header="Edit existing _mappack" />
-                        <MenuItem Header="Edit local _collection" />
-                        <MenuItem Header="Edit existing ._osc file" />
+                        <MenuItem Header="Edit existing mappack" />
+                        <MenuItem Header="Edit ingame collections" />
+                    </MenuItem>
+                    <MenuItem Header="Tournaments">
+                        <MenuItem Header="Create a new tournament" />
+                        <MenuItem Header="Open a tournament" />
+                        <Separator/>
+                        <MenuItem Header="No tournament open" IsEnabled="False"/>
+                        <MenuItem Header="Rename tournament" IsEnabled="False"/>
+                        <MenuItem Header="Manage players" IsEnabled="False"/>
+                        <MenuItem Header="Manage teams" IsEnabled="False"/>
+                        <MenuItem Header="Mappools" IsEnabled="False"/>
+                        <MenuItem Header="Schedule" IsEnabled="False"/>
                     </MenuItem>
                     <MenuItem Header="_Hlep">
                         <MenuItem Header="How 2 use _tutorail" />
