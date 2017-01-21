@@ -84,7 +84,7 @@ namespace osu_collection_manager.Managers {
             throw new System.ArgumentException("Configuration key \"OsuExecutablePath\" does not exist."
                                                 + "\n Either you messed with the configuration file"
                                                 + "\n or you have got the program from a non-original source.");
-            return "Error";
+            //return "Error"; //Unnecessary piece of code. Kept for clarity.
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace osu_collection_manager.Managers {
             throw new System.ArgumentException("Configuration key \"OsuTExecutablePath\" does not exist."
                                                 + "\n Either you messed with the configuration file"
                                                 + "\n or you have got the program from a non-original source.");
-            return "Error";
+            //return "Error"; //Unnecessary piece of code. Kept for clarity.
         }
     }
 }
