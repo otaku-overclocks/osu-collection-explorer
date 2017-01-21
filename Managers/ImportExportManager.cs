@@ -47,5 +47,20 @@ namespace osu_collection_manager.Managers
             }
         }
 
+        /// <summary>
+        /// Calculate md5 hash from a file
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetHashFromFile(string path)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(path))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty).ToLower();
+                }
+            }
+        }
     }
 }
