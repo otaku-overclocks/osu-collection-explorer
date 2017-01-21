@@ -15,8 +15,9 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" Height="420" Width="666">
     <!-- copy lines 8 to 15 to each page/window -->
-    <Grid Margin="0">
-        <Grid.RowDefinitions>
+    <Grid>
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -25,16 +26,17 @@
             <Border.Effect>
                 <DropShadowEffect Direction="270" BlurRadius="10" Opacity="0.25" RenderingBias="Quality"/>
             </Border.Effect>
-            <Menu IsMainMenu="True" FlowDirection="LeftToRight" Height="48" Background="{DynamicResource MaterialDesignPaper}" Margin="5,0">
-                <MenuItem Header="_File">
-                    <MenuItem Header="Open _osu!.exe file"/>
-                    <MenuItem Header="Open ._osc file" />
-                    <Separator />
-                    <MenuItem Header="Create new _mappack" Click="NewMapPack_OnClick" />
-                    <MenuItem Header="_Exit">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="WindowClose" />
-                        </MenuItem.Icon>
+                <Menu IsMainMenu="True" FlowDirection="LeftToRight" Height="48" Background="{DynamicResource MaterialDesignPaper}" Margin="5,0">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="Open _osu!.exe file"/>
+                        <MenuItem Header="Open ._osc file" />
+                        <Separator />
+                        <MenuItem Header="Create new _mappack" Click="NewMapPack_OnClick" />
+                        <MenuItem Header="_Exit">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="WindowClose" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_Edit">
                         <MenuItem Header="Edit existing _mappack" />
@@ -52,8 +54,7 @@
                     </MenuItem>
                 </Menu>
             </Border>
-            <Frame x:Name="WindowContent" Source="Pages/HomePage.xaml" NavigationUIVisibility="Hidden" />
-        </DockPanel>
+        </Grid>
         <Grid x:Name="LoadingOverlay" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignPaper}">
             <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54" Style="{DynamicResource MaterialDesignCircularProgressBar}" Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True"></ProgressBar>
         </Grid>
