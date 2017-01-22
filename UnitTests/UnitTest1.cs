@@ -116,6 +116,13 @@ namespace UnitTests
             {
                 var di = Directory.CreateDirectory(Preferences.DownloadsPath);
             }
-        } 
+        }
+
+        [TestMethod]
+        public void TestLog()
+        {
+            LogManager.Write("Hello world!");
+            Debug.WriteLine(LogManager.LogPath);
+        }
     }
 }

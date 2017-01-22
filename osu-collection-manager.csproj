@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Managers\DownloadManager.cs" />
+    <Compile Include="Managers\LogManager.cs" />
     <Compile Include="Pages\SelectCollectionsPage.xaml.cs">
       <DependentUpon>SelectCollectionsPage.xaml</DependentUpon>
     </Compile>
