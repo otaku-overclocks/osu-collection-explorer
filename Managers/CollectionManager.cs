@@ -51,31 +51,41 @@ namespace osu_collection_manager.Managers
         /// </remarks>  
         public static void ReadCollectionsDB()
         {
-            //Create an empty list
-            _collections = new List<Collection>();
-            //Open collections.db in our custom binary reader
-            using (var r = new CustomReader(File.OpenRead(Preferences.CollectionsDBPath)))
+            try
             {
-                //Here we are reading the data
-                //More about it here: https://osu.ppy.sh/wiki/Db_(file_format)#collection.db
-                _osuVersion = r.ReadInt32();
-                var amount = r.ReadInt32();
-                for (var i = 0; i < amount; i++)
+#if DEBUG
+                LogManager.Write("Reading collections at: " + Preferences.CollectionsDBPath);
+#endif
+                //Create an empty list
+                _collections = new List<Collection>();
+                //Open collections.db in our custom binary reader
+                using (var r = new CustomReader(File.OpenRead(Preferences.CollectionsDBPath)))
                 {
-                    var name = r.ReadString();
-                    var size = r.ReadInt32();
-                    // We dont need the hashes. Instead, we check if osu.db contains some info about them.
-                    // If it does we add a List of beatmaps to the collection model. 
-                    // Note: There are beatmaps from same set through the list. Sorting happens in collections contructor
-                    var beatmaps = new List<Beatmap>(size);
-                    for (var j = 0; j < size; j++)
+                    //Here we are reading the data
+                    //More about it here: https://osu.ppy.sh/wiki/Db_(file_format)#collection.db
+                    _osuVersion = r.ReadInt32();
+                    var amount = r.ReadInt32();
+                    for (var i = 0; i < amount; i++)
                     {
-                        var hash = r.ReadString();
-                        var map = LocalSongManager.FindByHash(hash);
-                        if (map != null) beatmaps.Add(new Beatmap(map));
+                        var name = r.ReadString();
+                        var size = r.ReadInt32();
+                        // We dont need the hashes. Instead, we check if osu.db contains some info about them.
+                        // If it does we add a List of beatmaps to the collection model. 
+                        // Note: There are beatmaps from same set through the list. Sorting happens in collections contructor
+                        var beatmaps = new List<Beatmap>(size);
+                        for (var j = 0; j < size; j++)
+                        {
+                            var hash = r.ReadString();
+                            var map = LocalSongManager.FindByHash(hash);
+                            if (map != null) beatmaps.Add(new Beatmap(map));
+                        }
+                        _collections.Add(new Collection(name, beatmaps));
                     }
-                    _collections.Add(new Collection(name, beatmaps));
                 }
+            }
+            catch (Exception e)
+            {
+                LogManager.Write(e);
             }
         }
 
@@ -87,26 +97,36 @@ namespace osu_collection_manager.Managers
         /// </remarks>  
         public static void WriteCollectionsDB()
         {
-            //Open collections.db in our custom binary writer
-            using (var w = new CustomWriter(File.Open(Preferences.CollectionsDBPath, FileMode.Create)))
+            try
             {
-                //Here we are writing the data
-                //More about it here: https://osu.ppy.sh/wiki/Db_(file_format)#collection.db
-                w.Write(_osuVersion);
-                w.Write(_collections.Count);
-                foreach (var collection in _collections)
+#if DEBUG
+                LogManager.Write("Writing collections at: " + Preferences.CollectionsDBPath);
+#endif
+                //Open collections.db in our custom binary writer
+                using (var w = new CustomWriter(File.Open(Preferences.CollectionsDBPath, FileMode.Create)))
                 {
-                    w.Write(collection.Name);
-                    w.Write(collection.BeatmapCount);
-                    // Write hashes from all beatmaps in the hash. Osu does it too
-                    foreach (var mapSet in collection.MapSets)
+                    //Here we are writing the data
+                    //More about it here: https://osu.ppy.sh/wiki/Db_(file_format)#collection.db
+                    w.Write(_osuVersion);
+                    w.Write(_collections.Count);
+                    foreach (var collection in _collections)
                     {
-                        foreach (var map in mapSet.Maps)
+                        w.Write(collection.Name);
+                        w.Write(collection.BeatmapCount);
+                        // Write hashes from all beatmaps in the hash. Osu does it too
+                        foreach (var mapSet in collection.MapSets)
                         {
-                            w.Write(map.MD5Hash);
+                            foreach (var map in mapSet.Maps)
+                            {
+                                w.Write(map.MD5Hash);
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                LogManager.Write(e);
             }
         }
 
@@ -125,8 +145,8 @@ namespace osu_collection_manager.Managers
                     //Check for existing mapsets so we dont place duplicates
                     foreach (var mapSet in collection.MapSets)
                     {
-                        if(mapSet.Maps.Count == 0) continue;
-                        if(existing.MapSets.Find(set => set.SetID.Equals(mapSet.SetID)) == null)
+                        if (mapSet.Maps.Count == 0) continue;
+                        if (existing.MapSets.Find(set => set.SetID.Equals(mapSet.SetID)) == null)
                             existing.MapSets.Add(mapSet);
                     }
                     continue;

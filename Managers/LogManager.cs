@@ -14,7 +14,7 @@ namespace osu_collection_manager.Managers
 
         public static readonly string LogPath = $"{System.Environment.CurrentDirectory}/log.txt";
 
-        public static StreamWriter Writer { get; set; }
+        private static StreamWriter _writer { get; set; }
 
         public static void Write(Exception e)
         {
@@ -23,23 +23,23 @@ namespace osu_collection_manager.Managers
 
         public static void Write(string msg, string tag = INFO_TAG)
         {
-            var close = Writer == null; //If already opened keep open; Means we want to write multiple lines
+            var close = _writer == null; //If already opened keep open; Means we want to write multiple lines
             if (close) //If closed open a new one in append mode
             {
                 Open();
             }
-            Writer.WriteLine($"{tag} {msg}"); //Write with tag perpended
+            _writer.WriteLine($"{tag} {msg}"); //Write with tag perpended
             if (close) Close();
         }
 
         public static void Open()
         {
-            Writer = new StreamWriter(LogPath, true);
+            _writer = new StreamWriter(LogPath, true);
         }
 
         public static void Close()
         {
-            Writer.Close();
+            _writer.Close();
         }
     }
 }
