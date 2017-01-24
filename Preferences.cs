@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using osu_collection_manager.Managers;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace osu_collection_manager
 {
@@ -10,12 +13,10 @@ namespace osu_collection_manager
     {
         public static readonly int VERSION = 1;
         
-        //public static string OsuInstallationPath = $@"C:\Users\{Environment.UserName}\AppData\Local\osu!";
-        public static string OsuInstallationPath = $@"G:\Games\OsuTest";
-        public static string CollectionsDBPath { get { return OsuInstallationPath + "\\collection.db"; } }
-        public static string OsuDBPath { get { return OsuInstallationPath + "\\osu!.db"; } }
-        public static string SongsPath { get { return OsuInstallationPath + "\\Songs"; } }
-        public static string DownloadsPath { get { return OsuInstallationPath + "\\OCMTemp"; } }
+        public static string CollectionsDBPath { get { return OsuPath + "\\collection.db"; } }
+        public static string OsuDBPath { get { return OsuPath + "\\osu!.db"; } }
+        public static string SongsPath { get { return OsuPath + "\\Songs"; } }
+        public static string DownloadsPath { get { return OsuPath + "\\OCMTemp"; } }
 
         public static int BloodcatThreadCount = 8;
         public static string BloodcatDownloadLink = "http://bloodcat.com/osu/s/";
@@ -24,7 +25,22 @@ namespace osu_collection_manager
         {
             get
             {
-                return Properties.Settings.Default.OsuPath;
+                var ret = Properties.Settings.Default.OsuPath;
+                if (ret != null && !ret.Equals(string.Empty)) return ret;
+                ret = OsuInstanceManager.GetPathFromRegistry();
+                if (ret == null)
+                {
+                    var dialog = new OpenFileDialog() { Multiselect = false, Filter = "osu!.exe|osu!.exe" };
+                    var result = dialog.ShowDialog();
+                    if (result == true) ret = dialog.FileName;
+                }
+                OsuPath = ret;
+                return ret;
+            }
+            set
+            {
+                Properties.Settings.Default.OsuPath = value;
+                Properties.Settings.Default.Save();
             }
         }
     }

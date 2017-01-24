@@ -22,7 +22,7 @@ namespace osu_collection_manager
         /// </returns>
         static public object[] LoadOsuExe()
         {
-            var runningosu = new Managers.OsuInstanceManager().getPathOfRunningOsu();
+            var runningosu = new Managers.OsuInstanceManager().GetPathOfRunningOsu();
             if (runningosu==null)
             {
                 // osu! doesn't seem to be running
