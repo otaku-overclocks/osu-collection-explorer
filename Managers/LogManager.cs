@@ -35,7 +35,7 @@ namespace osu_collection_manager.Managers
         /// <param name="tag"></param>
         public static void Write(string msg, string tag = INFO_TAG)
         {
-            var close = _writer == null; //If already opened keep open; Means we want to write multiple lines
+            var close = (_writer == null); //If already opened keep open; Means we want to write multiple lines
             if (close) 
             {
                 Open(); //If closed open a new one 
@@ -59,6 +59,7 @@ namespace osu_collection_manager.Managers
         {
             if (_writer == null) return;
             _writer.Close(); // Close the stream
+            _writer = null;
         }
     }
 }

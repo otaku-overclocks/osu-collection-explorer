@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,10 @@ namespace osu_collection_manager.Managers
         /// <param name="callback"></param>
         public static void StartDownload(Action callback  = null)
         {
+            if (!Directory.Exists(Preferences.DownloadsPath))
+            {
+                Directory.CreateDirectory(Preferences.DownloadsPath);
+            }
             _finishCallback = callback;
             UpdateDownload();
         }
