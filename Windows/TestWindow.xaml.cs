@@ -124,7 +124,8 @@ namespace osu_collection_manager
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Preferences.OsuInstallationPath = path.Text;
+            //Obsolete
+            //Preferences.OsuInstallationPath = path.Text;
         }
     }
 }

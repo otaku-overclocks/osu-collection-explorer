@@ -29,28 +29,6 @@ namespace osu_collection_manager
         public MainWindow()
         {
             InitializeComponent();
-            // temp fix
-            string osupath = null;
-            Process[] pnames = Common.LoadOsuExe() as Process[];
-            if (pnames == null)
-            {
-                // osu! hasn't been found
-                OpenFileDialog openfiledialog = new OpenFileDialog() { Multiselect = false, Filter = "osu!.exe|osu!.exe" };
-                bool? result = openfiledialog.ShowDialog();
-                if (result == true)
-                {
-                    osupath = openfiledialog.FileName;
-                }
-            }
-            else
-            {
-                // osu! has been found, store first path
-                osupath = pnames[0].MainModule.FileName;
-            }
-            if (osupath != null)
-            {
-                Preferences.OsuInstallationPath = System.IO.Path.GetDirectoryName(osupath);
-            }
             // temp fix end
             new Task(() =>
             {

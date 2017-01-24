@@ -38,13 +38,13 @@ namespace UnitTests
         {
             var collections = CollectionManager.Collections;
             var file = new CollectionsFile(collections);
-            file.WriteToFile( Preferences.OsuInstallationPath + "\\export.txt");
+            file.WriteToFile( Preferences.OsuPath + "\\export.txt");
         }
 
         [TestMethod]
         public void TestCollectionsFromFile()
         {
-            var file = CollectionsFile.ReadFromFile(Preferences.OsuInstallationPath + "\\export.txt");
+            var file = CollectionsFile.ReadFromFile(Preferences.OsuPath + "\\export.txt");
             var collections = file.Collections;
             LogCollections(collections);
         }
