@@ -17,7 +17,7 @@ namespace osu_collection_manager.UI.UserControls.Models
     {
         private float _progress = 0;
         private bool _extracted = false;
-        private bool _failed = false;
+        private Exception _error;
 
         public override float Progress
         {
@@ -39,12 +39,12 @@ namespace osu_collection_manager.UI.UserControls.Models
                 OnPropertyChanged(nameof(Extracted));
             }
         }
-        public override bool Failed
+        public override Exception Error
         {
-            get { return _failed; }
+            get { return _error; }
             set
             {
-                _failed = value;
+                _error = value;
                 Progress = 100f;
                 OnPropertyChanged(nameof(Failed));
             }

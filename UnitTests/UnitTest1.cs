@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Json;
@@ -123,6 +124,21 @@ namespace UnitTests
         {
             LogManager.Write("Hello world!");
             Debug.WriteLine(LogManager.LogPath);
+        }
+
+        [TestMethod]
+        public void TestWriteConfig()
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Add("Foo", "Bar");
+            config.Save(ConfigurationSaveMode.Modified);
+            Debug.WriteLine("Done");
+        }
+
+        [TestMethod]
+        public void TestReadConfig()
+        {
+            Debug.WriteLine("Foo " + ConfigurationManager.AppSettings["Foo"]);
         }
     }
 }
