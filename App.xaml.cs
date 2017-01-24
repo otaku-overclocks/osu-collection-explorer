@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,12 +16,15 @@ namespace osu_collection_manager
     {
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            string arglist = "";
-            foreach (string arg in e.Args)
+            var arglist = "";
+            foreach (var arg in e.Args)
             {
                 arglist += arg + "\n";
             }
-            //System.Windows.Forms.MessageBox.Show(arglist);
+            var path = Preferences.OsuPath;
+#if DEBUG
+            Debug.WriteLine($"Found osu path: {path}");
+#endif
         }
     }
 }
