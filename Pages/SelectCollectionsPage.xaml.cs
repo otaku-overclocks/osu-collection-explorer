@@ -141,7 +141,7 @@ namespace osu_collection_manager.Pages
             DarkenOverlay.Visibility = Visibility.Hidden;
         }
 
-        private void ImportMaps(IEnumerable<Collection> collections)
+        private void ImportMaps(List<Collection> collections)
         {
             // Merges current collections with the collections we want to add
             CollectionManager.AddCollections(collections);
