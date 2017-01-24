@@ -140,5 +140,11 @@ namespace UnitTests
         {
             Debug.WriteLine("Foo " + ConfigurationManager.AppSettings["Foo"]);
         }
+
+        [TestMethod]
+        public void TestRegistry()
+        {
+            Debug.WriteLine("Path: " + OsuInstanceManager.GetPathFromRegistry());
+        }
     }
 }
