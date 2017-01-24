@@ -25,6 +25,8 @@ namespace osu_collection_manager
         {
             get
             {
+#if DEBUG
+#endif
                 var ret = Properties.Settings.Default.OsuPath;
                 if (ret != null && !ret.Equals(string.Empty)) return ret;
                 ret = OsuInstanceManager.GetPathFromRegistry();
