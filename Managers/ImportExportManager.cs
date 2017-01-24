@@ -35,16 +35,35 @@ namespace osu_collection_manager.Managers
 
         public static void ProcessDownloads(IEnumerable<MapsetDownloadHolder> downloads)
         {
+#if DEBUG
+            LogManager.Open();
+#endif
             foreach (var mapSetDownload in downloads)
             {
-                var extractedPath = $"{Preferences.SongsPath}/{MapSetDownload.MakeOsuFolderName(mapSetDownload.Name)}";
-                var files = System.IO.Directory.GetFiles(extractedPath, "*.osu");
-                foreach (var file in files)
+                if(mapSetDownload.Failed || !mapSetDownload.Completed) continue;
+#if DEBUG
+                LogManager.Write($"Processing map: {mapSetDownload.Name}");
+#endif
+                try
                 {
-                    var beatmap = new Beatmap(GetHashFromFile(file));
-                    mapSetDownload.Mapset.Maps.Add(beatmap);
+                    var extractedPath =
+                        $"{Preferences.SongsPath}/{MapSetDownload.MakeOsuFolderName(mapSetDownload.Name)}";
+                    var files = System.IO.Directory.GetFiles(extractedPath, "*.osu");
+                    foreach (var file in files)
+                    {
+                        var beatmap = new Beatmap(GetHashFromFile(file));
+                        mapSetDownload.Mapset.Maps.Add(beatmap);
+                    }
+                }
+                catch (Exception e)
+                {
+                    LogManager.Write($"Could not process download for map {mapSetDownload.Name}", LogManager.ERROR_TAG);
+                    LogManager.Write(e);
                 }
             }
+#if DEBUG
+            LogManager.Close();
+#endif
         }
 
         /// <summary>

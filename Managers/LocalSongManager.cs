@@ -19,9 +19,24 @@ namespace osu_collection_manager.Managers
             {
                 if (_localSongs == null)
                 {
-                    _localSongs = OsuDb.Read(Preferences.OsuDBPath);
+                    ReadFromDb();
                 }
                 return _localSongs;
+            }
+        }
+
+        public static void ReadFromDb()
+        {
+            try
+            {
+                _localSongs = OsuDb.Read(Preferences.OsuDBPath);
+            }
+            catch (Exception e)
+            {
+                LogManager.Open();
+                LogManager.Write($"Failed to read osu.db at {Preferences.OsuDBPath}", LogManager.ERROR_TAG);
+                LogManager.Write(e);
+                LogManager.Close();
             }
         }
 

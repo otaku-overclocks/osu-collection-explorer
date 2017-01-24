@@ -85,7 +85,10 @@ namespace osu_collection_manager.Managers
             }
             catch (Exception e)
             {
+                LogManager.Open();
+                LogManager.Write($"Failed to read collections.db at {Preferences.CollectionsDBPath}", LogManager.ERROR_TAG);
                 LogManager.Write(e);
+                LogManager.Close();
             }
         }
 
@@ -126,7 +129,10 @@ namespace osu_collection_manager.Managers
             }
             catch (Exception e)
             {
+                LogManager.Open();
+                LogManager.Write($"Failed to write collections.db at {Preferences.CollectionsDBPath}", LogManager.ERROR_TAG);
                 LogManager.Write(e);
+                LogManager.Close();
             }
         }
 

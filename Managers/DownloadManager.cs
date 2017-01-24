@@ -29,6 +29,13 @@ namespace osu_collection_manager.Managers
                     Downloading.Remove(ms);
                     Completed.Add(ms);
                     UpdateDownload();
+                    if (ms.Failed)
+                    {
+                        LogManager.Open();
+                        LogManager.Write($"Failed downloading mapset from url: {ms.Url}");
+                        LogManager.Write(ms.Error);
+                        LogManager.Close();
+                    }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
                 task.Start();
             }
