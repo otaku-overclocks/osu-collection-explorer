@@ -15,6 +15,7 @@ namespace osu_collection_manager.Managers
     {
         /// <summary>
         /// Check a list of collections if they contain missing mapsets. The missing ones should be downloaded.
+        /// Ths also copies over the mapset of existing ones since imported dont contain that data
         /// </summary>
         /// <param name="collections"></param>
         /// <returns>List with missing mapsets</returns>
@@ -26,8 +27,16 @@ namespace osu_collection_manager.Managers
                 foreach (var mapSet in collection.MapSets)
                 {
                     // If no set found in osu.db we add it to the list of not found maps.
-                    if (LocalSongManager.FindSetByID(mapSet.SetID) == null)
+                    var found = LocalSongManager.FindSetByID(mapSet.SetID);
+                    if (found == null)
+                    {
                         ret.Add(mapSet);
+                    }
+                    else
+                    {
+                        // This is more reliable
+                        mapSet.Maps = found.Maps;
+                    }
                 }
             }
             return ret;
