@@ -45,13 +45,13 @@ namespace osu_collection_manager
 
             var cols = CollectionManager.Collections;
             var download = new MapsetDownloadHolder(cols[0].MapSets[2], cols[0].MapSets[2].GetBloodcatLink(),
-                Preferences.DownloadsPath);
+                Preferences.SongsPath);
             DownloadList.Downloads.Insert(0, download);
             var download2 = new MapsetDownloadHolder(cols[0].MapSets[3], cols[0].MapSets[3].GetBloodcatLink(),
-                Preferences.DownloadsPath);
+                Preferences.SongsPath);
             DownloadList.Downloads.Insert(0, download2);
-            var task = download.CreateTask(Preferences.SongsPath);
-            var task2 = download2.CreateTask(Preferences.SongsPath);
+            var task = download.CreateTask();
+            var task2 = download2.CreateTask();
             task.Start();
             task2.Start();
         }

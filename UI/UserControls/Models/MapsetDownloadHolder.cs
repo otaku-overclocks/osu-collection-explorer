@@ -13,7 +13,7 @@ using OsuMapDownload.Models;
 
 namespace osu_collection_manager.UI.UserControls.Models
 {
-    public class MapsetDownloadHolder : MapSetDownload, INotifyPropertyChanged
+    public class MapsetDownloadHolder : MapSetExtractDownload, INotifyPropertyChanged
     {
         private float _progress = 0;
         private bool _extracted = false;
@@ -30,15 +30,6 @@ namespace osu_collection_manager.UI.UserControls.Models
         }
         public MapSet Mapset { get; set; }
         public string Title => $"{Mapset.Artist} - {Mapset.Title}";
-        public override bool Extracted
-        {
-            get { return _extracted; }
-            set
-            {
-                _extracted = value;
-                OnPropertyChanged(nameof(Extracted));
-            }
-        }
         public override Exception Error
         {
             get { return _error; }

@@ -117,7 +117,7 @@ namespace osu_collection_manager.Pages
             //Add all maps to download queue
             foreach (var mapSet in MapsetList.GetSelected())
             {
-                var dl = new MapsetDownloadHolder(mapSet, mapSet.GetBloodcatLink(), Preferences.DownloadsPath);
+                var dl = new MapsetDownloadHolder(mapSet, mapSet.GetBloodcatLink(), Preferences.SongsPath);
                 DownloadManager.Queue.Add(dl); // Add to queue
                 DownloadList.Downloads.Add(dl); // Add to download list (ui)
             }
