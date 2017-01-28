@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using osu_collection_manager;
 using osu_collection_manager.Managers;
 using osu_collection_manager.Models;
+using OsuMapDownload;
 using OsuMapDownload.Models;
 
 namespace UnitTests
@@ -80,7 +81,7 @@ namespace UnitTests
         {
             CreateTempDlPath();
             var download = new MapSetDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
-            var task = download.CreateTask(Preferences.SongsPath);
+            var task = download.CreateTask();
             task.Start();
             while (!task.IsCompleted)
             {
@@ -94,21 +95,27 @@ namespace UnitTests
         [TestMethod]
         public void TestAsyncDownloadMultiple()
         {
+            DownloadUtils.SetThreadCountMax();
             CreateTempDlPath();
             var download = new MapSetDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
-            var task = download.CreateTask(Preferences.SongsPath);
+            var task = download.CreateTask();
             var download2 = new MapSetDownload("http://bloodcat.com/osu/s/553711", Preferences.DownloadsPath);
-            var task2 = download2.CreateTask(Preferences.SongsPath);
+            var task2 = download2.CreateTask();
+            var download3 = new MapSetDownload("http://bloodcat.com/osu/s/469815", Preferences.DownloadsPath);
+            var task3 = download3.CreateTask();
             task.Start();
             task2.Start();
-            while (!task.IsCompleted || !task2.IsCompleted)
+            task3.Start();
+            while (!task.IsCompleted || !task2.IsCompleted || !task3.IsCompleted)
             {
                 Debug.WriteLine($"Download 1 - Progress: {download.Progress} Speed: {download.Speed} kb/s");
                 Debug.WriteLine($"Download 2 - Progress: {download2.Progress} Speed: {download2.Speed} kb/s");
+                Debug.WriteLine($"Download 3 - Progress: {download3.Progress} Speed: {download3.Speed} kb/s");
                 Thread.Sleep(100);
             }
             Debug.WriteLine($"Download 1 Completed: {download.Completed} or Failed: {download.Failed}");
             Debug.WriteLine($"Download 2 Completed: {download2.Completed} or Failed: {download2.Failed}");
+            Debug.WriteLine($"Download 3 Completed: {download3.Completed} or Failed: {download3.Failed}");
         }
 
         private static void CreateTempDlPath()
