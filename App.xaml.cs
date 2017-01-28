@@ -23,7 +23,6 @@ namespace osu_collection_manager
                 arglist += arg + "\n";
             }
             var path = Preferences.OsuPath;
-            DownloadUtils.SetThreadCountMax();
 #if DEBUG
             Debug.WriteLine($"Found osu path: {path}");
 #endif

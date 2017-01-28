@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -52,6 +53,15 @@ namespace osu_collection_manager.UI.UserControls.Models
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override void AfterComplete()
+        {
+            base.AfterComplete();
+            var filePath = $"{Path}/{Name}";
+            if (!File.Exists(filePath)) return;
+            if (!Directory.Exists(Preferences.SongsPath)) Directory.CreateDirectory(Preferences.SongsPath);
+            File.Move(filePath, $"{Preferences.SongsPath}/{Name}");
         }
     }
 }

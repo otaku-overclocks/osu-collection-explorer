@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OsuMapDownload;
 using OsuMapDownload.Models;
 
 namespace osu_collection_manager.Managers
@@ -59,6 +60,7 @@ namespace osu_collection_manager.Managers
         /// <param name="callback"></param>
         public static void StartDownload(Action callback  = null)
         {
+            DownloadUtils.SetThreadCountMax();
             if (!Directory.Exists(Preferences.SongsPath))
             {
                 Directory.CreateDirectory(Preferences.SongsPath);
