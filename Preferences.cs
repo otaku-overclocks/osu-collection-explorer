@@ -18,7 +18,7 @@ namespace osu_collection_manager
         public static string SongsPath { get { return OsuPath + "\\Songs"; } }
         public static string DownloadsPath { get { return OsuPath + "\\OCMTemp"; } }
 
-        public static int BloodcatThreadCount = 2;
+        public static int BloodcatThreadCount = 8;
         public static string BloodcatDownloadLink = "http://bloodcat.com/osu/s/";
 
         public static string OsuPath
