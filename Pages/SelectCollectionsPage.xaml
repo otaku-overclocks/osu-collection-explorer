@@ -23,7 +23,7 @@
             <RowDefinition />
             <RowDefinition Height="52" />
         </Grid.RowDefinitions>
-        <userControls:CollectionsTree Grid.Row="0" x:Name="CollectionsTreeView" />
+        <userControls:CollectionsTree Grid.Row="0" x:Name="CollectionsTreeView" FontFamily="Roboto" />
         <Grid Height="52" Grid.Row="1" Margin="16, 0" x:Name="ExportNavigation">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

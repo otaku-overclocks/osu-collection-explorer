@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OsuMapDownload;
 using OsuMapDownload.Models;
 
 namespace osu_collection_manager.Managers
@@ -29,7 +30,7 @@ namespace osu_collection_manager.Managers
                 var ms = Queue[0];
                 Queue.Remove(ms); // Remove from queue
                 Downloading.Add(ms); // Add to downloading
-                var task = ms.CreateTask(Preferences.SongsPath); // Create a task to downlaod and extract the mapset
+                var task = ms.CreateTask(); // Create a task to downlaod and extract the mapset
                 var cont = task.ContinueWith(delegate (Task task1) // Create a task which will be run once the downlaod is completed
                 {
                     Downloading.Remove(ms); // Remove from downloads
@@ -59,9 +60,10 @@ namespace osu_collection_manager.Managers
         /// <param name="callback"></param>
         public static void StartDownload(Action callback  = null)
         {
-            if (!Directory.Exists(Preferences.DownloadsPath))
+            DownloadUtils.SetThreadCountMax();
+            if (!Directory.Exists(Preferences.SongsPath))
             {
-                Directory.CreateDirectory(Preferences.DownloadsPath);
+                Directory.CreateDirectory(Preferences.SongsPath);
             }
             _finishCallback = callback;
             UpdateDownload();

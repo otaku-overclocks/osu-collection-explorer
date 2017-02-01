@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,7 +14,7 @@ using OsuMapDownload.Models;
 
 namespace osu_collection_manager.UI.UserControls.Models
 {
-    public class MapsetDownloadHolder : MapSetDownload, INotifyPropertyChanged
+    public class MapsetDownloadHolder : MapSetExtractDownload, INotifyPropertyChanged
     {
         private float _progress = 0;
         private bool _extracted = false;
@@ -30,15 +31,6 @@ namespace osu_collection_manager.UI.UserControls.Models
         }
         public MapSet Mapset { get; set; }
         public string Title => $"{Mapset.Artist} - {Mapset.Title}";
-        public override bool Extracted
-        {
-            get { return _extracted; }
-            set
-            {
-                _extracted = value;
-                OnPropertyChanged(nameof(Extracted));
-            }
-        }
         public override Exception Error
         {
             get { return _error; }
@@ -61,6 +53,15 @@ namespace osu_collection_manager.UI.UserControls.Models
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override void AfterComplete()
+        {
+            base.AfterComplete();
+            var filePath = $"{Path}/{Name}";
+            if (!File.Exists(filePath)) return;
+            if (!Directory.Exists(Preferences.SongsPath)) Directory.CreateDirectory(Preferences.SongsPath);
+            File.Move(filePath, $"{Preferences.SongsPath}/{Name}");
         }
     }
 }

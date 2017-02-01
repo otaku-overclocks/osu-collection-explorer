@@ -49,25 +49,14 @@ namespace osu_collection_manager.Managers
 #endif
             foreach (var mapSetDownload in downloads)
             {
-                if(mapSetDownload.Failed || !mapSetDownload.Completed) continue;
+                if(mapSetDownload.Failed || !mapSetDownload.Completed || !mapSetDownload.Extracted) continue;
 #if DEBUG
                 LogManager.Write($"Processing map: {mapSetDownload.Name}");
 #endif
-                try
+                foreach (var hash in mapSetDownload.MapHashes)
                 {
-                    var extractedPath =
-                        $"{Preferences.SongsPath}/{MapSetDownload.MakeOsuFolderName(mapSetDownload.Name)}";
-                    var files = System.IO.Directory.GetFiles(extractedPath, "*.osu");
-                    foreach (var file in files)
-                    {
-                        var beatmap = new Beatmap(GetHashFromFile(file));
-                        mapSetDownload.Mapset.Maps.Add(beatmap);
-                    }
-                }
-                catch (Exception e)
-                {
-                    LogManager.Write($"Could not process download for map {mapSetDownload.Name}", LogManager.ERROR_TAG);
-                    LogManager.Write(e);
+                    var beatmap = new Beatmap(hash);
+                    mapSetDownload.Mapset.Maps.Add(beatmap);
                 }
             }
 #if DEBUG
@@ -75,20 +64,6 @@ namespace osu_collection_manager.Managers
 #endif
         }
 
-        /// <summary>
-        /// Calculate md5 hash from a file
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static string GetHashFromFile(string path)
-        {
-            using (var md5 = MD5.Create())
-            {
-                using (var stream = File.OpenRead(path))
-                {
-                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty).ToLower();
-                }
-            }
-        }
+        
     }
 }

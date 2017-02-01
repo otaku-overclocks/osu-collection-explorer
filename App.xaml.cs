@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using OsuMapDownload;
 
 namespace osu_collection_manager
 {
