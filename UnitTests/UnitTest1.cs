@@ -179,5 +179,11 @@ namespace UnitTests
         {
             Debug.WriteLine("Path: " + OsuInstanceManager.GetPathFromRegistry());
         }
+
+        [TestMethod]
+        public void TestBackup()
+        {
+            BackupManager.BackupCollections();
+        }
     }
 }
