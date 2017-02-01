@@ -7,19 +7,30 @@
              xmlns:models="clr-namespace:osu_collection_manager.UI.UserControls.Models"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             x:Name="MainElement">
-    <TreeView x:Name="TreeViewCollections" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <TreeView.Resources>
-            <HierarchicalDataTemplate DataType="{x:Type models:CollectionHolder}" ItemsSource="{Binding Mapsets}">
-                <CheckBox IsChecked="{Binding Selected}" >
-                    <TextBlock Text="{Binding Name}" />
-                </CheckBox>
-            </HierarchicalDataTemplate>
-            <DataTemplate DataType="{x:Type models:MapsetHolder}">
-                <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}">
-                    <TextBlock Text="{Binding Name}" />
-                </CheckBox>
-            </DataTemplate>
-        </TreeView.Resources>
-    </TreeView>
+             x:Name="MainElement" d:DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Row="0" Background="#FF424242">
+            <CheckBox IsChecked="{Binding Selected}" Margin="16,0">
+                <TextBlock Foreground="White" Text="{Binding Title}" FontWeight="Bold"  TextTrimming="CharacterEllipsis" />
+            </CheckBox>
+        </Grid>
+        <TreeView Grid.Row="1" x:Name="TreeViewCollections" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type models:CollectionHolder}" ItemsSource="{Binding Children}">
+                    <CheckBox IsChecked="{Binding Selected}">
+                        <TextBlock Text="{Binding Name}" />
+                    </CheckBox>
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type models:MapsetHolder}">
+                    <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}">
+                        <TextBlock Text="{Binding Name}" />
+                    </CheckBox>
+                </DataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
 </UserControl>

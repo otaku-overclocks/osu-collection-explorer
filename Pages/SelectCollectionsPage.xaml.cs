@@ -39,14 +39,14 @@ namespace osu_collection_manager.Pages
         /// </summary>
         public SelectPurpose Purpose;
 
-        public SelectCollectionsPage(IEnumerable<Collection> collections, SelectPurpose purpose = SelectPurpose.Export) : base()
+        public SelectCollectionsPage(List<Collection> collections, SelectPurpose purpose = SelectPurpose.Export) : base()
         {
             InitializeComponent();
             Purpose = purpose;
             //We add all the collections into the treelist
             foreach (var collection in collections)
             {
-                CollectionsTreeView.Collections.Add(new CollectionHolder(collection, true));
+                CollectionsTreeView.Children.Add(new CollectionHolder(CollectionsTreeView, collection, true));
             }
             //Set the confirmatiopn button text. Export or Import
             BtnConfirm.Content = Purpose == SelectPurpose.Export ? "Export" : "Import";

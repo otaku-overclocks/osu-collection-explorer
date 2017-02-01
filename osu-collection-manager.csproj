@@ -90,7 +90,9 @@
     <Compile Include="UI\UserControls\MapsetList.xaml.cs">
       <DependentUpon>MapsetList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\Models\BaseCheckTreeItemHolder.cs" />
     <Compile Include="UI\UserControls\Models\CollectionHolder.cs" />
+    <Compile Include="UI\UserControls\Models\ICheckTreeItemHolder.cs" />
     <Compile Include="UI\UserControls\Models\MapsetDownloadHolder.cs" />
     <Compile Include="UI\UserControls\Models\MapsetHolder.cs" />
     <Page Include="MainWindow.xaml">

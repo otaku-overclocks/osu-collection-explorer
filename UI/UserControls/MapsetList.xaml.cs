@@ -37,7 +37,7 @@ namespace osu_collection_manager.UI.UserControls
             var ret = new List<MapSet>();
             foreach (var mapsetHolder in Mapsets)
             {
-                if(mapsetHolder.Selected) ret.Add(mapsetHolder.Data);
+                if(mapsetHolder.Selected == true) ret.Add(mapsetHolder.Data);
             }
             return ret;
         }
