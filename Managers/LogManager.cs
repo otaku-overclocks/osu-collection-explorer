@@ -15,7 +15,7 @@ namespace osu_collection_manager.Managers
         /// <summary>
         /// Save the log in the same path as the program
         /// </summary>
-        public static readonly string LogPath = $"{System.Environment.CurrentDirectory}/log.txt";
+        public static readonly string LogPath = $"{Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location)}/log.txt";
 
         private static StreamWriter _writer { get; set; }
 
