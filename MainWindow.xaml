@@ -1,4 +1,4 @@
-﻿<Window x:Class="osu_collection_manager.MainWindow"
+﻿<windows:BaseNavigationWindow x:Class="osu_collection_manager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:osu_collection_manager"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -18,14 +19,14 @@
     <Grid>
         <Grid Margin="0">
             <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Frame x:Name="WindowContent" Source="Pages/HomePage.xaml"  NavigationUIVisibility="Hidden" Grid.Row="1"/>
-        <Border DockPanel.Dock="Top" Margin="-5,0" Background="{DynamicResource MaterialDesignPaper}">
-            <Border.Effect>
-                <DropShadowEffect Direction="270" BlurRadius="10" Opacity="0.25" RenderingBias="Quality"/>
-            </Border.Effect>
+                <RowDefinition Height="48"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Frame x:Name="WindowContent" Source="Pages/HomePage.xaml"  NavigationUIVisibility="Hidden" Grid.Row="1"/>
+            <Border DockPanel.Dock="Top" Margin="-5,0" Background="{DynamicResource MaterialDesignPaper}">
+                <Border.Effect>
+                    <DropShadowEffect Direction="270" BlurRadius="10" Opacity="0.25" RenderingBias="Quality"/>
+                </Border.Effect>
                 <Menu IsMainMenu="True" FlowDirection="LeftToRight" Height="48" Background="{DynamicResource MaterialDesignPaper}" Margin="5,0">
                     <MenuItem Header="_File">
                         <MenuItem Header="Open .osc file"  Click="ImportCollections_OnClick" />
@@ -70,4 +71,5 @@
             <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54" Style="{DynamicResource MaterialDesignCircularProgressBar}" Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True"></ProgressBar>
         </Grid>
     </Grid>
-</Window>
+</windows:BaseNavigationWindow>
+

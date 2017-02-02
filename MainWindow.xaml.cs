@@ -18,13 +18,14 @@ using System.Diagnostics;
 using Microsoft.Win32;
 using osu_collection_manager.Models;
 using osu_collection_manager.Pages;
+using osu_collection_manager.UI.Windows;
 
 namespace osu_collection_manager
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : BaseNavigationWindow
     {
         public MainWindow()
         {
@@ -63,7 +64,7 @@ namespace osu_collection_manager
             LoadingOverlay.Visibility = display ? Visibility.Visible : Visibility.Hidden;
         }
 
-        public void OpenPage(BaseMainPage page)
+        public override void OpenPage(BasePage page)
         {
             DisplayLoadingOverlay(true);
             WindowContent.Content = page;

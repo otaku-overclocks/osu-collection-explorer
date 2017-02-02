@@ -27,7 +27,7 @@ namespace osu_collection_manager.Pages
     /// <summary>
     /// Interaction logic for SelectCollectionsPage.xaml
     /// </summary>
-    public partial class SelectCollectionsPage : BaseMainPage
+    public partial class SelectCollectionsPage : BasePage
     {
         public enum SelectPurpose
         {
@@ -80,7 +80,7 @@ namespace osu_collection_manager.Pages
             //Select the file in explorer
             System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
             //Go back to main page
-            _mainWindow.WindowContent.Content = null;
+            MainWindow.OpenPage(null);
         }
 
         private void Import()
@@ -148,8 +148,8 @@ namespace osu_collection_manager.Pages
             // Write the database
             CollectionManager.WriteCollectionsDB();
             // Go back to main menu
-            _mainWindow.WindowContent.Content = null;
-            MessageBox.Show(_mainWindow, "Maps are imported");
+            MainWindow.OpenPage(null);
+            MessageBox.Show(MainWindow, "Maps are imported");
         }
     }
 }

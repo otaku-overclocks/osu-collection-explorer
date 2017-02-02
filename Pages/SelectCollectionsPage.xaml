@@ -1,4 +1,4 @@
-﻿<pages:BaseMainPage x:Class="osu_collection_manager.Pages.SelectCollectionsPage"
+﻿<pages:BasePage x:Class="osu_collection_manager.Pages.SelectCollectionsPage"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -57,4 +57,4 @@
             <userControls:DownloadList Background="{DynamicResource MaterialDesignPaper}" x:Name="DownloadList" Width="400" Margin="0, 32" />
         </Grid>
     </Grid>
-</pages:BaseMainPage>
+</pages:BasePage>
