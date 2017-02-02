@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:osu_collection_manager.UI">
+
+    <Image x:Key="CloseImage" Source="/Images/UI/Close.png" Width="16" Height="16" />
+    <Image x:Key="MinimizeImage" Source="/Images/UI/Minimize.png" Width="16" Height="16" />
+    <Image x:Key="MaximizeImage" Source="/Images/UI/Maximize.png" Width="16" Height="16" />
+
+    <Style x:Key="WindowNavButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border>
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Content" Value="{StaticResource MinimizeImage}" />
+        <Setter Property="Background" Value="Green" />
+        <Setter Property="Opacity" Value="0.54" />
+        <Setter Property="IsHitTestVisible" Value="true" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Control.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:0.15" To="1" Storyboard.TargetProperty="Opacity" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:0.15" To="0.54" Storyboard.TargetProperty="Opacity" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

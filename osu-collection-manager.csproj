@@ -80,7 +80,10 @@
       <DependentUpon>SelectCollectionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="UI\Pages\BaseMainPage.cs" />
+    <Compile Include="UI\Pages\BasePage.cs" />
+    <Compile Include="UI\Pages\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
       <DependentUpon>CollectionsTree.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Pages\MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Styles\MyStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UserControls\DownloadList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,7 +130,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\TestCollectionSelectWindow.xaml">
+    <Page Include="UI\Windows\CEMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,8 +154,9 @@
     <Compile Include="Pages\RandomTestsPage.xaml.cs">
       <DependentUpon>RandomTestsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TestCollectionSelectWindow.xaml.cs">
-      <DependentUpon>TestCollectionSelectWindow.xaml</DependentUpon>
+    <Compile Include="UI\Windows\BaseNavigationWindow.cs" />
+    <Compile Include="UI\Windows\CEMainWindow.xaml.cs">
+      <DependentUpon>CEMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
@@ -214,6 +226,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\osu-full logo-pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UI\Close.png" />
+    <Resource Include="Images\UI\Minimize.png" />
+    <Resource Include="Images\UI\Maximize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
