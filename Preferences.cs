@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +30,12 @@ namespace osu_collection_manager
             get
             {
 #if DEBUG
-                //return @"G:\Games\OsuTest";
+               // return @"G:\Games\OsuTest";
 #endif
                 var ret = Properties.Settings.Default.OsuPath;
                 if (ret != null && !ret.Equals(string.Empty)) return ret;
                 ret = OsuInstanceManager.GetPathFromRegistry();
-                if (ret == null)
+                if (ret == null || !File.Exists($"{ret}\\osu!.exe"))
                 {
                     var dialog = new OpenFileDialog() { Multiselect = false, Filter = "osu!.exe|osu!.exe" };
                     var result = dialog.ShowDialog();
