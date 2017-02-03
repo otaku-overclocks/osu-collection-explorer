@@ -94,6 +94,9 @@
     <Compile Include="UI\Pages\Modals\DownloadMissingModal.xaml.cs">
       <DependentUpon>DownloadMissingModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
       <DependentUpon>CollectionsTree.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\Modals\DownloadMissingModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
