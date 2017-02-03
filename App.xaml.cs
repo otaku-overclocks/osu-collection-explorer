@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using osu_collection_manager.Managers;
 using OsuMapDownload;
 
 namespace osu_collection_manager
@@ -30,6 +31,10 @@ namespace osu_collection_manager
 #if DEBUG
             Debug.WriteLine($"Found osu path: {path}");
 #endif
+            new Task(() => //TODO: Wait for callback
+            {
+                var col = CollectionManager.Collections; // First time read.
+            }).Start();
         }
     }
 }
