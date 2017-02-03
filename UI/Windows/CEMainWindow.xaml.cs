@@ -31,12 +31,7 @@ namespace osu_collection_manager.UI.Windows
 
         private void Maximize(object sender, RoutedEventArgs e)
         {
-            if (WindowState.Equals(WindowState.Maximized))
-            {
-                WindowState = WindowState.Normal;
-                return;
-            }
-            WindowState = WindowState.Maximized;
+            WindowState = WindowState.Equals(WindowState.Maximized) ? WindowState.Normal : WindowState.Maximized;
         }
 
         private void Minimize(object sender, RoutedEventArgs e)
