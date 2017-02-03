@@ -1,6 +1,29 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:osu_collection_manager.UI">
+                    xmlns:local="clr-namespace:osu_collection_manager.UI"
+                    xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
+                    xmlns:pages="clr-namespace:osu_collection_manager.UI.Pages"
+                    xmlns:userControls="clr-namespace:osu_collection_manager.UI.UserControls">
+    
+    <SolidColorBrush x:Key="DarkMenuColor" Color="#212121"></SolidColorBrush>
+    <SolidColorBrush x:Key="LightMenuColor" Color="#424242"></SolidColorBrush>
+
+    <Style x:Key="BaseStyle" TargetType="Control">
+        <Setter Property="FontFamily" Value="Roboto" />
+    </Style>
+
+    <Style x:Key="BaseRootStyle" TargetType="Control" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Background" Value="{StaticResource MaterialDesignPaper}" />
+    </Style>
+
+    <Style TargetType="pages:BasePage" x:Key="PageStyle">
+        <Setter Property="FontFamily" Value="Roboto" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="windows:BaseNavigationWindow" BasedOn="{StaticResource BaseRootStyle}" />
+
+    <Style TargetType="userControls:CollectionsTree" BasedOn="{StaticResource BaseStyle}" />
 
     <Image x:Key="CloseImage" Source="/Images/UI/Close.png" Width="16" Height="16" />
     <Image x:Key="MinimizeImage" Source="/Images/UI/Minimize.png" Width="16" Height="16" />
