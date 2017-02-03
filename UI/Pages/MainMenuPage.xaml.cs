@@ -56,5 +56,13 @@ namespace osu_collection_manager.UI.Pages
             var collections = CollectionsFile.ReadFromFile(openFileDialog.FileName);
             OpenImportEditPage(collections.Collections);
         }
+
+        private void BtnResetCOnfig_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            Properties.Settings.Default.Save();
+            MessageBox.Show("The saved path has been removed.\nSo far, we didn't code in a setting reload after resetting, so the program will close. It should find a new path after you restart it.");
+            Environment.Exit(0);
+        }
     }
 }

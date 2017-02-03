@@ -19,6 +19,11 @@
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16"
                     Click="BtnImport_OnClick" />
+            <Button x:Name="BtnResetCOnfig" Content="Reset saved path"
+                    BorderBrush="{StaticResource SecondaryAccentBrush}"
+                    Background="{StaticResource SecondaryAccentBrush}"
+                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16"
+                    Click="BtnResetCOnfig_Click" />
         </StackPanel>
     </Grid>
 </local:BasePage>
