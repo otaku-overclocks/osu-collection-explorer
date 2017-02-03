@@ -43,6 +43,12 @@ namespace osu_collection_manager.UI.Pages
             MainWindow.OpenPage(new ImportEditPage(collections));
         }
 
+        public void ImportFromFile(string path)
+        {
+            var collections = CollectionsFile.ReadFromFile(path);
+            OpenImportEditPage(collections.Collections);
+        }
+
         private void BtnImport_OnClick(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
