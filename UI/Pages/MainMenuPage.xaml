@@ -13,11 +13,12 @@
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}"
-                    d:LayoutOverrides="Height" Margin="16" />
+                    d:LayoutOverrides="Height" Margin="16" Click="BtnExport_OnClick" />
             <Button x:Name="BtnImport" Content="Import/Edit Collections"
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"
-                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16" />
+                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16"
+                    Click="BtnImport_OnClick" />
         </StackPanel>
     </Grid>
 </local:BasePage>
