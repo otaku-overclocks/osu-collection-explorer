@@ -22,6 +22,8 @@ namespace osu_collection_manager
         public static int BloodcatThreadCount = 8;
         public static string BloodcatDownloadLink = "http://bloodcat.com/osu/s/";
 
+        public const string COLLECTION_FORMAT = ".osc";
+
         public static string OsuPath
         {
             get

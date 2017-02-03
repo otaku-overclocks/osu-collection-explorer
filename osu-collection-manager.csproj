@@ -80,9 +80,19 @@
       <DependentUpon>SelectCollectionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="UI\Pages\BaseModal.cs" />
     <Compile Include="UI\Pages\BasePage.cs" />
+    <Compile Include="UI\Pages\ExportPage.xaml.cs">
+      <DependentUpon>ExportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\ImportEditPage.xaml.cs">
+      <DependentUpon>ImportEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\Modals\DownloadMissingModal.xaml.cs">
+      <DependentUpon>DownloadMissingModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\CollectionsTree.xaml.cs">
       <DependentUpon>CollectionsTree.xaml</DependentUpon>
@@ -114,7 +124,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Pages\ExportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\ImportEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Pages\MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\Modals\DownloadMissingModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +180,7 @@
     <Compile Include="UI\Windows\CEMainWindow.xaml.cs">
       <DependentUpon>CEMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Windows\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

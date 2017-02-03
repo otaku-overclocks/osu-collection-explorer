@@ -13,7 +13,7 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Row="0" Background="#FF424242">
+        <Grid Row="0" Background="{StaticResource LightMenuColor}">
             <CheckBox IsChecked="{Binding Selected}" Margin="16,0">
                 <TextBlock Foreground="White" Text="{Binding Title}" FontWeight="Bold"  TextTrimming="CharacterEllipsis" />
             </CheckBox>

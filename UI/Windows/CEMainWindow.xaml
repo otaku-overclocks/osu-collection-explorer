@@ -1,22 +1,20 @@
 ﻿<windows:BaseNavigationWindow x:Class="osu_collection_manager.UI.Windows.CEMainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
-        mc:Ignorable="d"
-        Background="{DynamicResource  MaterialDesignPaper}"
-        Title="CEMainWindow" Height="360" Width="440"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        WindowState="Normal"
-        ResizeMode="CanResize"
-        UseLayoutRounding="True"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                              xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
+                              mc:Ignorable="d"
+                              Background="{DynamicResource MaterialDesignPaper}"
+                              Title="CEMainWindow" Height="360" Width="440"
+                              AllowsTransparency="True"
+                              WindowStyle="None"
+                              WindowState="Normal"
+                              ResizeMode="CanResize"
+                              UseLayoutRounding="True"
+                              AllowDrop="True" Drop="OnFileDrop"
+                              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="48"
@@ -28,22 +26,33 @@
             <RowDefinition Height="48" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Background="{DynamicResource ResourceKey=MaterialDesignPaper}">
-            <Border.Effect>
-                <DropShadowEffect Direction="270" Opacity="0.25" ShadowDepth="2" BlurRadius="4"/>
-            </Border.Effect>
-            <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
+        <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
             <TextBlock Text="Collection Manager" VerticalAlignment="Center" Foreground="White" Opacity="0.54"
                        FontSize="16" FontWeight="Bold" Margin="8,0,0,0" />
             <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource CloseImage}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="Close"/>
+                    Content="{StaticResource CloseImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                    Click="Close" />
             <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource MaximizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="Maximize"/>
+                    Content="{StaticResource MaximizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                    Click="Maximize" />
             <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource MinimizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="Minimize"/>
+                    Content="{StaticResource MinimizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                    Click="Minimize" />
         </DockPanel>
-        </Border>
-        <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+        <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" Grid.Row="1" />
+
+        <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="ModalOverlay" Visibility="Hidden" Background="#BB000000">
+            <Border Background="{StaticResource MaterialDesignPaper}" Name="ModalMask" CornerRadius="4" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" Width="{Binding ModalSize.X}" Height="{Binding ModalSize.Y}" />
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=ModalMask}" />
+                </StackPanel.OpacityMask>
+                <Frame x:Name="ModalContent" NavigationUIVisibility="Hidden" Width="{Binding ModalSize.X}"
+                       Height="{Binding ModalSize.Y}" />
+            </StackPanel>
+        </Grid>
     </Grid>
+
 
 </windows:BaseNavigationWindow>
