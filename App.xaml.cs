@@ -23,10 +23,10 @@ namespace osu_collection_manager
             {
                 arglist += arg + "\n";
             }
-            if (arglist == "")
+           /* if (arglist == "")
                 MessageBox.Show("No args passed");
             else
-                MessageBox.Show(arglist);
+                MessageBox.Show(arglist);*/
             var path = Preferences.OsuPath;
 #if DEBUG
             Debug.WriteLine($"Found osu path: {path}");
