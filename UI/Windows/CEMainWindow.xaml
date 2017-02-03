@@ -26,7 +26,11 @@
             <RowDefinition Height="48" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
+        <Border Background="{DynamicResource MaterialDesignPaper}">
+            <Border.Effect>
+                <DropShadowEffect Direction="270" Opacity="0.25" RenderingBias="Quality" BlurRadius="4" ShadowDepth="2"/>
+            </Border.Effect>
+            <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
             <TextBlock Text="Collection Manager" VerticalAlignment="Center" Foreground="White" Opacity="0.54"
                        FontSize="16" FontWeight="Bold" Margin="8,0,0,0" />
             <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
@@ -39,6 +43,7 @@
                     Content="{StaticResource MinimizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
                     Click="Minimize" />
         </DockPanel>
+        </Border>
         <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" Grid.Row="1" />
 
         <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="ModalOverlay" Visibility="Hidden" Background="#BB000000">
