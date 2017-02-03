@@ -15,8 +15,11 @@ namespace osu_collection_manager.UI.Windows
     /// </summary>
     public partial class CEMainWindow : BaseNavigationWindow
     {
+        public Vector ModalSize { get; set; }
+
         public CEMainWindow()
         {
+            ModalSize = new Vector(400, 300);
             InitializeComponent();
             OpenPage(new MainMenuPage());
         }
