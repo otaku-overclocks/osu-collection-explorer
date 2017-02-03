@@ -39,7 +39,7 @@ namespace osu_collection_manager
                 {
                     var dialog = new OpenFileDialog() { Multiselect = false, Filter = "osu!.exe|osu!.exe" };
                     var result = dialog.ShowDialog();
-                    if (result == true) ret = dialog.FileName;
+                    if (result == true) ret = Path.GetDirectoryName(dialog.FileName);
                 }
                 OsuPath = ret;
                 return ret;
