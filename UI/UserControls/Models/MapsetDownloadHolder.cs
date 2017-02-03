@@ -29,10 +29,8 @@ namespace osu_collection_manager.UI.UserControls.Models
                 OnPropertyChanged(nameof(Progress));
             }
         }
-
         public MapSet Mapset { get; set; }
         public string Title => $"{Mapset.Artist} - {Mapset.Title}";
-
         public override Exception Error
         {
             get { return _error; }
@@ -63,12 +61,7 @@ namespace osu_collection_manager.UI.UserControls.Models
             var filePath = $"{Path}/{Name}";
             if (!File.Exists(filePath)) return;
             if (!Directory.Exists(Preferences.SongsPath)) Directory.CreateDirectory(Preferences.SongsPath);
-            var dest = $"{Preferences.SongsPath}/{Name}";
-            if (File.Exists(dest))
-            {
-                File.Delete(dest);
-            }
-            File.Move(filePath, dest);
+            File.Move(filePath, $"{Preferences.SongsPath}/{Name}");
         }
     }
 }

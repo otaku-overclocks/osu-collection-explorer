@@ -69,10 +69,5 @@ namespace osu_collection_manager
             DisplayLoadingOverlay(true);
             WindowContent.Content = page;
         }
-
-        public override void OpenModal(BaseModal dialog)
-        {
-           
-        }
     }
 }
