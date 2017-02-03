@@ -14,7 +14,7 @@ namespace osu_collection_manager.UI.Windows
             InitializeComponent();
             OpenPage(new MainMenuPage());
         }
-
+        // window buttons
         private void Close(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -23,18 +23,16 @@ namespace osu_collection_manager.UI.Windows
         private void Maximize(object sender, RoutedEventArgs e)
         {
             if (WindowState.Equals(WindowState.Maximized))
-            {
                 WindowState = WindowState.Normal;
-                return;
-            }
-            WindowState = WindowState.Maximized;
+            else
+                WindowState = WindowState.Maximized;
         }
 
         private void Minimize(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
-
+        // window buttons end?
         public override void OpenPage(BasePage page)
         {
             WindowContent.Content = page;
