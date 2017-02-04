@@ -7,7 +7,7 @@
                               xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
                               mc:Ignorable="d"
                               Background="{DynamicResource MaterialDesignPaper}"
-                              Title="CEMainWindow" Height="360" Width="440"
+                              Title="{Binding ElementName=windowTitle, Path=Text}" Height="360" Width="440"
                               AllowsTransparency="True"
                               WindowStyle="None"
                               WindowState="Normal"
@@ -26,12 +26,13 @@
             <RowDefinition Height="48" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" Grid.Row="1" />
         <Border Background="{DynamicResource MaterialDesignPaper}">
             <Border.Effect>
                 <DropShadowEffect Direction="270" Opacity="0.25" RenderingBias="Quality" BlurRadius="4" ShadowDepth="2"/>
             </Border.Effect>
             <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
-            <TextBlock Text="Collection Manager" VerticalAlignment="Center" Foreground="White" Opacity="0.54"
+            <TextBlock x:Name="windowTitle" Text="osu! collection manager beta 0.1" VerticalAlignment="Center" Foreground="White" Opacity="0.54"
                        FontSize="16" FontWeight="Bold" Margin="8,0,0,0" />
             <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
                     Content="{StaticResource CloseImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
@@ -42,9 +43,18 @@
             <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
                     Content="{StaticResource MinimizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
                     Click="Minimize" />
-        </DockPanel>
+            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
+                    Content="{StaticResource SettingsImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                    Click="OpenSettings" />
+                <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
+                    HorizontalAlignment="Right" DockPanel.Dock="Right"
+                    Click="GoGithub">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="GithubCircle" Height="24" Width="24" Foreground="White"/>
+                    </Button.Content>
+                </Button>
+            </DockPanel>
         </Border>
-        <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" Grid.Row="1" />
 
         <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="ModalOverlay" Visibility="Hidden" Background="#BB000000">
             <Border Background="{StaticResource MaterialDesignPaper}" Name="ModalMask" CornerRadius="4" VerticalAlignment="Center"

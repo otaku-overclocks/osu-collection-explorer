@@ -63,7 +63,7 @@ namespace osu_collection_manager.UI.Pages
             CollectionManager.WriteCollectionsDB();
             // Go back to main menu
             MainWindow.OpenPage(null);
-            MessageBox.Show(MainWindow, "Maps are imported");
+            MessageBox.Show(MainWindow, "Maps are imported. Don't forget to restart twice the game if new maps have been downloaded to make sure the maps are imported and shown in the collections! (This is not a bug in either osu! or OCM. osu!'s behavior causes it to not reload the collections after importing beatmaps.)");
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)

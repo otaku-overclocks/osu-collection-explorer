@@ -31,7 +31,8 @@ namespace osu_collection_manager.Pages
         private void linkOsu_Click(object sender, RoutedEventArgs e)
         {
             string osupath = null;
-            Process[] pnames = Common.LoadOsuExe() as Process[];
+            Process[] pnames = new Process[] { null };
+            // Process[] pnames = Common.LoadOsuExe() as Process[];
             if (pnames==null)
             {
                 // osu! hasn't been found

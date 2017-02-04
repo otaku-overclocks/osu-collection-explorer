@@ -18,6 +18,7 @@ namespace osu_collection_manager
     {
         private void App_Startup(object sender, StartupEventArgs e)
         {
+#if DEBUG
             var arglist = "";
             foreach (var arg in e.Args)
             {
@@ -28,7 +29,6 @@ namespace osu_collection_manager
             else
                 MessageBox.Show(arglist);
             var path = Preferences.OsuPath;
-#if DEBUG
             Debug.WriteLine($"Found osu path: {path}");
 #endif
             new Task(() => //TODO: Wait for callback

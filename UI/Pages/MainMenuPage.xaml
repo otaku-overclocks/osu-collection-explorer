@@ -24,6 +24,7 @@
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16"
                     Click="BtnResetCOnfig_Click" />
+            <Label Content="osu! collections manager, beta 0.1" HorizontalContentAlignment="Center"/>
         </StackPanel>
     </Grid>
 </local:BasePage>

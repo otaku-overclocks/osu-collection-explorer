@@ -37,9 +37,7 @@ namespace osu_collection_manager
                 ret = OsuInstanceManager.GetPathFromRegistry();
                 if (ret == null || !File.Exists($"{ret}\\osu!.exe"))
                 {
-                    var dialog = new OpenFileDialog() { Multiselect = false, Filter = "osu!.exe|osu!.exe" };
-                    var result = dialog.ShowDialog();
-                    if (result == true) ret = Path.GetDirectoryName(dialog.FileName);
+                    ret = Common.OpenOsuExe();
                 }
                 OsuPath = ret;
                 return ret;

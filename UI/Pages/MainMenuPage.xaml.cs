@@ -51,7 +51,7 @@ namespace osu_collection_manager.UI.Pages
 
         private void BtnImport_OnClick(object sender, RoutedEventArgs e)
         {
-            var openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog() { Filter = "Collections file|*.osc" };
             if (openFileDialog.ShowDialog() != true) return;
             var collections = CollectionsFile.ReadFromFile(openFileDialog.FileName);
             OpenImportEditPage(collections.Collections);

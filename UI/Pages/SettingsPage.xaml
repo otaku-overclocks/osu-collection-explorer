@@ -5,10 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:osu_collection_manager.UI.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="SettingsPage">
-
+      d:DesignHeight="300" d:DesignWidth="600"
+      Title="Settings"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource  MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}" Loaded="SettingsPage_Loaded">
     <Grid>
-        
+        <Grid VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="osu! folder path" Margin="5,14,5,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="osu_folder_path" Grid.Column="1" Margin="0,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+            <Button Content="Open osu!.exe" Grid.Column="2" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Click="Button_Click"/>
+        </Grid>
+        <Button Content="Save settings" HorizontalAlignment="Right" Margin="0,0,10,18" VerticalAlignment="Bottom"
+                BorderBrush="{StaticResource SecondaryAccentBrush}"
+                    Background="{StaticResource SecondaryAccentBrush}"
+                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" Click="Button_Click_1"/>
+        <Button HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom"
+            BorderBrush="{StaticResource SecondaryAccentBrush}"
+            Background="{StaticResource SecondaryAccentBrush}"
+            Foreground="{StaticResource SecondaryAccentForegroundBrush}"
+            Style="{StaticResource MaterialDesignFloatingActionButton}" Click="goToHome" Height="48" Width="48">
+            <Button.Content>
+                <materialDesign:PackIcon Kind="Home" Height="Auto" Width="Auto" Margin="7"/>
+            </Button.Content>
+        </Button>
+
     </Grid>
 </local:BasePage>

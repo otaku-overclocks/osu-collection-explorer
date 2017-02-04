@@ -24,5 +24,38 @@ namespace osu_collection_manager.UI.Pages
         {
             InitializeComponent();
         }
+
+        private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            osu_folder_path.Text = Properties.Settings.Default.OsuPath;
+        }
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.OsuPath = osu_folder_path.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string path = Common.OpenOsuExe();
+            osu_folder_path.Text = path;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SaveSettings();
+            MessageBox.Show("Saved!");
+        }
+
+        private void goToHome(object sender, RoutedEventArgs e)
+        {
+            MainWindow.OpenPage(null);
+        }
     }
 }

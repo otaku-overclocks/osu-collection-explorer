@@ -3,7 +3,8 @@
                     xmlns:local="clr-namespace:osu_collection_manager.UI"
                     xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
                     xmlns:pages="clr-namespace:osu_collection_manager.UI.Pages"
-                    xmlns:userControls="clr-namespace:osu_collection_manager.UI.UserControls">
+                    xmlns:userControls="clr-namespace:osu_collection_manager.UI.UserControls"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     
     <SolidColorBrush x:Key="DarkMenuColor" Color="#212121"></SolidColorBrush>
     <SolidColorBrush x:Key="LightMenuColor" Color="#424242"></SolidColorBrush>
@@ -24,10 +25,14 @@
     <Style TargetType="windows:BaseNavigationWindow" BasedOn="{StaticResource BaseRootStyle}" />
 
     <Style TargetType="userControls:CollectionsTree" BasedOn="{StaticResource BaseStyle}" />
-
+    <!--
     <Image x:Key="CloseImage" Source="/Images/UI/Close.png" Width="16" Height="16" />
     <Image x:Key="MinimizeImage" Source="/Images/UI/Minimize.png" Width="16" Height="16" />
-    <Image x:Key="MaximizeImage" Source="/Images/UI/Maximize.png" Width="16" Height="16" />
+    <Image x:Key="MaximizeImage" Source="/Images/UI/Maximize.png" Width="16" Height="16" /> -->
+    <materialDesign:PackIcon x:Key="CloseImage" Kind="WindowClose"       Background="{StaticResource MaterialDesignPaper}" Width="24" Height="24" Foreground="White"/>
+    <materialDesign:PackIcon x:Key="MaximizeImage" Kind="WindowMaximize" Background="{StaticResource MaterialDesignPaper}" Width="24" Height="24" Foreground="White"/>
+    <materialDesign:PackIcon x:Key="MinimizeImage" Kind="WindowMinimize" Background="{StaticResource MaterialDesignPaper}" Width="24" Height="24" Foreground="White"/>
+    <materialDesign:PackIcon x:Key="SettingsImage" Kind="Settings"       Background="{StaticResource MaterialDesignPaper}" Width="24" Height="24" Foreground="White"/>
 
     <Style x:Key="WindowNavButton" TargetType="Button">
         <Setter Property="Template">
@@ -45,9 +50,9 @@
             </Setter.Value>
         </Setter>
 
-        <Setter Property="Margin" Value="8" />
-        <Setter Property="Width" Value="16" />
-        <Setter Property="Height" Value="16" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
         <Setter Property="Content" Value="{StaticResource MinimizeImage}" />
         <Setter Property="Background" Value="Green" />
         <Setter Property="Opacity" Value="0.54" />
