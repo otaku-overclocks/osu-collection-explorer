@@ -15,7 +15,8 @@
                 TextOptions.TextFormattingMode="Ideal"
                 TextOptions.TextRenderingMode="Auto"
                 Background="{DynamicResource  MaterialDesignPaper}"
-                FontFamily="{DynamicResource MaterialDesignFont}">
+                FontFamily="{DynamicResource MaterialDesignFont}"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -31,7 +32,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <CheckBox Margin="16,0" IsChecked="True" x:Name="ChkBackup">
+            <CheckBox Margin="16,0" IsChecked="{Binding Backup}" x:Name="ChkBackup">
                 <TextBlock Foreground="White" Text="Backup collections" />
             </CheckBox>
             <Button Grid.Column="1" x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Right" Height="36"

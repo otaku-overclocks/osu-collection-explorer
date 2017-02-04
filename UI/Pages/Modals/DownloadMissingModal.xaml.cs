@@ -57,7 +57,10 @@ namespace osu_collection_manager.UI.Pages.Modals
                 // Process the maps. This gets all the beatmaps in folder, 
                 // gets their md5 hash an puts them into Mapset model
                 ImportExportManager.ProcessDownloads(DownloadList.Downloads);
-                Close();
+                this.Dispatcher.Invoke(() =>
+                {
+                    Close();
+                });
             });
         }
     }

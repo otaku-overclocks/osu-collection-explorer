@@ -43,7 +43,7 @@ namespace osu_collection_manager.Managers
                         LogManager.Write(ms.Error);
                         LogManager.Close();
                     }
-                }, TaskScheduler.FromCurrentSynchronizationContext()); // Task will be run in ui thread
+                }); // Task will be run in ui thread
                 task.Start(); // Start download async
             }
             // If all downloads are completed and we have set a "all downlaods finished" callback, we will run it and remove it

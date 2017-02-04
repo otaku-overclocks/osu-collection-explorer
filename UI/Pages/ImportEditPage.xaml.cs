@@ -26,6 +26,8 @@ namespace osu_collection_manager.UI.Pages
     /// </summary>
     public partial class ImportEditPage : BasePage
     {
+        public bool Backup { get; set; } = true;
+
         public ImportEditPage(IEnumerable<Collection> collections, string name = null)
         {
             InitializeComponent();
@@ -57,14 +59,17 @@ namespace osu_collection_manager.UI.Pages
         public void ImportCollections(List<Collection> collections)
         {
             //Backup if checked
-            if(ChkBackup.IsChecked == true) BackupManager.BackupCollections();
+            if(Backup) BackupManager.BackupCollections();
             // Merges current collections with the collections we want to add
             CollectionManager.AddCollections(collections);
             // Write the database
             CollectionManager.WriteCollectionsDB();
             // Go back to main menu
-            MainWindow.OpenPage(null);
-            MessageBox.Show(MainWindow, "Maps are imported. Don't forget to restart twice the game if new maps have been downloaded to make sure the maps are imported and shown in the collections! (This is not a bug in either osu! or OCM. osu!'s behavior causes it to not reload the collections after importing beatmaps.)");
+            this.Dispatcher.Invoke(() =>
+            {
+                MainWindow.OpenPage(null);
+                MessageBox.Show(MainWindow, "Maps are imported. Don't forget to restart twice the game if new maps have been downloaded to make sure the maps are imported and shown in the collections! (This is not a bug in either osu! or OCM. osu!'s behavior causes it to not reload the collections after importing beatmaps.)");
+            });
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
