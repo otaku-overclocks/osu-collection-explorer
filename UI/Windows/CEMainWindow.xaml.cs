@@ -27,7 +27,7 @@ namespace osu_collection_manager.UI.Windows
 
         public CEMainWindow()
         {
-            ModalSize = new Vector(400, 300);
+            ModalSize = new Vector(460, 300);
             InitializeComponent();
             OpenPage(new MainMenuPage());
             LoadingOverlay.Visibility = Visibility.Visible;
