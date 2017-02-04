@@ -8,7 +8,14 @@
                 mc:Ignorable="d"
                 d:DesignHeight="300" d:DesignWidth="440"
                 Title="ImportEditPage"
-                Style="{StaticResource PageStyle}">
+                Style="{StaticResource PageStyle}"
+                TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                TextElement.FontWeight="Regular"
+                TextElement.FontSize="13"
+                TextOptions.TextFormattingMode="Ideal"
+                TextOptions.TextRenderingMode="Auto"
+                Background="{DynamicResource  MaterialDesignPaper}"
+                FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Grid>
         <Grid.RowDefinitions>

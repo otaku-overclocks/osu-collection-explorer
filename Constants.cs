@@ -18,5 +18,10 @@ namespace osu_collection_manager
             @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\";
 
         public const string REG_VALUE_OSU_UNINSTALLLOC = @"DisplayIcon";
+
+        public static string[] OSU_MEMES = new []
+        {
+            "osu!jet"
+        };
     }
 }

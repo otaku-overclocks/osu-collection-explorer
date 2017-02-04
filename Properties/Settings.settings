@@ -6,7 +6,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="BloodcatThreadCount" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="ShownWarning" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

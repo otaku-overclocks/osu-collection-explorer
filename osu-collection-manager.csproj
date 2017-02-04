@@ -94,6 +94,9 @@
     <Compile Include="UI\Pages\Modals\DownloadMissingModal.xaml.cs">
       <DependentUpon>DownloadMissingModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\Modals\WarningModal.xaml.cs">
+      <DependentUpon>WarningModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\Modals\DownloadMissingModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\Modals\WarningModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

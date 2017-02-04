@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using osu_collection_manager.Models;
+using osu_collection_manager.UI.Pages.Modals;
 
 namespace osu_collection_manager.UI.Pages
 {

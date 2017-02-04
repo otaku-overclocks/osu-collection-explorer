@@ -37,13 +37,25 @@ namespace osu_collection_manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int BloodcatThreadCount {
             get {
                 return ((int)(this["BloodcatThreadCount"]));
             }
             set {
                 this["BloodcatThreadCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShownWarning {
+            get {
+                return ((bool)(this["ShownWarning"]));
+            }
+            set {
+                this["ShownWarning"] = value;
             }
         }
     }
