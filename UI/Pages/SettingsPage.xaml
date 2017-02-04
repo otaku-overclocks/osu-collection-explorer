@@ -15,6 +15,32 @@
       TextOptions.TextRenderingMode="Auto"
       Background="{DynamicResource  MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}" Loaded="SettingsPage_Loaded">
+    <local:BasePage.Resources>
+        <Storyboard x:Key="saved">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="label">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-57">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="-57"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="label">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.3" Value="50">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </local:BasePage.Resources>
+    <local:BasePage.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource saved}"/>
+        </EventTrigger>
+    </local:BasePage.Triggers>
     <Grid Margin="16">
         <StackPanel VerticalAlignment="Top" Orientation="Vertical">
             <Grid>
@@ -36,16 +62,28 @@
                 <Slider x:Name="bd_thread_count" Grid.Column="1" Margin="0,15,0,0" Foreground="{StaticResource SecondaryAccentBrush}" IsSnapToTickEnabled="True" TickFrequency="1" Minimum="1" Maximum="16"></Slider>
             </Grid>
         </StackPanel>
-       
-       
-        <Button Content="Save settings" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+
+
+        <Label x:Name="label" Content="Saved!" VerticalAlignment="Bottom" Margin="0,0,0,10" HorizontalContentAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom"
                 BorderBrush="{StaticResource SecondaryAccentBrush}"
-                    Background="{StaticResource SecondaryAccentBrush}"
-                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" Click="Button_Click_1"/>
+                Background="{StaticResource SecondaryAccentBrush}"
+                Foreground="{StaticResource SecondaryAccentForegroundBrush}" Click="Button_Click_1"
+                Style="{StaticResource MaterialDesignFloatingActionButton}" Height="48" Width="48">
+            <Button.Content>
+                <materialDesign:PackIcon Kind="ContentSave" Height="Auto" Width="Auto" Margin="7"/>
+            </Button.Content>
+        </Button>
         <Button HorizontalAlignment="Left"  VerticalAlignment="Bottom"
-            BorderBrush="{StaticResource SecondaryAccentBrush}"
-            Background="{StaticResource SecondaryAccentBrush}"
-            Foreground="{StaticResource SecondaryAccentForegroundBrush}"
             Style="{StaticResource MaterialDesignFloatingActionButton}" Click="goToHome" Height="48" Width="48">
             <Button.Content>
                 <materialDesign:PackIcon Kind="Home" Height="Auto" Width="Auto" Margin="7"/>
