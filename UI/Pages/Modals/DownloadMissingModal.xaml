@@ -10,7 +10,8 @@
                  d:DesignHeight="300" d:DesignWidth="300"
                  Title="DownloadMissingModal"
                  Background="{StaticResource MaterialDesignPaper}"
-                 Style="{StaticResource PageStyle}">
+                 Style="{StaticResource PageStyle}"
+                 DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
         <Grid x:Name="MissingSelector" HorizontalAlignment="Stretch" Margin="16" Background="{DynamicResource MaterialDesignPaper}" VerticalAlignment="Stretch">
@@ -31,8 +32,20 @@
             <Button Grid.Column="0" x:Name="BtnDownloadCancel" Content="Cancel" Grid.Row="2" HorizontalAlignment="Right" Height="36"
                         Margin="8,0,0,0" Click="BtnDownloadCancel_OnClick"/>
         </Grid>
-        <Grid x:Name="ProgressView" Opacity="0.87" Visibility="Hidden" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="16">
-            <userControls:DownloadList Background="{DynamicResource MaterialDesignPaper}" x:Name="DownloadList" HorizontalAlignment="Stretch" FontFamily="Roboto" />
+        <Grid x:Name="ProgressView" Opacity="0.87" Visibility="Hidden" Background="{DynamicResource MaterialDesignPaper}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="16">
+               <Grid.RowDefinitions>
+                   <RowDefinition Height="38"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>  
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Downloading missing beatmaps" VerticalAlignment="Center" FontSize="14" Foreground="White"></TextBlock>
+                <TextBlock Grid.Column="1" FontSize="14"  Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding DownloadingProgress}"></TextBlock>
+            </Grid>
+            <userControls:DownloadList Grid.Row="1" Background="{DynamicResource MaterialDesignPaper}" x:Name="DownloadList" HorizontalAlignment="Stretch" FontFamily="Roboto" />
         </Grid>
     </Grid>
 </pages:BaseModal>

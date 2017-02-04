@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using osu_collection_manager.Annotations;
 using osu_collection_manager.Managers;
 using osu_collection_manager.Models;
 using osu_collection_manager.UI.UserControls.Models;
@@ -22,9 +26,18 @@ namespace osu_collection_manager.UI.Pages.Modals
     /// <summary>
     /// Interaction logic for DownloadMissingModal.xaml
     /// </summary>
-    public partial class DownloadMissingModal : BaseModal
+    public partial class DownloadMissingModal : BaseModal, INotifyPropertyChanged
     {
-
+        private string _downloadingProgress = "0/0";
+        public string DownloadingProgress
+        {
+            get { return _downloadingProgress; }
+            set
+            {
+                _downloadingProgress = value; 
+                OnPropertyChanged(nameof(DownloadingProgress));
+            }
+        }
 
         public DownloadMissingModal(IEnumerable<MapSet> missing, Action<ModalFinishType> closeCallback = null) : base(closeCallback)
         {
@@ -33,6 +46,13 @@ namespace osu_collection_manager.UI.Pages.Modals
             {
                 MapsetList.Mapsets.Add(new MapsetHolder(null, mapSet, true));
             }
+            DownloadManager.Downloading.CollectionChanged += DownloadingCollectionChanged; 
+        }
+
+        private void DownloadingCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            DownloadingProgress =
+                $"{DownloadManager.Completed.Count}/{DownloadManager.Queue.Count + DownloadManager.Downloading.Count}";
         }
 
         private void BtnDownloadCancel_OnClick(object sender, RoutedEventArgs e)
@@ -62,6 +82,14 @@ namespace osu_collection_manager.UI.Pages.Modals
                     Close();
                 });
             });
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

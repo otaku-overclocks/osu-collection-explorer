@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace osu_collection_manager.Managers
 {
     public class DownloadManager
     {
-        public static readonly List<MapSetDownload> Queue = new List<MapSetDownload>();
-        public static readonly List<MapSetDownload> Downloading = new List<MapSetDownload>();
-        public static readonly List<MapSetDownload> Completed = new List<MapSetDownload>();
+        public static readonly ObservableCollection<MapSetDownload> Queue = new ObservableCollection<MapSetDownload>();
+        public static readonly ObservableCollection<MapSetDownload> Downloading = new ObservableCollection<MapSetDownload>();
+        public static readonly ObservableCollection<MapSetDownload> Completed = new ObservableCollection<MapSetDownload>();
 
         private static Action _finishCallback { get; set; }
 
