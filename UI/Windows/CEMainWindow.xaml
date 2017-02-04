@@ -67,6 +67,9 @@
                        Height="{Binding ModalSize.Y}" />
             </StackPanel>
         </Grid>
+        <Grid x:Name="LoadingOverlay" Grid.Row="1" Background="{StaticResource MaterialDesignPaper}" Visibility="Visible">
+            <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54" Style="{DynamicResource MaterialDesignCircularProgressBar}" Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True"></ProgressBar>
+        </Grid>
     </Grid>
 
 

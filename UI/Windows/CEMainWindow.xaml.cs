@@ -9,6 +9,8 @@ using osu_collection_manager.UI.Pages;
 using osu_collection_manager.UI.Pages.Modals;
 using System.Windows.Controls;
 using System;
+using System.Threading.Tasks;
+using osu_collection_manager.Managers;
 
 namespace osu_collection_manager.UI.Windows
 {
@@ -19,11 +21,25 @@ namespace osu_collection_manager.UI.Windows
     {
         public Vector ModalSize { get; set; }
 
+        public static Task InitialLoadTask { get; private set; }
+
         public CEMainWindow()
         {
             ModalSize = new Vector(400, 300);
             InitializeComponent();
             OpenPage(new MainMenuPage());
+            LoadingOverlay.Visibility = Visibility.Visible;
+            InitialLoadTask = new Task(() =>
+            {
+                var col = CollectionManager.Collections; // First time read.
+            });
+            InitialLoadTask.ContinueWith((task, o) =>
+            {
+                Dispatcher.Invoke(() => {
+                    LoadingOverlay.Visibility = Visibility.Hidden;
+                });
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+            InitialLoadTask.Start();
         }
 
         private void Close(object sender, RoutedEventArgs e)

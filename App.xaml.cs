@@ -31,10 +31,6 @@ namespace osu_collection_manager
             var path = Preferences.OsuPath;
             Debug.WriteLine($"Found osu path: {path}");
 #endif
-            new Task(() => //TODO: Wait for callback
-            {
-                var col = CollectionManager.Collections; // First time read.
-            }).Start();
         }
     }
 }
