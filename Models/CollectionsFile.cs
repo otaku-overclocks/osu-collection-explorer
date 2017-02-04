@@ -17,8 +17,12 @@ namespace osu_collection_manager.Models
         /// </summary>
         [DataMember]
         public int Version { get; set; }
+
         [DataMember]
         public List<Collection> Collections { get; set; }
+
+        [DataMember]
+        public string Name { get; set; } = "Untitled collection pack";
 
         public CollectionsFile(List<Collection> collections)
         {
@@ -73,7 +77,7 @@ namespace osu_collection_manager.Models
             var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                return (CollectionsFile)ser.ReadObject(stream);
+                return (CollectionsFile) ser.ReadObject(stream);
             }
         }
 

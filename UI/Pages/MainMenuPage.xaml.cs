@@ -38,15 +38,15 @@ namespace osu_collection_manager.UI.Pages
             OpenExportPage();
         }
 
-        public void OpenImportEditPage(IEnumerable<Collection> collections)
+        public void OpenImportEditPage(IEnumerable<Collection> collections, string name = null)
         {
-            MainWindow.OpenPage(new ImportEditPage(collections));
+            MainWindow.OpenPage(new ImportEditPage(collections, name));
         }
 
         public void ImportFromFile(string path)
         {
             var collections = CollectionsFile.ReadFromFile(path);
-            OpenImportEditPage(collections.Collections);
+            OpenImportEditPage(collections.Collections, collections.Name);
         }
 
         private void BtnImport_OnClick(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace osu_collection_manager.UI.Pages
             var openFileDialog = new OpenFileDialog() { Filter = "Collections file|*.osc" };
             if (openFileDialog.ShowDialog() != true) return;
             var collections = CollectionsFile.ReadFromFile(openFileDialog.FileName);
-            OpenImportEditPage(collections.Collections);
+            OpenImportEditPage(collections.Collections, collections.Name);
         }
 
         private void BtnResetCOnfig_Click(object sender, RoutedEventArgs e)

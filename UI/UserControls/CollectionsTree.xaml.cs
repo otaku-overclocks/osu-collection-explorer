@@ -131,18 +131,18 @@ namespace osu_collection_manager.UI.UserControls
             throw new NotImplementedException();
         }
 
-        public List<Collection> GetSelected()
+        public List<Collection> GetSelected(bool apply = false)
         {
             var ret = new List<Collection>();
             foreach (var child in Children)
             {
                 if (child.Selected == true)
                 {
-                    ret.Add(child.Data);
+                    ret.Add(child.GetData(apply));
                 }
                 else if (child.Selected == null)
                 {
-                    var col = child.Data;
+                    var col = child.GetData(apply);
                     col.MapSets.Clear();
                     foreach (var subChild in child.Children)
                     {

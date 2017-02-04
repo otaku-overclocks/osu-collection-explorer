@@ -26,19 +26,20 @@ namespace osu_collection_manager.UI.Pages
     /// </summary>
     public partial class ImportEditPage : BasePage
     {
-        public ImportEditPage(IEnumerable<Collection> collections)
+        public ImportEditPage(IEnumerable<Collection> collections, string name = null)
         {
             InitializeComponent();
             foreach (var collection in collections)
             {
                 Tree.Children.Add(new CollectionHolder(Tree, collection, true));
             }
+            if (name != null) Tree.Title = name;
         }
 
         private void BtnImport_OnClick(object sender, RoutedEventArgs e)
         {
             //Get selected collections
-            var selected = Tree.GetSelected();
+            var selected = Tree.GetSelected(true);
             //Check if some maps are missing
             var missing = ImportExportManager.CheckMissingMapSets(selected);
             if (missing.Count > 0)
@@ -69,18 +70,11 @@ namespace osu_collection_manager.UI.Pages
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
             //Get selected collections
-            var selected = Tree.GetSelected();
-            //Prompt a dialog to get the path to export to.
-            var saveFileDialog = new SaveFileDialog {Filter = "Collections file (*.osc)|*.osc"};
-            if (saveFileDialog.ShowDialog() != true) return; // Action is cancelled
+            var selected = Tree.GetSelected(false);
             //Put our collections in our file model
-            var file = new CollectionsFile(selected);
-            //Serialize and write the file to our selected path
-            file.WriteToFile(saveFileDialog.FileName);
-            //Select the file in explorer
-            System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
-            //Go back to main page
-            MainWindow.OpenPage(null);
+            var file = new CollectionsFile(selected) { Name = Tree.Title };
+            //If saved. Go back to main page
+            if (ExportPage.PromptSave(file)) MainWindow.OpenPage(null);
         }
     }
 }

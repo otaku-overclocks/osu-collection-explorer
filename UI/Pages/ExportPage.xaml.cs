@@ -37,18 +37,23 @@ namespace osu_collection_manager.UI.Pages
         private void BtnConfirm_OnClick(object sender, RoutedEventArgs e)
         {
             //Get selected collections
-            var selected = Tree.GetSelected();
+            var selected = Tree.GetSelected(false);
+            //Put our collections in our file model
+            var file = new CollectionsFile(selected) {Name = Tree.Title};
+            //If saved. Go back to main page
+            if (PromptSave(file)) MainWindow.OpenPage(null);
+        }
+
+        public static bool PromptSave(CollectionsFile file)
+        {
             //Prompt a dialog to get the path to export to.
             var saveFileDialog = new SaveFileDialog { Filter = "Collections file (*.osc)|*.osc" };
-            if (saveFileDialog.ShowDialog() != true) return; // Action is cancelled
-            //Put our collections in our file model
-            var file = new CollectionsFile(selected);
+            if (saveFileDialog.ShowDialog() != true) return false; // Action is cancelled
             //Serialize and write the file to our selected path
             file.WriteToFile(saveFileDialog.FileName);
             //Select the file in explorer
             System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
-            //Go back to main page
-            MainWindow.OpenPage(null);
+            return true;
         }
     }
 }
