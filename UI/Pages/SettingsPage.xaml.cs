@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OsuMapDownload;
 
 namespace osu_collection_manager.UI.Pages
 {
@@ -33,11 +34,13 @@ namespace osu_collection_manager.UI.Pages
         private void LoadSettings()
         {
             osu_folder_path.Text = Properties.Settings.Default.OsuPath;
+            bd_thread_count.Value = Properties.Settings.Default.BloodcatThreadCount;
         }
 
         private void SaveSettings()
         {
             Properties.Settings.Default.OsuPath = osu_folder_path.Text;
+            Properties.Settings.Default.BloodcatThreadCount = (int)bd_thread_count.Value;
             Properties.Settings.Default.Save();
         }
 

@@ -34,5 +34,17 @@ namespace osu_collection_manager.Properties {
                 this["OsuPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BloodcatThreadCount {
+            get {
+                return ((int)(this["BloodcatThreadCount"]));
+            }
+            set {
+                this["BloodcatThreadCount"] = value;
+            }
+        }
     }
 }

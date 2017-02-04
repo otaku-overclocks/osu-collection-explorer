@@ -11,11 +11,11 @@ using System.IO;
 
 namespace osu_collection_manager
 {
-    class Common
+    public class Common
     {
         public static string OpenOsuExe()
         {
-            string path = "";
+            string path = null;
             var dialog = new OpenFileDialog() { Multiselect = false, Filter = "osu!.exe|osu!.exe" };
             var result = dialog.ShowDialog();
             if (result == true) path = Path.GetDirectoryName(dialog.FileName);

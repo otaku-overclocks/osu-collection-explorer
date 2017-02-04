@@ -20,7 +20,18 @@ namespace osu_collection_manager
         public static string DownloadsPath { get { return OsuPath + "\\OCMTemp"; } }
         public static string BackupsPath { get { return OsuPath + "\\Backup"; } }
 
-        public static int BloodcatThreadCount = 8;
+        public static int BloodcatThreadCount
+        {
+            get
+            {
+                return Properties.Settings.Default.BloodcatThreadCount;
+            }
+            set
+            {
+                Properties.Settings.Default.BloodcatThreadCount = value;
+                Properties.Settings.Default.Save();
+            }
+        }
         public static string BloodcatDownloadLink = "http://bloodcat.com/osu/s/";
 
         public const string COLLECTION_FORMAT = ".osc";
@@ -29,9 +40,6 @@ namespace osu_collection_manager
         {
             get
             {
-#if DEBUG
-               // return @"G:\Games\OsuTest";
-#endif
                 var ret = Properties.Settings.Default.OsuPath;
                 if (ret != null && !ret.Equals(string.Empty)) return ret;
                 ret = OsuInstanceManager.GetPathFromRegistry();

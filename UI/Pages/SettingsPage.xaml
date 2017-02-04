@@ -15,22 +15,34 @@
       TextOptions.TextRenderingMode="Auto"
       Background="{DynamicResource  MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}" Loaded="SettingsPage_Loaded">
-    <Grid>
-        <Grid VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="osu! folder path" Margin="5,14,5,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="osu_folder_path" Grid.Column="1" Margin="0,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
-            <Button Content="Open osu!.exe" Grid.Column="2" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Click="Button_Click"/>
-        </Grid>
-        <Button Content="Save settings" HorizontalAlignment="Right" Margin="0,0,10,18" VerticalAlignment="Bottom"
+    <Grid Margin="16">
+        <StackPanel VerticalAlignment="Top" Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="osu! folder path" Margin="5,14,5,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="osu_folder_path" Grid.Column="1" Margin="0,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                <Button Content="Open osu!.exe" Grid.Column="2" HorizontalAlignment="Right" Margin="10,10,0,10" VerticalAlignment="Top" Click="Button_Click"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding ElementName=bd_thread_count, Path=Value, StringFormat=Bloodcat thread count ({0})}" Margin="5,14,5,0" VerticalAlignment="Top"/>
+                <Slider x:Name="bd_thread_count" Grid.Column="1" Margin="0,15,0,0" Foreground="{StaticResource SecondaryAccentBrush}" IsSnapToTickEnabled="True" TickFrequency="1" Minimum="1" Maximum="16"></Slider>
+            </Grid>
+        </StackPanel>
+       
+       
+        <Button Content="Save settings" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                 BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}" Click="Button_Click_1"/>
-        <Button HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom"
+        <Button HorizontalAlignment="Left"  VerticalAlignment="Bottom"
             BorderBrush="{StaticResource SecondaryAccentBrush}"
             Background="{StaticResource SecondaryAccentBrush}"
             Foreground="{StaticResource SecondaryAccentForegroundBrush}"
