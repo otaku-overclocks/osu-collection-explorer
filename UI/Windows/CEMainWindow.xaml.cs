@@ -9,8 +9,10 @@ using osu_collection_manager.UI.Pages;
 using osu_collection_manager.UI.Pages.Modals;
 using System.Windows.Controls;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using osu_collection_manager.Managers;
+using osu_collection_manager.Models;
 
 namespace osu_collection_manager.UI.Windows
 {
@@ -45,7 +47,8 @@ namespace osu_collection_manager.UI.Windows
         private void Close(object sender, RoutedEventArgs e)
         {
             // Application.Current.Shutdown();
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            OpenDialog(new DownloadMissingModal(new List<MapSet>()));
         }
 
         private void Maximize(object sender, RoutedEventArgs e)
@@ -64,17 +67,17 @@ namespace osu_collection_manager.UI.Windows
             WindowContent.Content = page;
         }
 
-        public override void OpenModal(BaseModal dialog)
+        public override void OpenDialog(BaseModal dialog)
         {
             if (dialog == null)
             {
-                ModalContent.Content = null;
-                ModalOverlay.Visibility = Visibility.Hidden;
+                //ModalContent.Content = null;
+                MainDialog.IsOpen = false;
                 return;
             }
           
             ModalContent.Content = dialog;
-            ModalOverlay.Visibility = Visibility.Visible;
+            MainDialog.IsOpen = true;
         }
 
         private void OnFileDrop(object sender, DragEventArgs e)

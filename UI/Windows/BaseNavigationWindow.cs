@@ -8,6 +8,6 @@ namespace osu_collection_manager.UI.Windows
     {
         public abstract void OpenPage(BasePage page);
 
-        public abstract void OpenModal(BaseModal dialog);
+        public abstract void OpenDialog(BaseModal dialog);
     }
 }

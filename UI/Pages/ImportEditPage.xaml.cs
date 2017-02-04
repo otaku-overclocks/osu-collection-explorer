@@ -44,7 +44,7 @@ namespace osu_collection_manager.UI.Pages
             var missing = ImportExportManager.CheckMissingMapSets(selected);
             if (missing.Count > 0)
             {
-                MainWindow.OpenModal(new DownloadMissingModal(missing, delegate(ModalFinishType type)
+                MainWindow.OpenDialog(new DownloadMissingModal(missing, delegate(ModalFinishType type)
                 {
                     if (type.Equals(ModalFinishType.Succes)) 
                         ImportCollections(selected);

@@ -29,7 +29,7 @@ namespace osu_collection_manager.UI.Pages
         public virtual void Close(ModalFinishType type = ModalFinishType.Succes)
         {
             Callback?.Invoke(type);
-            MainWindow.OpenModal(null);
+            MainWindow.OpenDialog(null);
         }
     }
 }

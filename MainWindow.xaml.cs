@@ -70,7 +70,7 @@ namespace osu_collection_manager
             WindowContent.Content = page;
         }
 
-        public override void OpenModal(BaseModal dialog)
+        public override void OpenDialog(BaseModal dialog)
         {
            
         }
