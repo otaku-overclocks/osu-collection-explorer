@@ -26,7 +26,7 @@
             <RowDefinition Height="48" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <materialDesign:DialogHost x:Name="MainDialog" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <materialDesign:DialogHost x:Name="MainDialog" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource DialogStyleDark}">
             <materialDesign:DialogHost.DialogContent >
                 <Frame x:Name="ModalContent" NavigationUIVisibility="Hidden" Width="{Binding ModalSize.X}"
                        Height="{Binding ModalSize.Y}" />
@@ -34,11 +34,11 @@
             <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </materialDesign:DialogHost>
 
-        <Border Background="{DynamicResource MaterialDesignPaper}">
+        <Border Grid.Row="0" Background="{DynamicResource MaterialDesignPaper}">
             <Border.Effect>
                 <DropShadowEffect Direction="270" Opacity="0.25" RenderingBias="Quality" BlurRadius="4" ShadowDepth="2" />
             </Border.Effect>
-            <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
+            <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
                 <TextBlock x:Name="windowTitle" Text="osu! collection manager beta 0.1" VerticalAlignment="Center"
                            Foreground="White" Opacity="0.54"
                            FontSize="16" FontWeight="Bold" Margin="8,0,0,0" />

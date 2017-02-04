@@ -47,8 +47,7 @@ namespace osu_collection_manager.UI.Windows
         private void Close(object sender, RoutedEventArgs e)
         {
             // Application.Current.Shutdown();
-            //Environment.Exit(0);
-            OpenDialog(new DownloadMissingModal(new List<MapSet>()));
+            Environment.Exit(0);
         }
 
         private void Maximize(object sender, RoutedEventArgs e)
@@ -71,7 +70,6 @@ namespace osu_collection_manager.UI.Windows
         {
             if (dialog == null)
             {
-                //ModalContent.Content = null;
                 MainDialog.IsOpen = false;
                 return;
             }
