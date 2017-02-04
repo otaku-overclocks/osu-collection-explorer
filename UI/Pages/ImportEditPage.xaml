@@ -29,13 +29,16 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <CheckBox Margin="16,0" IsChecked="True" x:Name="ChkBackup">
                 <TextBlock Foreground="White" Text="Backup collections" />
             </CheckBox>
-            <Button Grid.Column="1" x:Name="BtnSave" Content="Save" HorizontalAlignment="Right" Height="36"
+            <Button Grid.Column="1" x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Right" Height="36"
+                    Margin="8,6,8,6" Click="BtnCancel_OnClick" />
+            <Button Grid.Column="2" x:Name="BtnSave" Content="Save" HorizontalAlignment="Right" Height="36"
                     Margin="8,6,8,6" Click="BtnSave_OnClick" />
-            <Button Grid.Column="2" x:Name="BtnImport" Content="Import" HorizontalAlignment="Right" Height="36"
+            <Button Grid.Column="3" x:Name="BtnImport" Content="Import" HorizontalAlignment="Right" Height="36"
                     Margin="8,6,16,6" Click="BtnImport_OnClick" />
         </Grid>
     </Grid>

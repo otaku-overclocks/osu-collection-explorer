@@ -18,7 +18,13 @@
         <userControls:CollectionsTree Grid.Row="0" x:Name="Tree" />
 
         <Grid Grid.Row="1" Background="{StaticResource DarkMenuColor}">
-            <Button x:Name="BtnConfirm" Content="Export" HorizontalAlignment="Right" Height="36"
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition></ColumnDefinition>
+               <ColumnDefinition Width="Auto"></ColumnDefinition>
+           </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Right" Height="36"
+                    Margin="8,6,8,6" Click="BtnCancel_OnClick" />
+            <Button Grid.Column="1" x:Name="BtnConfirm" Content="Export" HorizontalAlignment="Right" Height="36"
                     Margin="8,6,16,6" Click="BtnConfirm_OnClick" />
         </Grid>
     </Grid>
