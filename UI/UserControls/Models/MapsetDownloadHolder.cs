@@ -16,17 +16,41 @@ namespace osu_collection_manager.UI.UserControls.Models
 {
     public class MapsetDownloadHolder : MapSetExtractDownload, INotifyPropertyChanged
     {
-        private float _progress = 0;
-        private bool _extracted = false;
-        private Exception _error;
+        private static SolidColorBrush _failedBrush = new SolidColorBrush(Color.FromRgb(0xF4, 0x43, 0x36));
+        private static SolidColorBrush _succesBrush = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50));
 
+        private float _progress = 0;
+        private string _progressText = "Waiting";
+        private Exception _error;
+        private SolidColorBrush _progressBrush = new SolidColorBrush(Color.FromRgb(0xC5, 0x11, 0x62));
         public override float Progress
         {
             get { return _progress; }
             set
             {
                 _progress = value;
+                ProgressText = $"{(_progress/100):P1}";
                 OnPropertyChanged(nameof(Progress));
+            }
+        }
+
+        public string ProgressText
+        {
+            get { return _progressText; }
+            set
+            {
+                _progressText = value;
+                OnPropertyChanged(nameof(ProgressText));
+            }
+        }
+
+        public SolidColorBrush ProgressBrush
+        {
+            get { return _progressBrush; }
+            set
+            {
+                _progressBrush = value;
+                OnPropertyChanged(nameof(ProgressBrush));
             }
         }
 
@@ -40,6 +64,8 @@ namespace osu_collection_manager.UI.UserControls.Models
             {
                 _error = value;
                 Progress = 100f;
+                ProgressText = "Failed!";
+                ProgressBrush = _failedBrush;
                 OnPropertyChanged(nameof(Failed));
             }
         }
@@ -69,6 +95,8 @@ namespace osu_collection_manager.UI.UserControls.Models
                 File.Delete(dest);
             }
             File.Move(filePath, dest);
+            ProgressText = "Success!";
+            ProgressBrush = _succesBrush;
         }
     }
 }
