@@ -76,5 +76,10 @@ namespace osu_collection_manager.UI.Pages
             //If saved. Go back to main page
             if (ExportPage.PromptSave(file)) MainWindow.OpenPage(null);
         }
+
+        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow.OpenPage(null);
+        }
     }
 }

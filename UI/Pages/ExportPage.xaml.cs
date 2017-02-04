@@ -55,5 +55,10 @@ namespace osu_collection_manager.UI.Pages
             System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
             return true;
         }
+
+        private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow.OpenPage(null);
+        }
     }
 }
