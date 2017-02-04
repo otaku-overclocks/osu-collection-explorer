@@ -29,35 +29,38 @@
         <Frame x:Name="WindowContent" NavigationUIVisibility="Hidden" Grid.Row="1" />
         <Border Background="{DynamicResource MaterialDesignPaper}">
             <Border.Effect>
-                <DropShadowEffect Direction="270" Opacity="0.25" RenderingBias="Quality" BlurRadius="4" ShadowDepth="2"/>
+                <DropShadowEffect Direction="270" Opacity="0.25" RenderingBias="Quality" BlurRadius="4" ShadowDepth="2" />
             </Border.Effect>
             <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="8">
-            <TextBlock x:Name="windowTitle" Text="osu! collection manager beta 0.1" VerticalAlignment="Center" Foreground="White" Opacity="0.54"
-                       FontSize="16" FontWeight="Bold" Margin="8,0,0,0" />
-            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource CloseImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
-                    Click="Close" />
-            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource MaximizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
-                    Click="Maximize" />
-            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource MinimizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
-                    Click="Minimize" />
-            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    Content="{StaticResource SettingsImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
-                    Click="OpenSettings" />
+                <TextBlock x:Name="windowTitle" Text="osu! collection manager beta 0.1" VerticalAlignment="Center"
+                           Foreground="White" Opacity="0.54"
+                           FontSize="16" FontWeight="Bold" Margin="8,0,0,0" />
                 <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
-                    HorizontalAlignment="Right" DockPanel.Dock="Right"
-                    Click="GoGithub">
+                        Content="{StaticResource CloseImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                        Click="Close" />
+                <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
+                        Content="{StaticResource MaximizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                        Click="Maximize" />
+                <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
+                        Content="{StaticResource MinimizeImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                        Click="Minimize" />
+                <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
+                        Content="{StaticResource SettingsImage}" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                        Click="OpenSettings" />
+                <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{StaticResource WindowNavButton}"
+                        HorizontalAlignment="Right" DockPanel.Dock="Right"
+                        Click="GoGithub">
                     <Button.Content>
-                        <materialDesign:PackIcon Kind="GithubCircle" Height="24" Width="24" Foreground="White"/>
+                        <materialDesign:PackIcon  Kind="GithubCircle" Height="24" Width="24" Foreground="White" />
                     </Button.Content>
                 </Button>
+
             </DockPanel>
         </Border>
 
         <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="ModalOverlay" Visibility="Hidden" Background="#BB000000">
-            <Border Background="{StaticResource MaterialDesignPaper}" Name="ModalMask" CornerRadius="4" VerticalAlignment="Center"
+            <Border Background="{StaticResource MaterialDesignPaper}" Name="ModalMask" CornerRadius="4"
+                    VerticalAlignment="Center"
                     HorizontalAlignment="Center" Width="{Binding ModalSize.X}" Height="{Binding ModalSize.Y}" />
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel.OpacityMask>
@@ -67,8 +70,11 @@
                        Height="{Binding ModalSize.Y}" />
             </StackPanel>
         </Grid>
-        <Grid x:Name="LoadingOverlay" Grid.Row="1" Background="{StaticResource MaterialDesignPaper}" Visibility="Visible">
-            <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54" Style="{DynamicResource MaterialDesignCircularProgressBar}" Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True"></ProgressBar>
+        <Grid x:Name="LoadingOverlay" Grid.Row="1" Background="{StaticResource MaterialDesignPaper}"
+              Visibility="Visible">
+            <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54"
+                         Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                         Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True" />
         </Grid>
     </Grid>
 

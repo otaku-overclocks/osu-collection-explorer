@@ -38,7 +38,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border>
+                    <Border Background="{TemplateBinding Background}">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -54,7 +54,7 @@
         <Setter Property="Width" Value="24" />
         <Setter Property="Height" Value="24" />
         <Setter Property="Content" Value="{StaticResource MinimizeImage}" />
-        <Setter Property="Background" Value="Green" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Opacity" Value="0.54" />
         <Setter Property="IsHitTestVisible" Value="true" />
         <Style.Triggers>
