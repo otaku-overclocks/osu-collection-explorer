@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" TextAlignment="Center"
-                           Text="Looks like your are missing some maps." FontSize="14" Margin="0, 12" Foreground="White"/>
+                           Text="Looks like you are missing some maps." FontSize="14" Margin="0, 12" Foreground="White"/>
             <userControls:MapsetList Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" x:Name="MapsetList" HorizontalAlignment="Stretch" />
             <Button Grid.Column="1" x:Name="BtnDownload" Content="Download" Grid.Row="2" HorizontalAlignment="Right" Height="36"
                         Margin="8,0,0,0" Click="BtnDownload_OnClick"/>
