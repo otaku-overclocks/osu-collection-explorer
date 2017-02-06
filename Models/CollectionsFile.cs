@@ -75,10 +75,10 @@ namespace osu_collection_manager.Models
         public static CollectionsFile ReadFromFile(string path)
         {
             var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                return (CollectionsFile) ser.ReadObject(stream);
-            }
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    return (CollectionsFile)ser.ReadObject(stream);
+                }
         }
 
         /// <summary>

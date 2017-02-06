@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource  MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="420" Width="666">
+        Title="MainWindow" Height="544.123" Width="710.743">
     <!-- copy lines 8 to 15 to each page/window -->
     <Grid>
         <Grid Margin="0">

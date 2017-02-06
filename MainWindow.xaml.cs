@@ -31,6 +31,7 @@ namespace osu_collection_manager
         {
             InitializeComponent();
             // temp fix end
+
             new Task(() =>
             {
                 var col = CollectionManager.Collections; // First time read.
@@ -46,6 +47,7 @@ namespace osu_collection_manager
         }
 
         // END menubar code
+
         private void ExportCollections_OnClick(object sender, RoutedEventArgs e)
         {
             OpenPage(new Pages.SelectCollectionsPage(CollectionManager.Collections, SelectCollectionsPage.SelectPurpose.Export));

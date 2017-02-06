@@ -60,5 +60,15 @@ namespace osu_collection_manager.UI.Pages
         {
             MainWindow.OpenPage(null);
         }
+
+        private void button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            Properties.Settings.Default.OsuPath = Preferences.OsuPath;
+            Properties.Settings.Default.BloodcatThreadCount = 4;
+            Properties.Settings.Default.ShownWarning = false;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+        }
     }
 }

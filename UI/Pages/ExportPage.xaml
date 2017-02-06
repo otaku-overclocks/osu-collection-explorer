@@ -6,9 +6,8 @@
                 xmlns:local="clr-namespace:osu_collection_manager.UI.Pages"
                 xmlns:userControls="clr-namespace:osu_collection_manager.UI.UserControls"
                 mc:Ignorable="d"
-                d:DesignHeight="300" d:DesignWidth="300"
                 Title="ExportPage"
-                Style="{StaticResource PageStyle}">
+                Style="{StaticResource PageStyle}" Height="312.371" Width="424.743">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,14 +17,16 @@
         <userControls:CollectionsTree Grid.Row="0" x:Name="Tree" />
 
         <Grid Grid.Row="1" Background="{StaticResource DarkMenuColor}">
-           <Grid.ColumnDefinitions>
-               <ColumnDefinition></ColumnDefinition>
-               <ColumnDefinition Width="Auto"></ColumnDefinition>
-           </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Button Grid.Column="0" x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Right" Height="36"
                     Margin="8,6,8,6" Click="BtnCancel_OnClick" />
             <Button Grid.Column="1" x:Name="BtnConfirm" Content="Export" HorizontalAlignment="Right" Height="36"
                     Margin="8,6,16,6" Click="BtnConfirm_OnClick" />
+            <Button Grid.Column="0" x:Name="BtnSelect" Content="Select a different collection" HorizontalAlignment="Right" Height="36"
+                Margin="0,14,93,14" Click="BtnSelect_OnClick" Width="216" />
         </Grid>
     </Grid>
 </local:BasePage>

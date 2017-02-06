@@ -89,6 +89,7 @@
                 <materialDesign:PackIcon Kind="Home" Height="Auto" Width="Auto" Margin="7"/>
             </Button.Content>
         </Button>
+        <Button x:Name="button" Content="Reset Defaults" HorizontalAlignment="Left" Margin="69,236,0,0" VerticalAlignment="Top" Width="133" Click="button_Click_2"/>
 
     </Grid>
 </local:BasePage>
