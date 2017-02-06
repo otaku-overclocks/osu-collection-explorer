@@ -18,6 +18,7 @@ using osu_collection_manager.Models;
 using osu_collection_manager.UI.Pages.Modals;
 using osu_collection_manager.UI.UserControls;
 using osu_collection_manager.UI.UserControls.Models;
+using System.Diagnostics;
 
 namespace osu_collection_manager.UI.Pages
 {
@@ -57,9 +58,18 @@ namespace osu_collection_manager.UI.Pages
         }
 
         public void ImportCollections(List<Collection> collections)
-        {
+        {   // Check if osu! is running. If it is, inform the user and wait 1 minute for the user to close it.
+            Process[] p = Process.GetProcessesByName("osu!");
+            if (p.Count() != 0)
+            {
+                Process osu = p.FirstOrDefault();
+                this.Dispatcher.Invoke(() =>
+                {
+                    MessageBox.Show(MainWindow, "Please close osu! before proceeding to install the beatmaps! Pressing OK will install the beatmaps whether osu! is open or not. We prefer osu! closed in this process.");
+                });
+            }
             //Backup if checked
-            if(Backup) BackupManager.BackupCollections();
+            if (Backup) BackupManager.BackupCollections();
             // Merges current collections with the collections we want to add
             CollectionManager.AddCollections(collections);
             // Write the database
@@ -68,7 +78,11 @@ namespace osu_collection_manager.UI.Pages
             this.Dispatcher.Invoke(() =>
             {
                 MainWindow.OpenPage(null);
-                MessageBox.Show(MainWindow, "Maps are imported. Don't forget to restart twice the game if new maps have been downloaded to make sure the maps are imported and shown in the collections! (This is not a bug in either osu! or OCM. osu!'s behavior causes it to not reload the collections after importing beatmaps.)");
+                if (p.Count() != 0)
+                    MessageBox.Show(MainWindow, "Maps are imported. \nIf you have osu! open while installing the beatmaps, don't forget to press F5 in the map selection screen if the new maps and/or collections are missing, and if that doesn't work, please restart the game!");
+                else
+                    MessageBox.Show(MainWindow, "Maps are imported. You can now start the game!");
+                // (This is not a bug in either osu! or OCM. osu!'s behavior causes it to not reload the collections after importing beatmaps.)
             });
         }
 
