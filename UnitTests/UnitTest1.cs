@@ -75,75 +75,7 @@ namespace UnitTests
                 Debug.Write("i");
             }
         }
-
-        [TestMethod]
-        public void TestAsyncDownload()
-        {
-            CreateTempDlPath();
-            var download = new MapSetDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
-            var task = download.CreateTask();
-            task.Start();
-            while (!task.IsCompleted)
-            {
-                Debug.WriteLine(download.Progress + " with speed " + download.Speed);
-                Thread.Sleep(100);
-            }
-            Debug.WriteLine(download.Completed);
-            Debug.WriteLine(download.Failed);
-        }
-
-        [TestMethod]
-        public void TestAsyncDownloadMultiple()
-        {
-            DownloadUtils.SetThreadCountMax();
-            CreateTempDlPath();
-            var download = new MapSetDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
-            var task = download.CreateTask();
-            var download2 = new MapSetDownload("http://bloodcat.com/osu/s/553711", Preferences.DownloadsPath);
-            var task2 = download2.CreateTask();
-            var download3 = new MapSetDownload("http://bloodcat.com/osu/s/469815", Preferences.DownloadsPath);
-            var task3 = download3.CreateTask();
-            task.Start();
-            task2.Start();
-            task3.Start();
-            while (!task.IsCompleted || !task2.IsCompleted || !task3.IsCompleted)
-            {
-                Debug.WriteLine($"Download 1 - Progress: {download.Progress} Speed: {download.Speed} kb/s");
-                Debug.WriteLine($"Download 2 - Progress: {download2.Progress} Speed: {download2.Speed} kb/s");
-                Debug.WriteLine($"Download 3 - Progress: {download3.Progress} Speed: {download3.Speed} kb/s");
-                Thread.Sleep(100);
-            }
-            Debug.WriteLine($"Download 1 Completed: {download.Completed} or Failed: {download.Failed}");
-            Debug.WriteLine($"Download 2 Completed: {download2.Completed} or Failed: {download2.Failed}");
-            Debug.WriteLine($"Download 3 Completed: {download3.Completed} or Failed: {download3.Failed}");
-        }
-
-        [TestMethod]
-        public void TestAsyncDownloadMultipleOpen()
-        {
-            DownloadUtils.SetThreadCountMax();
-            CreateTempDlPath();
-            SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-
-            var download = new MapSetExtractDownload("http://bloodcat.com/osu/s/138554", Preferences.DownloadsPath);
-            DownloadManager.Queue.Add(download);
-           var download2 = new MapSetExtractDownload("http://bloodcat.com/osu/s/553711", Preferences.DownloadsPath);
-            DownloadManager.Queue.Add(download2);
-            var download3 = new MapSetExtractDownload("http://bloodcat.com/osu/s/469815", Preferences.DownloadsPath);
-            DownloadManager.Queue.Add(download3);
-            DownloadManager.StartDownload();
-            while (DownloadManager.Queue.Count > 0 || DownloadManager.Downloading.Count >0)
-            {
-                Debug.WriteLine($"Download 1 - Progress: {download.Progress} Speed: {download.Speed} kb/s");
-                Debug.WriteLine($"Download 2 - Progress: {download2.Progress} Speed: {download2.Speed} kb/s");
-                Debug.WriteLine($"Download 3 - Progress: {download3.Progress} Speed: {download3.Speed} kb/s");
-                Thread.Sleep(100);
-            }
-            Debug.WriteLine($"Download 1 Completed: {download.Completed} or Failed: {download.Failed}");
-            Debug.WriteLine($"Download 2 Completed: {download2.Completed} or Failed: {download2.Failed}");
-            Debug.WriteLine($"Download 3 Completed: {download3.Completed} or Failed: {download3.Failed}");
-        }
-
+        
         private static void CreateTempDlPath()
         {
             if (!Directory.Exists(Preferences.DownloadsPath))
