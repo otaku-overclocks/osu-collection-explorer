@@ -10,68 +10,68 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using osu_collection_manager.Annotations;
 using osu_collection_manager.Models;
+using OsuMapDownload;
 using OsuMapDownload.Models;
 
 namespace osu_collection_manager.UI.UserControls.Models
 {
-    public class MapsetDownloadHolder : MapSetExtractDownload, INotifyPropertyChanged
+    public class MapsetDownloadHolder : MapsetExtractDownload, INotifyPropertyChanged
     {
-        private static SolidColorBrush _failedBrush = new SolidColorBrush(Color.FromRgb(0xF4, 0x43, 0x36));
-        private static SolidColorBrush _succesBrush = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50));
+        private static readonly SolidColorBrush FAILED_BRUSH = new SolidColorBrush(Color.FromRgb(0xF4, 0x43, 0x36));
+        private static readonly SolidColorBrush SUCCES_BRUSH = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50));
 
-        private float _progress = 0;
-        private string _progressText = "Waiting";
-        private Exception _error;
-        private SolidColorBrush _progressBrush = new SolidColorBrush(Color.FromRgb(0xC5, 0x11, 0x62));
         public override float Progress
         {
-            get { return _progress; }
-            set
+            get { return base.Progress*100; }
+            protected set
             {
-                _progress = value;
-                ProgressText = $"{(_progress/100):P1}";
+                base.Progress = value;
                 OnPropertyChanged(nameof(Progress));
+                OnPropertyChanged(nameof(StatusDisplayField));
             }
         }
 
-        public string ProgressText
-        {
-            get { return _progressText; }
-            set
-            {
-                _progressText = value;
-                OnPropertyChanged(nameof(ProgressText));
-            }
-        }
-
-        public SolidColorBrush ProgressBrush
-        {
-            get { return _progressBrush; }
-            set
-            {
-                _progressBrush = value;
-                OnPropertyChanged(nameof(ProgressBrush));
-            }
-        }
+        public SolidColorBrush ProgressBrush { get; set; } = new SolidColorBrush(Color.FromRgb(0xC5, 0x11, 0x62));
 
         public MapSet Mapset { get; set; }
         public string Title => $"{Mapset.Artist} - {Mapset.Title}";
 
-        public override Exception Error
-        {
-            get { return _error; }
-            set
-            {
-                _error = value;
-                Progress = 100f;
-                ProgressText = "Failed!";
-                ProgressBrush = _failedBrush;
-                OnPropertyChanged(nameof(Failed));
+        public override MapsetDownloadStatus Status {
+            get { return base.Status; }
+            set {
+                base.Status = value;
+                OnPropertyChanged(nameof(StatusDisplayField));
             }
         }
 
-        public MapsetDownloadHolder(MapSet mapset, string url, string path, string name = null) : base(url, path, name)
-        {
+        public string StatusDisplayField {
+            get {
+                switch (Status) {
+                    case MapsetDownloadStatus.Failed:
+                        ProgressBrush = FAILED_BRUSH;
+                        base.Progress = 1;
+                        OnPropertyChanged(nameof(Progress));
+                        OnPropertyChanged(nameof(ProgressBrush));
+                        return "Failed!";
+                    case MapsetDownloadStatus.Completed:
+                        ProgressBrush = SUCCES_BRUSH;
+                        base.Progress = 1;
+                        OnPropertyChanged(nameof(Progress));
+                        OnPropertyChanged(nameof(ProgressBrush));
+                        return "Finished!";
+                    case MapsetDownloadStatus.Waiting:
+                        return "Waiting";
+                    case MapsetDownloadStatus.Downloading:
+                        return $"{(Progress/100):P1}";
+                    case MapsetDownloadStatus.Extracting:
+                        return "Extracting";
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        public MapsetDownloadHolder(MapSet mapset, string path, BeatmapDownloadProvider provider) : base(mapset.SetID, path, provider) {
             Mapset = mapset;
         }
 
@@ -83,20 +83,16 @@ namespace osu_collection_manager.UI.UserControls.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public override void AfterComplete()
-        {
-            base.AfterComplete();
-            var filePath = $"{Path}/{Name}";
+        protected override void AfterDownload() {
+            base.AfterDownload();
+            var filePath = $"{Path}/{FileName}";
             if (!File.Exists(filePath)) return;
             if (!Directory.Exists(Preferences.SongsPath)) Directory.CreateDirectory(Preferences.SongsPath);
-            var dest = $"{Preferences.SongsPath}/{Name}";
-            if (File.Exists(dest))
-            {
+            var dest = $"{Preferences.SongsPath}/{FileName}";
+            if (File.Exists(dest)) {
                 File.Delete(dest);
             }
             File.Move(filePath, dest);
-            ProgressText = "Success!";
-            ProgressBrush = _succesBrush;
         }
     }
 }

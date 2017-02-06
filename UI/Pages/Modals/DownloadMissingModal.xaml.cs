@@ -46,13 +46,13 @@ namespace osu_collection_manager.UI.Pages.Modals
             {
                 MapsetList.Mapsets.Add(new MapsetHolder(null, mapSet, true));
             }
-            DownloadManager.Downloading.CollectionChanged += DownloadingCollectionChanged; 
+            DownloadManager.DOWNLOADING.CollectionChanged += DownloadingCollectionChanged; 
         }
 
         private void DownloadingCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             DownloadingProgress =
-                $"{DownloadManager.Completed.Count}/{DownloadManager.Queue.Count + DownloadManager.Downloading.Count}";
+                $"{DownloadManager.COMPLETED.Count}/{DownloadManager.QUEUE.Count + DownloadManager.DOWNLOADING.Count}";
         }
 
         private void BtnDownloadCancel_OnClick(object sender, RoutedEventArgs e)
@@ -67,8 +67,8 @@ namespace osu_collection_manager.UI.Pages.Modals
             //Add all maps to download queue
             foreach (var mapSet in MapsetList.GetSelected())
             {
-                var dl = new MapsetDownloadHolder(mapSet, mapSet.GetBloodcatLink(), Preferences.DownloadsPath);
-                DownloadManager.Queue.Add(dl); // Add to queue
+                var dl = new MapsetDownloadHolder(mapSet, Preferences.DownloadsPath, DownloadManager.BC_PROVIDER);
+                DownloadManager.QUEUE.Add(dl); // Add to queue
                 DownloadList.Downloads.Add(dl); // Add to download list (ui)
             }
             //Start downloads; And add a callback once done
