@@ -50,15 +50,12 @@ namespace osu_collection_manager
 
         private void ExportCollections_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenPage(new Pages.SelectCollectionsPage(CollectionManager.Collections, SelectCollectionsPage.SelectPurpose.Export));
+            throw new NotImplementedException();
         }
 
         private void ImportCollections_OnClick(object sender, RoutedEventArgs e)
         {
-            var openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() != true) return;
-            var collections = CollectionsFile.ReadFromFile(openFileDialog.FileName);
-            OpenPage(new Pages.SelectCollectionsPage(collections.Collections, SelectCollectionsPage.SelectPurpose.Import));
+            throw new NotImplementedException();
         }
 
         public void DisplayLoadingOverlay(bool display)
