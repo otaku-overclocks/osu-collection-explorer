@@ -63,12 +63,12 @@ namespace osu_collection_manager.UI.Pages
 
         private void BtnSelect_OnClick(object sender, RoutedEventArgs e)
         {
-            //var dialog = new OpenFileDialog() { Multiselect = false, Filter = "collection.db|*.db", InitialDirectory = Preferences.OsuPath };
-            //var result = dialog.ShowDialog();
-            //if (result == true) Preferences.CustomCollectionsDBPath = System.IO.Path.GetFullPath(dialog.FileName);
-            
-            //MainWindow.OpenPage(new ExportPage());
-            // TODO
+            var dialog = new OpenFileDialog() { Multiselect = false, Filter = "collection.db|*.db", InitialDirectory = Preferences.OsuPath };
+            var result = dialog.ShowDialog();
+            if (result == true) Preferences.CollectionsDBPath = System.IO.Path.GetFullPath(dialog.FileName);
+            CollectionManager.ReadCollectionsDB();
+            MainWindow.OpenPage(null);
+            MainWindow.OpenPage(new ExportPage());
         }
     }
 }

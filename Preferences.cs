@@ -8,15 +8,13 @@ using System.Windows.Forms;
 using osu_collection_manager.Managers;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
-namespace osu_collection_manager
+namespace osu_collection_manager    
 {
     public class Preferences
     {
-        private static string tempCollectionDBPath;
-
+    
         public static readonly int VERSION = 1;
-        public static string CustomCollectionsDBPath { get { return tempCollectionDBPath;} set { tempCollectionDBPath = value; } }
-        public static string CollectionsDBPath { get { return OsuPath + "\\collection.db"; } }
+        public static string CollectionsDBPath { get; set; } = OsuPath + "\\collection.db";
         public static string OsuDBPath { get { return OsuPath + "\\osu!.db"; } }
         public static string SongsPath { get { return OsuPath + "\\Songs"; } }
         public static string DownloadsPath { get { return OsuPath + "\\OCMTemp"; } }
