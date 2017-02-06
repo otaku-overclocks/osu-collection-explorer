@@ -82,9 +82,6 @@
     <Compile Include="Managers\BackupManager.cs" />
     <Compile Include="Managers\DownloadManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
-    <Compile Include="Pages\SelectCollectionsPage.xaml.cs">
-      <DependentUpon>SelectCollectionsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UI\Pages\BaseModal.cs" />
     <Compile Include="UI\Pages\BasePage.cs" />
@@ -129,10 +126,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RandomTestsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SelectCollectionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
