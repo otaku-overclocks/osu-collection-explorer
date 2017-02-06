@@ -58,7 +58,7 @@ namespace osu_collection_manager.UI.Pages
         }
 
         public void ImportCollections(List<Collection> collections)
-        {   // Check if osu! is running. If it is, inform the user and wait 1 minute for the user to close it.
+        {   // Check if osu! is running. If it is, inform the user to either close it or ignore the message.
             Process[] p = Process.GetProcessesByName("osu!");
             if (p.Count() != 0)
             {
