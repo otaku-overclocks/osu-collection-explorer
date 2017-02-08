@@ -1,32 +1,43 @@
 ﻿<pages:BaseModal x:Class="osu_collection_manager.UI.Pages.Modals.LoginModal"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:osu_collection_manager.UI.Pages.Modals"
-      xmlns:pages="clr-namespace:osu_collection_manager.UI.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="LoginModal"
-      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-      TextElement.FontWeight="Regular"
-      TextElement.FontSize="13"
-      TextOptions.TextFormattingMode="Ideal"
-      TextOptions.TextRenderingMode="Auto"
-      FontFamily="{DynamicResource MaterialDesignFont}">
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:local="clr-namespace:osu_collection_manager.UI.Pages.Modals"
+                 xmlns:pages="clr-namespace:osu_collection_manager.UI.Pages"
+                 mc:Ignorable="d"
+                 d:DesignHeight="300" d:DesignWidth="300"
+                 Title="LoginModal"
+                 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                 TextElement.FontWeight="Regular"
+                 TextElement.FontSize="13"
+                 TextOptions.TextFormattingMode="Ideal"
+                 TextOptions.TextRenderingMode="Auto"
+                 FontFamily="{DynamicResource MaterialDesignFont}">
 
-    
-    <StackPanel VerticalAlignment="Center">
-        <Label Margin="5" Content="Login with osu!" FontWeight="Bold"/>
-        <DockPanel Height="auto" Margin="5,5">
-            <Label Content="Username" DockPanel.Dock="Left"/>
-            <TextBox />
-        </DockPanel>
-        <DockPanel Height="auto" Margin="5,5">
-            <Label Content="Password" DockPanel.Dock="Left"/>
-            <PasswordBox />
-        </DockPanel>
-        <Button Margin="10" Content="Login"/>
-    </StackPanel>
+    <Grid>
+        <StackPanel VerticalAlignment="Center">
+            <Label Margin="5" Content="Login with osu!" FontWeight="Bold" />
+            <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="Invalid username or password!" TextAlignment="Center" Background="#F44336" Padding="8"></TextBlock>
+            <DockPanel Height="auto" Margin="5,5">
+                <Label Content="Username" DockPanel.Dock="Left" />
+                <TextBox x:Name="TbxUsername"/>
+            </DockPanel>
+            <DockPanel Height="auto" Margin="5,5">
+                <Label Content="Password" DockPanel.Dock="Left" />
+                <PasswordBox x:Name="TbxPassword"/>
+            </DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Margin="5,10,10,10" Content="Login" Click="Login_OnClick"/>
+                <Button Grid.Column="0" Margin="10,10,5,10" Content="Cancel" Click="Cancel_OnClick"/>
+            </Grid>
+        </StackPanel>
+        <Grid x:Name="LoggingInOverlay" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignPaper}">
+            <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Width="54" Style="{DynamicResource MaterialDesignCircularProgressBar}" Foreground="{StaticResource SecondaryAccentBrush}" IsIndeterminate="True"></ProgressBar>
+        </Grid>
+    </Grid>
 </pages:BaseModal>
-

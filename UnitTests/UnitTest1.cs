@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using osu_collection_manager;
 using osu_collection_manager.Managers;
 using osu_collection_manager.Models;
+using osu_collection_manager.Utils;
 using OsuMapDownload;
 using OsuMapDownload.Models;
 
@@ -116,6 +117,14 @@ namespace UnitTests
         public void TestBackup()
         {
             BackupManager.BackupCollections();
+        }
+
+        [TestMethod]
+        public void TestEncrypt() {
+            var pass = "Hello World!";
+            var cypher = FileUtils.Encrypt(pass);
+            Debug.WriteLine(cypher);
+            Debug.WriteLine(FileUtils.Decrypt(cypher));
         }
     }
 }

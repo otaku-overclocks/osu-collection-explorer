@@ -59,6 +59,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +97,9 @@
     </Compile>
     <Compile Include="UI\Pages\Modals\DownloadMissingModal.xaml.cs">
       <DependentUpon>DownloadMissingModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\Modals\LoginModal.xaml.cs">
+      <DependentUpon>LoginModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\Modals\WarningModal.xaml.cs">
       <DependentUpon>WarningModal.xaml</DependentUpon>
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\Modals\DownloadMissingModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\Modals\LoginModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

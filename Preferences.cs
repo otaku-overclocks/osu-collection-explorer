@@ -19,6 +19,7 @@ namespace osu_collection_manager
         public static string SongsPath { get { return OsuPath + "\\Songs"; } }
         public static string DownloadsPath { get { return OsuPath + "\\OCMTemp"; } }
         public static string BackupsPath { get { return OsuPath + "\\Backup"; } }
+        public static string CookiesSavePath => Application.UserAppDataPath + "\\cookies.txt";
 
         public static int BloodcatThreadCount
         {
