@@ -19,21 +19,15 @@ namespace osu_collection_manager.Managers
         /// </summary>
         /// <param name="collections"></param>
         /// <returns>List with missing mapsets</returns>
-        public static List<MapSet> CheckMissingMapSets(List<Collection> collections)
-        {
+        public static List<MapSet> CheckMissingMapSets(List<Collection> collections) {
             var ret = new List<MapSet>();
-            foreach (var collection in collections)
-            {
-                foreach (var mapSet in collection.MapSets)
-                {
+            foreach (var collection in collections) {
+                foreach (var mapSet in collection.MapSets) {
                     // If no set found in osu.db we add it to the list of not found maps.
                     var found = LocalSongManager.FindSetByID(mapSet.SetID);
-                    if (found == null)
-                    {
+                    if (found == null) {
                         ret.Add(mapSet);
-                    }
-                    else
-                    {
+                    } else {
                         // This is more reliable
                         mapSet.Maps = found.Maps;
                     }
@@ -42,28 +36,23 @@ namespace osu_collection_manager.Managers
             return ret;
         }
 
-        public static void ProcessDownloads(IEnumerable<MapsetDownloadHolder> downloads)
-        {
+        public static void ProcessDownloads(IEnumerable<MapsetDownloadHolder> downloads) {
 #if DEBUG
-            LogManager.Open();
+            //LogManager.Open();
 #endif
-            foreach (var mapSetDownload in downloads)
-            {
-                if(mapSetDownload.Failed || !mapSetDownload.Completed || !mapSetDownload.Extracted) continue;
+            foreach (var mapSetDownload in downloads) {
+                if (mapSetDownload.Status != MapsetDownloadStatus.Completed) continue;
 #if DEBUG
-                LogManager.Write($"Processing map: {mapSetDownload.Name}");
+                LogManager.Write($"Processing map: {mapSetDownload.Title}");
 #endif
-                foreach (var hash in mapSetDownload.MapHashes)
-                {
+                foreach (var hash in mapSetDownload.MapHashes) {
                     var beatmap = new Beatmap(hash);
                     mapSetDownload.Mapset.Maps.Add(beatmap);
                 }
             }
 #if DEBUG
-            LogManager.Close();
+            //LogManager.Close();
 #endif
         }
-
-        
     }
 }

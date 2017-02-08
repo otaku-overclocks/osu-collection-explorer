@@ -22,5 +22,8 @@ namespace osu_collection_manager.UI.Pages
         {
            // _mainWindow.DisplayLoadingOverlay(false);
         }
+
+        
+
     }
 }

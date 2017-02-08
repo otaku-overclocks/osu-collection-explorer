@@ -42,10 +42,16 @@ namespace osu_collection_manager.UI.Windows
                 });
             }, TaskScheduler.FromCurrentSynchronizationContext());
             InitialLoadTask.Start();
-            if (!Properties.Settings.Default.ShownWarning)
-            {
+            if (!Properties.Settings.Default.ShownWarning) {
                 OpenDialog(new WarningModal());
+            } else {
+                ShowLogin();
             }
+        }
+
+        public void ShowLogin() {
+            if(!Properties.Settings.Default.ShownLogin)
+            OpenDialog(new AskLogin());
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -75,6 +81,7 @@ namespace osu_collection_manager.UI.Windows
             if (dialog == null)
             {
                 MainDialog.IsOpen = false;
+                ShowLogin();
                 return;
             }
           

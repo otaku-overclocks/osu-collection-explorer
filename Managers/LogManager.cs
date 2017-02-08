@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace osu_collection_manager.Managers
         /// </summary>
         public static readonly string LogPath = $"{Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location)}/log.txt";
 
-        private static StreamWriter _writer { get; set; }
+        private static StreamWriter _writer { get; set; } = new StreamWriter(LogPath, true);
 
         /// <summary>
         /// Writes an error to log with default error tag
@@ -35,16 +36,21 @@ namespace osu_collection_manager.Managers
         /// <param name="tag"></param>
         public static void Write(string msg, string tag = INFO_TAG)
         {
-            var close = (_writer == null); //If already opened keep open; Means we want to write multiple lines
+            /*var close = (_writer == null); //If already opened keep open; Means we want to write multiple lines
             if (close) 
             {
                 Open(); //If closed open a new one 
-            }
+            }*/
             _writer.WriteLine($"[{DateTime.Now:dd/MM/yy H:mm:ss}] {tag} {msg}"); //Write with tag perpended
-            if (close) Close();
+            /*if (close) Close();*/
         }
 
-        /// <summary>
+        public static void Flush() {
+            _writer?.Flush();
+        }
+
+
+        /*/// <summary>
         /// Opens a new streamwriter. Use it if you need to write multiple log entries in a short time.
         /// </summary>
         public static void Open()
@@ -60,6 +66,6 @@ namespace osu_collection_manager.Managers
             if (_writer == null) return;
             _writer.Close(); // Close the stream
             _writer = null;
-        }
+        }*/
     }
 }

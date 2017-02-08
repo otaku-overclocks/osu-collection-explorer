@@ -6,18 +6,26 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using osu_collection_manager.Properties;
+using osu_collection_manager.Utils;
 using OsuMapDownload;
 using OsuMapDownload.Models;
+using OsuMapDownload.Providers;
 
 namespace osu_collection_manager.Managers
 {
     public class DownloadManager
     {
-        public static readonly ObservableCollection<MapSetDownload> Queue = new ObservableCollection<MapSetDownload>();
-        public static readonly ObservableCollection<MapSetDownload> Downloading = new ObservableCollection<MapSetDownload>();
-        public static readonly ObservableCollection<MapSetDownload> Completed = new ObservableCollection<MapSetDownload>();
+        public static readonly ObservableCollection<MapsetDownload> QUEUE = new ObservableCollection<MapsetDownload>();
+        public static readonly ObservableCollection<MapsetDownload> DOWNLOADING = new ObservableCollection<MapsetDownload>();
+        public static readonly ObservableCollection<MapsetDownload> COMPLETED = new ObservableCollection<MapsetDownload>();
 
-        private static Action _finishCallback { get; set; }
+        public static B1oodcatDownloadProvider BcProvider = new B1oodcatDownloadProvider();
+        public static OsuDownloadProvider OsuProvider = 
+            new OsuDownloadProvider(Properties.Settings.Default.Username, FileUtils.Decrypt(Settings.Default.Password), 
+                Preferences.CookiesSavePath);
+
+        private static Action FinishCallback { get; set; }
 
         /// <summary>
         /// Starts all downloads that are in queue
@@ -25,33 +33,42 @@ namespace osu_collection_manager.Managers
         private static void UpdateDownload()
         {
             // Keeps starting the downloads till there a none left in queue or till we reached the max thread count
-            while (Queue.Count > 0 && Downloading.Count < Preferences.BloodcatThreadCount)
+            while (QUEUE.Count > 0 && DOWNLOADING.Count < Preferences.BloodcatThreadCount)
             {
                 // Get first download in queue
-                var ms = Queue[0];
-                Queue.Remove(ms); // Remove from queue
-                Downloading.Add(ms); // Add to downloading
-                var task = ms.CreateTask(); // Create a task to downlaod and extract the mapset
+                var ms = QUEUE[0];
+                QUEUE.Remove(ms); // Remove from queue
+                DOWNLOADING.Add(ms); // Add to downloading
+                var task = ms.GetTask(); // Create a task to downlaod and extract the mapset
                 var cont = task.ContinueWith(delegate (Task task1) // Create a task which will be run once the downlaod is completed
                 {
-                    Downloading.Remove(ms); // Remove from downloads
-                    Completed.Add(ms);  // Add to completed
-                    UpdateDownload(); // Start downloading new maps if there are some in queue
-                    if (ms.Failed) // Write t log if dl has failed
+                    DOWNLOADING.Remove(ms); // Remove from downloads
+                    COMPLETED.Add(ms);  // Add to completed
+                    if (ms.Status == MapsetDownloadStatus.Failed) // Write t log if dl has failed
                     {
-                        LogManager.Open();
-                        LogManager.Write($"Failed downloading mapset from url: {ms.Url}");
+                        //LogManager.Open();
+                        LogManager.Write("Failed downloading mapset: "+ms.DownloadProvider.GetUrl(ms));
                         LogManager.Write(ms.Error);
-                        LogManager.Close();
+                        //LogManager.Close();
+                        if (ms.DownloadProvider == OsuProvider) {
+#if DEBUG
+                            Debug.WriteLine("Adding to the queue again");
+#endif
+                            LogManager.Write("Probably deleted from osu. retrying via b1oodcat.");
+                            COMPLETED.Remove(ms);
+                            ms.Reset(BcProvider);
+                            QUEUE.Add(ms);
+                        }
                     }
-                }); // Task will be run in ui thread
-                task.Start(); // Start download async
+                    UpdateDownload(); // Start downloading new maps if there are some in queue
+                }); // Task will not be run in ui thread
+                ms.DownloadProvider.StartDownloadTask(task, ms); // Start download async
             }
             // If all downloads are completed and we have set a "all downlaods finished" callback, we will run it and remove it
-            if (Queue.Count == 0 && Downloading.Count == 0 && _finishCallback != null)
+            if (QUEUE.Count == 0 && DOWNLOADING.Count == 0 && FinishCallback != null)
             {
-                _finishCallback();
-                _finishCallback = null;
+                FinishCallback();
+                FinishCallback = null;
             }
         }
 
@@ -66,7 +83,7 @@ namespace osu_collection_manager.Managers
             {
                 Directory.CreateDirectory(Preferences.SongsPath);
             }
-            _finishCallback = callback;
+            FinishCallback = callback;
             UpdateDownload();
         }
     }

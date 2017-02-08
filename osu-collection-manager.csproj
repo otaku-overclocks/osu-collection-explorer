@@ -39,6 +39,10 @@
     <StartupObject>osu_collection_manager.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -55,6 +59,8 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,9 +84,6 @@
     <Compile Include="Managers\BackupManager.cs" />
     <Compile Include="Managers\DownloadManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
-    <Compile Include="Pages\SelectCollectionsPage.xaml.cs">
-      <DependentUpon>SelectCollectionsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UI\Pages\BaseModal.cs" />
     <Compile Include="UI\Pages\BasePage.cs" />
@@ -93,8 +96,14 @@
     <Compile Include="UI\Pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\Modals\AskLogin.xaml.cs">
+      <DependentUpon>AskLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\Modals\DownloadMissingModal.xaml.cs">
       <DependentUpon>DownloadMissingModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\Modals\LoginModal.xaml.cs">
+      <DependentUpon>LoginModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\Modals\WarningModal.xaml.cs">
       <DependentUpon>WarningModal.xaml</DependentUpon>
@@ -128,10 +137,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SelectCollectionsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Pages\ExportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,7 +149,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Pages\Modals\AskLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Pages\Modals\DownloadMissingModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\Modals\LoginModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,6 +20,7 @@ using osu_collection_manager.Annotations;
 using osu_collection_manager.Managers;
 using osu_collection_manager.Models;
 using osu_collection_manager.UI.UserControls.Models;
+using OsuMapDownload;
 
 namespace osu_collection_manager.UI.Pages.Modals
 {
@@ -46,13 +47,13 @@ namespace osu_collection_manager.UI.Pages.Modals
             {
                 MapsetList.Mapsets.Add(new MapsetHolder(null, mapSet, true));
             }
-            DownloadManager.Downloading.CollectionChanged += DownloadingCollectionChanged; 
+            DownloadManager.DOWNLOADING.CollectionChanged += DownloadingCollectionChanged; 
         }
 
         private void DownloadingCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             DownloadingProgress =
-                $"{DownloadManager.Completed.Count}/{DownloadManager.Queue.Count + DownloadManager.Downloading.Count}";
+                $"{DownloadManager.COMPLETED.Count}/{DownloadManager.QUEUE.Count + DownloadManager.DOWNLOADING.Count + DownloadManager.COMPLETED.Count}";
         }
 
         private void BtnDownloadCancel_OnClick(object sender, RoutedEventArgs e)
@@ -64,11 +65,16 @@ namespace osu_collection_manager.UI.Pages.Modals
         {
             MissingSelector.Visibility = Visibility.Hidden; // Hide missing overlay 
             ProgressView.Visibility = Visibility.Visible;// Show download overlay
-            //Add all maps to download queue
+            BeatmapDownloadProvider provider;
+            if (Preferences.LoginDefined) {
+                provider = DownloadManager.OsuProvider;
+            } else {
+                provider = DownloadManager.BcProvider;
+            }
             foreach (var mapSet in MapsetList.GetSelected())
             {
-                var dl = new MapsetDownloadHolder(mapSet, mapSet.GetBloodcatLink(), Preferences.DownloadsPath);
-                DownloadManager.Queue.Add(dl); // Add to queue
+                var dl = new MapsetDownloadHolder(mapSet, Preferences.DownloadsPath, provider);
+                DownloadManager.QUEUE.Add(dl); // Add to queue
                 DownloadList.Downloads.Add(dl); // Add to download list (ui)
             }
             //Start downloads; And add a callback once done

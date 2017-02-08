@@ -33,10 +33,10 @@ namespace osu_collection_manager.Managers
             }
             catch (Exception e)
             {
-                LogManager.Open();
+                //LogManager.Open();
                 LogManager.Write($"Failed to read osu.db at {Preferences.OsuDBPath}", LogManager.ERROR_TAG);
                 LogManager.Write(e);
-                LogManager.Close();
+                //LogManager.Close();
             }
         }
 

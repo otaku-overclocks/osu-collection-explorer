@@ -8,17 +8,21 @@ using System.Windows.Forms;
 using osu_collection_manager.Managers;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
-namespace osu_collection_manager
+namespace osu_collection_manager    
 {
     public class Preferences
     {
+    
         public static readonly int VERSION = 1;
-        
-        public static string CollectionsDBPath { get { return OsuPath + "\\collection.db"; } }
+        public static string CollectionsDBPath { get; set; } = OsuPath + "\\collection.db";
         public static string OsuDBPath { get { return OsuPath + "\\osu!.db"; } }
         public static string SongsPath { get { return OsuPath + "\\Songs"; } }
         public static string DownloadsPath { get { return OsuPath + "\\OCMTemp"; } }
         public static string BackupsPath { get { return OsuPath + "\\Backup"; } }
+        public static string CookiesSavePath => Application.UserAppDataPath + "\\cookies.txt";
+
+        public static bool LoginDefined => !string.IsNullOrEmpty(Properties.Settings.Default.Username) && 
+            !string.IsNullOrEmpty(Properties.Settings.Default.Password);
 
         public static int BloodcatThreadCount
         {
