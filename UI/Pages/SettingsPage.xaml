@@ -36,11 +36,6 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </local:BasePage.Resources>
-    <local:BasePage.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource saved}"/>
-        </EventTrigger>
-    </local:BasePage.Triggers>
     <Grid Margin="16">
         <StackPanel VerticalAlignment="Top" Orientation="Vertical">
             <Grid>
