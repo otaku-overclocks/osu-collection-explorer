@@ -16,7 +16,7 @@
                  FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Grid>
-        <StackPanel VerticalAlignment="Center">
+        <StackPanel>
             <Label Margin="5" Content="Login with osu!" FontWeight="Bold" />
             <TextBlock x:Name="ErrorMessage" Visibility="Collapsed" Text="Invalid username or password!" TextAlignment="Center" Background="#F44336" Padding="8"></TextBlock>
             <DockPanel Height="auto" Margin="5,5">

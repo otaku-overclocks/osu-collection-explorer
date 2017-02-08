@@ -61,6 +61,10 @@
                 <TextBlock Text="{Binding ElementName=bd_thread_count, Path=Value, StringFormat=Bloodcat thread count ({0})}" Margin="5,14,5,0" VerticalAlignment="Top"/>
                 <Slider x:Name="bd_thread_count" Grid.Column="1" Margin="0,15,0,0" Foreground="{StaticResource SecondaryAccentBrush}" IsSnapToTickEnabled="True" TickFrequency="1" Minimum="1" Maximum="16"></Slider>
             </Grid>
+            <StackPanel>
+                <TextBlock Text="Osu login - Login to download beatmaps from osu.ppy.sh" Margin="5,14,5,0"></TextBlock>
+                <Button x:Name="LoginOpen" Content="Login with osu" HorizontalAlignment="Left" Margin="8" Click="Login_OnClick"></Button>
+            </StackPanel>
         </StackPanel>
 
 

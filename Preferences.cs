@@ -21,6 +21,9 @@ namespace osu_collection_manager
         public static string BackupsPath { get { return OsuPath + "\\Backup"; } }
         public static string CookiesSavePath => Application.UserAppDataPath + "\\cookies.txt";
 
+        public static bool LoginDefined => !string.IsNullOrEmpty(Properties.Settings.Default.Username) && 
+            !string.IsNullOrEmpty(Properties.Settings.Default.Password);
+
         public static int BloodcatThreadCount
         {
             get

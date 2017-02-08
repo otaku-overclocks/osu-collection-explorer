@@ -22,6 +22,11 @@ namespace osu_collection_manager.UI.Pages.Modals
     /// </summary>
     public partial class LoginModal : BaseModal
     {
+        private readonly OsuDownloadProvider _provider = new OsuDownloadProvider("", "", Preferences.CookiesSavePath);
+
+        public LoginModal(Action<ModalFinishType> closeCallback) : base(closeCallback) {
+            InitializeComponent();
+        }
 
         public LoginModal() {
             InitializeComponent();
@@ -29,11 +34,18 @@ namespace osu_collection_manager.UI.Pages.Modals
 
         private void Login_OnClick(object sender, RoutedEventArgs e) {
             ErrorMessage.Visibility = Visibility.Collapsed;
-            var provider = new OsuDownloadProvider(TbxUsername.Text, TbxPassword.Password, Preferences.CookiesSavePath);
+            var username = TbxUsername.Text;
+            var password = TbxPassword.Password;
+            
             LoggingInOverlay.Visibility = Visibility.Visible;
             var task = new Task(() => {
-                //provider.L
+                var res = _provider.Login(username, password);
+                this.Dispatcher.Invoke(() => {
+                    LoginResponse(res);
+                });
+                
             });
+            task.Start();
         }
 
         public void LoginResponse(bool loggedIn) {
