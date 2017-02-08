@@ -1,0 +1,32 @@
+﻿<pages:BaseModal x:Class="osu_collection_manager.UI.Pages.Modals.LoginModal"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:osu_collection_manager.UI.Pages.Modals"
+      xmlns:pages="clr-namespace:osu_collection_manager.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="LoginModal"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      FontFamily="{DynamicResource MaterialDesignFont}">
+
+    
+    <StackPanel VerticalAlignment="Center">
+        <Label Margin="5" Content="Login with osu!" FontWeight="Bold"/>
+        <DockPanel Height="auto" Margin="5,5">
+            <Label Content="Username" DockPanel.Dock="Left"/>
+            <TextBox />
+        </DockPanel>
+        <DockPanel Height="auto" Margin="5,5">
+            <Label Content="Password" DockPanel.Dock="Left"/>
+            <PasswordBox />
+        </DockPanel>
+        <Button Margin="10" Content="Login"/>
+    </StackPanel>
+</pages:BaseModal>
+
