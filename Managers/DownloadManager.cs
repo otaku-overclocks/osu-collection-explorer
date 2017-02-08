@@ -20,8 +20,8 @@ namespace osu_collection_manager.Managers
         public static readonly ObservableCollection<MapsetDownload> DOWNLOADING = new ObservableCollection<MapsetDownload>();
         public static readonly ObservableCollection<MapsetDownload> COMPLETED = new ObservableCollection<MapsetDownload>();
 
-        public static readonly B1oodcatDownloadProvider BC_PROVIDER = new B1oodcatDownloadProvider();
-        public static readonly OsuDownloadProvider OSU_PROVIDER = 
+        public static B1oodcatDownloadProvider BcProvider = new B1oodcatDownloadProvider();
+        public static OsuDownloadProvider OsuProvider = 
             new OsuDownloadProvider(Properties.Settings.Default.Username, FileUtils.Decrypt(Settings.Default.Password), 
                 Preferences.CookiesSavePath);
 
@@ -50,13 +50,13 @@ namespace osu_collection_manager.Managers
                         LogManager.Write("Failed downloading mapset: "+ms.DownloadProvider.GetUrl(ms));
                         LogManager.Write(ms.Error);
                         //LogManager.Close();
-                        if (ms.DownloadProvider == OSU_PROVIDER) {
+                        if (ms.DownloadProvider == OsuProvider) {
 #if DEBUG
                             Debug.WriteLine("Adding to the queue again");
 #endif
                             LogManager.Write("Probably deleted from osu. retrying via b1oodcat.");
                             COMPLETED.Remove(ms);
-                            ms.Reset(BC_PROVIDER);
+                            ms.Reset(BcProvider);
                             QUEUE.Add(ms);
                         }
                     }

@@ -67,9 +67,9 @@ namespace osu_collection_manager.UI.Pages.Modals
             ProgressView.Visibility = Visibility.Visible;// Show download overlay
             BeatmapDownloadProvider provider;
             if (Preferences.LoginDefined) {
-                provider = DownloadManager.OSU_PROVIDER;
+                provider = DownloadManager.OsuProvider;
             } else {
-                provider = DownloadManager.BC_PROVIDER;
+                provider = DownloadManager.BcProvider;
             }
             foreach (var mapSet in MapsetList.GetSelected())
             {
