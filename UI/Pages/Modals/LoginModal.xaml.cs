@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using osu_collection_manager.Managers;
+using osu_collection_manager.Properties;
 using osu_collection_manager.Utils;
 using OsuMapDownload.Providers;
 
@@ -58,6 +60,9 @@ namespace osu_collection_manager.UI.Pages.Modals
             Properties.Settings.Default.Username = TbxUsername.Text;
             Properties.Settings.Default.Password = FileUtils.Encrypt(TbxPassword.Password);
             Properties.Settings.Default.Save();
+            DownloadManager.OsuProvider =
+            new OsuDownloadProvider(Properties.Settings.Default.Username, FileUtils.Decrypt(Settings.Default.Password),
+                Preferences.CookiesSavePath);
             MessageBox.Show("Successfully logged in.");
             Close(ModalFinishType.Succes);
         }
