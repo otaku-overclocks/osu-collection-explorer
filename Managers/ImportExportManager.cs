@@ -38,7 +38,7 @@ namespace osu_collection_manager.Managers
 
         public static void ProcessDownloads(IEnumerable<MapsetDownloadHolder> downloads) {
 #if DEBUG
-            LogManager.Open();
+            //LogManager.Open();
 #endif
             foreach (var mapSetDownload in downloads) {
                 if (mapSetDownload.Status != MapsetDownloadStatus.Completed) continue;
@@ -51,7 +51,7 @@ namespace osu_collection_manager.Managers
                 }
             }
 #if DEBUG
-            LogManager.Close();
+            //LogManager.Close();
 #endif
         }
     }

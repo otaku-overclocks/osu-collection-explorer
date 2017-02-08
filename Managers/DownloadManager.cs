@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using osu_collection_manager.Properties;
+using osu_collection_manager.Utils;
 using OsuMapDownload;
 using OsuMapDownload.Models;
 using OsuMapDownload.Providers;
@@ -19,6 +21,9 @@ namespace osu_collection_manager.Managers
         public static readonly ObservableCollection<MapsetDownload> COMPLETED = new ObservableCollection<MapsetDownload>();
 
         public static readonly B1oodcatDownloadProvider BC_PROVIDER = new B1oodcatDownloadProvider();
+        public static readonly OsuDownloadProvider OSU_PROVIDER = 
+            new OsuDownloadProvider(Properties.Settings.Default.Username, FileUtils.Decrypt(Settings.Default.Password), 
+                Preferences.CookiesSavePath);
 
         private static Action FinishCallback { get; set; }
 
@@ -39,14 +44,23 @@ namespace osu_collection_manager.Managers
                 {
                     DOWNLOADING.Remove(ms); // Remove from downloads
                     COMPLETED.Add(ms);  // Add to completed
-                    UpdateDownload(); // Start downloading new maps if there are some in queue
                     if (ms.Status == MapsetDownloadStatus.Failed) // Write t log if dl has failed
                     {
-                        LogManager.Open();
-                        LogManager.Write("Failed downloading mapset.");
+                        //LogManager.Open();
+                        LogManager.Write("Failed downloading mapset: "+ms.DownloadProvider.GetUrl(ms));
                         LogManager.Write(ms.Error);
-                        LogManager.Close();
+                        //LogManager.Close();
+                        if (ms.DownloadProvider == OSU_PROVIDER) {
+#if DEBUG
+                            Debug.WriteLine("Adding to the queue again");
+#endif
+                            LogManager.Write("Probably deleted from osu. retrying via b1oodcat.");
+                            COMPLETED.Remove(ms);
+                            ms.Reset(BC_PROVIDER);
+                            QUEUE.Add(ms);
+                        }
                     }
+                    UpdateDownload(); // Start downloading new maps if there are some in queue
                 }); // Task will not be run in ui thread
                 ms.DownloadProvider.StartDownloadTask(task, ms); // Start download async
             }

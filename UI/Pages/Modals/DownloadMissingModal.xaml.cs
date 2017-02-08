@@ -20,6 +20,7 @@ using osu_collection_manager.Annotations;
 using osu_collection_manager.Managers;
 using osu_collection_manager.Models;
 using osu_collection_manager.UI.UserControls.Models;
+using OsuMapDownload;
 
 namespace osu_collection_manager.UI.Pages.Modals
 {
@@ -52,7 +53,7 @@ namespace osu_collection_manager.UI.Pages.Modals
         private void DownloadingCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             DownloadingProgress =
-                $"{DownloadManager.COMPLETED.Count}/{DownloadManager.QUEUE.Count + DownloadManager.DOWNLOADING.Count}";
+                $"{DownloadManager.COMPLETED.Count}/{DownloadManager.QUEUE.Count + DownloadManager.DOWNLOADING.Count + DownloadManager.COMPLETED.Count}";
         }
 
         private void BtnDownloadCancel_OnClick(object sender, RoutedEventArgs e)
@@ -64,10 +65,15 @@ namespace osu_collection_manager.UI.Pages.Modals
         {
             MissingSelector.Visibility = Visibility.Hidden; // Hide missing overlay 
             ProgressView.Visibility = Visibility.Visible;// Show download overlay
-            //Add all maps to download queue
+            BeatmapDownloadProvider provider;
+            if (Preferences.LoginDefined) {
+                provider = DownloadManager.OSU_PROVIDER;
+            } else {
+                provider = DownloadManager.BC_PROVIDER;
+            }
             foreach (var mapSet in MapsetList.GetSelected())
             {
-                var dl = new MapsetDownloadHolder(mapSet, Preferences.DownloadsPath, DownloadManager.BC_PROVIDER);
+                var dl = new MapsetDownloadHolder(mapSet, Preferences.DownloadsPath, provider);
                 DownloadManager.QUEUE.Add(dl); // Add to queue
                 DownloadList.Downloads.Add(dl); // Add to download list (ui)
             }

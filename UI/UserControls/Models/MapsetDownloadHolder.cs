@@ -19,6 +19,7 @@ namespace osu_collection_manager.UI.UserControls.Models
     {
         private static readonly SolidColorBrush FAILED_BRUSH = new SolidColorBrush(Color.FromRgb(0xF4, 0x43, 0x36));
         private static readonly SolidColorBrush SUCCES_BRUSH = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50));
+        private static readonly SolidColorBrush DEFAULT_BRUSH = new SolidColorBrush(Color.FromRgb(0xC5, 0x11, 0x62));
 
         public override float Progress
         {
@@ -31,7 +32,7 @@ namespace osu_collection_manager.UI.UserControls.Models
             }
         }
 
-        public SolidColorBrush ProgressBrush { get; set; } = new SolidColorBrush(Color.FromRgb(0xC5, 0x11, 0x62));
+        public SolidColorBrush ProgressBrush { get; set; } = DEFAULT_BRUSH;
 
         public MapSet Mapset { get; set; }
         public string Title => $"{Mapset.Artist} - {Mapset.Title}";
@@ -60,6 +61,7 @@ namespace osu_collection_manager.UI.UserControls.Models
                         OnPropertyChanged(nameof(ProgressBrush));
                         return "Finished!";
                     case MapsetDownloadStatus.Waiting:
+                        base.Progress = 0;
                         return "Waiting";
                     case MapsetDownloadStatus.Downloading:
                         return $"{(Progress/100):P1}";
@@ -93,6 +95,12 @@ namespace osu_collection_manager.UI.UserControls.Models
                 File.Delete(dest);
             }
             File.Move(filePath, dest);
+        }
+
+        public override void Reset(BeatmapDownloadProvider provider) {
+            base.Reset(provider);
+            ProgressBrush = DEFAULT_BRUSH;
+            OnPropertyChanged(nameof(StatusDisplayField));
         }
     }
 }
