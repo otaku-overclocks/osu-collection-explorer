@@ -43,9 +43,7 @@ namespace osu_collection_manager.UI.Windows
             }, TaskScheduler.FromCurrentSynchronizationContext());
             InitialLoadTask.Start();
             if (!Properties.Settings.Default.ShownWarning) {
-                OpenDialog(new WarningModal(type => {
-                    this.Dispatcher.Invoke(ShowLogin);
-                }));
+                OpenDialog(new WarningModal());
             } else {
                 ShowLogin();
             }
@@ -83,6 +81,7 @@ namespace osu_collection_manager.UI.Windows
             if (dialog == null)
             {
                 MainDialog.IsOpen = false;
+                ShowLogin();
                 return;
             }
           
