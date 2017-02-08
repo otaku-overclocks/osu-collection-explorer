@@ -74,7 +74,6 @@ namespace osu_collection_manager.UI.Pages
                 UpdateLoginBtn();
                 return;
             }
-            Debug.WriteLine(Preferences.CookiesSavePath);
             MainWindow.OpenDialog(new LoginModal(type => {
                 if (type == ModalFinishType.Succes) {
                     this.Dispatcher.Invoke(UpdateLoginBtn);

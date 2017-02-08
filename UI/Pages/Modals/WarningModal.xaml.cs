@@ -22,6 +22,12 @@ namespace osu_collection_manager.UI.Pages.Modals
     {
         public string Meme { get; set; } = Constants.OSU_MEMES[0];
 
+        public WarningModal(Action<ModalFinishType> closeCallback) : base(closeCallback) {
+            InitializeComponent();
+            var rnd = new Random().Next(0, Constants.OSU_MEMES.Length);
+            Meme = Constants.OSU_MEMES[rnd];
+        }
+
         public WarningModal()
         {
             InitializeComponent();

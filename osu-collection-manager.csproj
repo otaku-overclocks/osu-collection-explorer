@@ -95,6 +95,9 @@
     <Compile Include="UI\Pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\Modals\AskLogin.xaml.cs">
+      <DependentUpon>AskLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\Modals\DownloadMissingModal.xaml.cs">
       <DependentUpon>DownloadMissingModal.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\Modals\AskLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
