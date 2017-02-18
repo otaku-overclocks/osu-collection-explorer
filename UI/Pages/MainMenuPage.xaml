@@ -9,7 +9,7 @@
                 Title="MainMenuPage">
     <Grid HorizontalAlignment="Stretch">
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="BtnExport" Content="Export Collections to .osc"
+            <Button x:Name="BtnExport" Content="Export Collections"
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}"

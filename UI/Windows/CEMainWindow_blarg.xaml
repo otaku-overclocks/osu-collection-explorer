@@ -7,7 +7,7 @@
                               xmlns:windows="clr-namespace:osu_collection_manager.UI.Windows"
                               mc:Ignorable="d"
                               Background="{DynamicResource MaterialDesignPaper}"
-                              Title="{Binding ElementName=windowTitle, Path=Text}" Height="416.907" Width="570.722"
+                              Title="{Binding ElementName=windowTitle, Path=Text}" Height="400.825" Width="531.134"
                               AllowsTransparency="True"
                               WindowStyle="None"
                               WindowState="Normal"

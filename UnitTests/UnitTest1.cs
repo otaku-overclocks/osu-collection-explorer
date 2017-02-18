@@ -126,5 +126,10 @@ namespace UnitTests
             Debug.WriteLine(cypher);
             Debug.WriteLine(FileUtils.Decrypt(cypher));
         }
+
+        [TestMethod]
+        public void TestS3() {
+
+        }
     }
 }

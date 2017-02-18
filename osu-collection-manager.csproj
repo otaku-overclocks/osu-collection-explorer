@@ -84,7 +84,6 @@
     <Compile Include="Managers\BackupManager.cs" />
     <Compile Include="Managers\DownloadManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
-    <Compile Include="Managers\OsuDBManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UI\Pages\BaseModal.cs" />
     <Compile Include="UI\Pages\BasePage.cs" />
@@ -209,6 +208,7 @@
     <Compile Include="UI\Windows\BaseNavigationWindow.cs" />
     <Compile Include="UI\Windows\CEMainWindow.xaml.cs">
       <DependentUpon>CEMainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Windows\TestWindow.xaml.cs">

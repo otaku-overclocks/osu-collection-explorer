@@ -34,5 +34,10 @@ namespace osu_collection_manager
 
             return false;
         }
+
+        public static string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        public static string pathDownload = Path.Combine(pathUser, "Downloads");
+        public static DirectoryInfo ocmDirInfo = new DirectoryInfo(Preferences.DownloadsPath + "/");
+
     }
 }
