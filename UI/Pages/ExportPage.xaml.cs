@@ -73,6 +73,7 @@ namespace osu_collection_manager.UI.Pages
                     }
                     ZipFile.CreateFromDirectory(Preferences.SongsPath + $"/{i}", Preferences.DownloadsPath + $"/{i}.osz");
                 }
+                #region
                 if (!(bool)exportToRepo.IsChecked)
                 {
                     //Prompt a dialog to get the path to export to.
@@ -92,9 +93,25 @@ namespace osu_collection_manager.UI.Pages
                     MessageBox.Show($"Successfully created!");
                     MainWindow.OpenPage(null);          // Return to homepage.
                 }
-                else
-                { // do s3 logic }
-                    return;
+                #endregion
+                else if ((bool)exportToRepo.IsChecked && (bool)exportSave.IsChecked)
+                {
+                    //Prompt a dialog to get the path to export to.
+                    var saveFileDialog = new SaveFileDialog { Filter = "Zip file (*.zip)|*.zip", AddExtension = true, FileName = $"{LocalSongManager.LocalSongs.AccountName }'s songs.zip" };
+                    saveFileDialog.ShowDialog();
+                    if (File.Exists(saveFileDialog.FileName))
+                    {
+                        MessageBox.Show($"You have a {saveFileDialog.FileName} in your selected folder. Please move it. If it still exists after pressing OK, it will be overriden.");
+                        if (File.Exists(saveFileDialog.FileName))
+                        {
+                            File.Delete(saveFileDialog.FileName);
+                        }
+                    }
+                    ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our osz files.
+                    // System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
+                    MessageBox.Show($"Successfully created!");
+                    S3Manager.storeZip(saveFileDialog.FileName, saveFileDialog.SafeFileName);
+                    MessageBox.Show("S3 Success?");
                 }
                 if (!(bool)exportToZip.IsChecked)
                 {
@@ -106,8 +123,8 @@ namespace osu_collection_manager.UI.Pages
                         if (PromptSave(file)) MainWindow.OpenPage(null);
                     }
 
-                    if (!(bool)exportToRepo.IsChecked) { }
-                    else { MessageBox.Show("upload to db not implemented yet"); }
+                    if ((bool)exportToRepo.IsChecked) { }
+                    else { MessageBox.Show("upload to db not implemented yet"); } //upload osc to s3
                 }
             }
         }

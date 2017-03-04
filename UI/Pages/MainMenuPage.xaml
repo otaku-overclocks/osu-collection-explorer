@@ -5,8 +5,7 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:local="clr-namespace:osu_collection_manager.UI.Pages"
                 mc:Ignorable="d"
-                d:DesignHeight="300" d:DesignWidth="300"
-                Title="MainMenuPage">
+                Title="MainMenuPage" Height="401.031" Width="344.33">
     <Grid HorizontalAlignment="Stretch">
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button x:Name="BtnExport" Content="Export Collections"
@@ -17,8 +16,13 @@
             <Button x:Name="BtnImport" Content="Import/Edit .osc"
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"
-                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16"
+                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" Margin="16"
                     Click="BtnImport_OnClick" />
+            <Button x:Name="BtnExportBeatmap" Content="Export Beatmaps"
+                BorderBrush="{StaticResource SecondaryAccentBrush}"
+                Background="{StaticResource SecondaryAccentBrush}"
+                Foreground="{StaticResource SecondaryAccentForegroundBrush}"
+                Margin="16" Click="BtnExport_OnClick" />
             <Button x:Name="BtnResetCOnfig" Content="Reset saved path"
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"
