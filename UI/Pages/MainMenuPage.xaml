@@ -18,11 +18,11 @@
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}" Margin="16"
                     Click="BtnImport_OnClick" />
-            <Button x:Name="BtnExportBeatmap" Content="Export Beatmaps"
+            <Button x:Name="BtnExportFolderOsz" Content="Export Beatmap Folder to .osz"
                 BorderBrush="{StaticResource SecondaryAccentBrush}"
                 Background="{StaticResource SecondaryAccentBrush}"
                 Foreground="{StaticResource SecondaryAccentForegroundBrush}"
-                Margin="16" Click="BtnExport_OnClick" />
+                Margin="16" Click="BtnExportFolderOsz_OnClick" />
             <Button x:Name="BtnResetCOnfig" Content="Reset saved path"
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"

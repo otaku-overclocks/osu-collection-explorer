@@ -110,7 +110,7 @@ namespace osu_collection_manager.UI.Pages
                     ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our osz files.
                     // System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
                     MessageBox.Show($"Successfully created!");
-                    S3Manager.storeZip(saveFileDialog.FileName, saveFileDialog.SafeFileName);
+                    // S3Manager.storeZip(saveFileDialog.FileName, saveFileDialog.SafeFileName);
                     MessageBox.Show("S3 Success?");
                 }
                 if (!(bool)exportToZip.IsChecked)
