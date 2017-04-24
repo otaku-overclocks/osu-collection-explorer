@@ -4,3 +4,6 @@ build:
   verbosity: minimal
 install:
   - cmd: git submodule update --init --recursive"
+  - cmd: nuget restore osu-collection-manager.sln
+  - cmd: nuget restore OsuMapDownload.sln
+  - cmd: nuget restore osu-database-reader.sln
