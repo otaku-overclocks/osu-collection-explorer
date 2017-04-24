@@ -1,4 +1,6 @@
-# osu-collection-explorer [![Build Status](https://travis-ci.org/otaku-overclocks/osu-collection-explorer.svg?branch=dev)](https://travis-ci.org/otaku-overclocks/osu-collection-explorer)
+# osu-collection-explorer 
+
+[![Build status](https://ci.appveyor.com/api/projects/status/teev6t88l9yetv98?svg=true)](https://ci.appveyor.com/project/Mark9870/osu-collection-explorer)
 
 Idea behind this:
 https://osu.ppy.sh/forum/t/541813
