@@ -11,3 +11,7 @@ install:
   - cmd: cd OsuBeatmapDownloadLib
   - cmd: nuget restore OsuMapDownload.sln
   - cmd: cd ..
+build_script:
+  - ps: .\build.cmd
+
+test: off
