@@ -7,7 +7,7 @@
                 xmlns:userControls="clr-namespace:osu_collection_manager.UI.UserControls"
                 mc:Ignorable="d"
                 Title="ExportPage"
-                Style="{StaticResource PageStyle}" Height="312.371" Width="424.743">
+                Style="{StaticResource PageStyle}" Height="347.371" Width="467.743">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,11 +22,14 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Right" Height="36"
-                    Margin="8,6,8,6" Click="BtnCancel_OnClick" />
+                    Margin="0,14,3,14" Click="BtnCancel_OnClick" />
             <Button Grid.Column="1" x:Name="BtnConfirm" Content="Export" HorizontalAlignment="Right" Height="36"
                     Margin="8,6,16,6" Click="BtnConfirm_OnClick" />
             <Button Grid.Column="0" x:Name="BtnSelect" Content="Select a different collection" HorizontalAlignment="Right" Height="36"
                 Margin="0,14,93,14" Click="BtnSelect_OnClick" Width="216" />
         </Grid>
+        <CheckBox x:Name="exportToZip" Content="Export to a Zip file" HorizontalAlignment="Left" Margin="188,3,0,0" VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.5,0.5" BorderThickness="0" Foreground="White" FontWeight="Bold" Checked="exportToZip_Checked"/>
+        <CheckBox x:Name="exportToRepo" Content="Export to a Public Repository" HorizontalAlignment="Left" Margin="188,21,0,0" VerticalAlignment="Top" Width="182" BorderThickness="0" Foreground="White" FontWeight="Bold" Checked="exportToRepo_Checked"/>
+        <CheckBox x:Name="exportSave" Content="Save to My Computer" HorizontalAlignment="Left" Margin="322,3,0,0" VerticalAlignment="Top" BorderThickness="0" Foreground="White" FontWeight="Bold"/>
     </Grid>
 </local:BasePage>

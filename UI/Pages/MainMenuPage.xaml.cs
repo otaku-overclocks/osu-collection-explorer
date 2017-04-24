@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using osu_collection_manager.Models;
 using osu_collection_manager.UI.Pages.Modals;
+using osu_collection_manager.Utils;
 
 namespace osu_collection_manager.UI.Pages
 {
@@ -63,6 +64,11 @@ namespace osu_collection_manager.UI.Pages
             Properties.Settings.Default.OsuPath = Preferences.OsuPath;
             Properties.Settings.Default.Save();
             Properties.Settings.Default.Reload();
+        }
+
+        private void BtnExportFolderOsz_OnClick(object sender, RoutedEventArgs e)
+        {
+            FileUtils.FolderToOsz();
         }
     }
 }

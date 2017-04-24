@@ -21,7 +21,7 @@ namespace osu_collection_manager
 
         public static string[] OSU_MEMES = new []
         {
-            "osu!jet"
+            "osu!jet", "freedom dive", "cookiezi", "peppy"
         };
     }
 }
