@@ -1,4 +1,4 @@
-# osu-collection-explorer ![travis-ci](https://travis-ci.org/otaku-overclocks/osu-collection-explorer.svg?branch=master)
+# osu-collection-explorer [![Build Status](https://travis-ci.org/otaku-overclocks/osu-collection-explorer.svg?branch=master)](https://travis-ci.org/otaku-overclocks/osu-collection-explorer)
 
 Idea behind this:
 https://osu.ppy.sh/forum/t/541813
