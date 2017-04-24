@@ -1,0 +1,6 @@
+version: 1.0.{build}
+build:
+  project: osu-collection-manager.sln
+  verbosity: minimal
+install:
+  - cmd: git submodule update --init --recursive"
