@@ -83,7 +83,7 @@ namespace osu_collection_manager.UI.Pages
                 }
 
                 System.Windows.Forms.MessageBox.Show("done!");
-
+                MainWindow.OpenPage(null);
             }
         }
     }
