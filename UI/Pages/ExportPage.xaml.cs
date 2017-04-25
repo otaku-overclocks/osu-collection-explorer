@@ -19,7 +19,7 @@ using osu_collection_manager.UI.UserControls.Models;
 using System.IO.Compression;
 using System.Diagnostics;
 using System.IO;
-
+using TagLib;
 namespace osu_collection_manager.UI.Pages
 {
     /// <summary>
@@ -44,6 +44,119 @@ namespace osu_collection_manager.UI.Pages
         {
             //Get selected collections
             var selected = Tree.GetSelected(false);
+
+            #region mp3 functions
+            if ((bool)exportMP3.IsChecked)
+            {
+                List<Collection> fileLocations = selected;      // get our selected maps
+                // string key: bd dictionary
+                // dictionary value: names dictionary
+                Dictionary<Dictionary<string, Beatmap>, Dictionary<string, string>> mapidname = new Dictionary<Dictionary<string, Beatmap>, Dictionary<string, string>>();
+                if (Directory.EnumerateFileSystemEntries(Preferences.DownloadsPath + "/").Any()) // Check if the OCM Temp folder has files in it.
+                {
+                    foreach (FileInfo file in Common.ocmDirInfo.GetFiles())
+                        file.Delete();                                                           // If we do, wipe the OCM Temp folder.
+                }
+
+                bool breakc = false;
+
+                foreach (Collection c in fileLocations)
+                {
+                    foreach (MapSet s in c.MapSets)
+                    {
+                        foreach (Beatmap b in s.Maps)
+                        {
+                            foreach (Dictionary<string, Beatmap> n in mapidname.Keys)
+                            {
+                                    if (n.ContainsKey(b.Entry.Title)) { breakc = true; break; } // If we already have the map, no need to put it in.
+                                breakc = false;
+                            }
+                            if (breakc)
+                            {
+                                break;
+                            }
+                            // string key: audio file name
+                            // string value: folder name
+                            var names = new Dictionary<string, string>();
+
+                            // string key : beatmap title
+                            // Beatmap value : beatmap
+                            var vb = new Dictionary<string,Beatmap>();
+
+                            names.Add(b.AudioFileName, b.FolderName);   // If we don't, add it to the dictionary.
+                            vb.Add(b.Entry.Title, b);                   // Add it again to another dictionary...
+                            mapidname.Add(vb, names);                    // Add everything together.
+                        }
+                    }
+                }
+
+                foreach (KeyValuePair<Dictionary<string,Beatmap>, Dictionary<string, string>> y in mapidname)
+                {
+                    foreach (KeyValuePair<string, Beatmap> i in y.Key)
+                    {
+                            foreach (KeyValuePair<string, string> x in y.Value)
+                            {
+                                #region Replace invalid characters to be used as a filename.
+                                string filename = "null";
+                                filename = i.Value.Entry.Title;
+                                filename = filename.Replace('~', '_');
+                                filename = filename.Replace('#', '_');
+                                filename = filename.Replace('%', '_');
+                                filename = filename.Replace('&', '_');
+                                filename = filename.Replace('*', '_');
+                                filename = filename.Replace('[', '_');
+                                filename = filename.Replace(']', '_');
+                                filename = filename.Replace('(', '_');
+                                filename = filename.Replace(')', '_');
+                                filename = filename.Replace('{', '_');
+                                filename = filename.Replace('}', '_');
+                                filename = filename.Replace('\\', '_');
+                                filename = filename.Replace(';', '_');
+                                filename = filename.Replace(':', '_');
+                                filename = filename.Replace('|', '_');
+                                filename = filename.Replace('?', '_');
+                                filename = filename.Replace('/', '_');
+                                filename = filename.Replace('\'', '_');
+                                filename = filename.Replace('"', '_');
+                                #endregion
+
+                                // Copy the mp3 to the osu! folder/OCMTemp.
+                                System.IO.File.Copy($"{Preferences.SongsPath}/{x.Value}/{x.Key}", $"{Preferences.DownloadsPath}/{filename}.mp3", true);
+
+                                #region Remove the tags, and add our tags.
+                                TagLib.File taglibfile = TagLib.File.Create($"{Preferences.DownloadsPath}/{filename}.mp3");
+                                taglibfile.RemoveTags(TagTypes.AllTags);
+                                taglibfile.Tag.Title = i.Value.Entry.Title;
+                                taglibfile.Tag.AlbumArtists = new string[1] { i.Value.Entry.Artist };
+                                taglibfile.Save();
+                                #endregion
+                            }
+                    }
+                }
+
+                if ((bool)exportToZip.IsChecked)
+                {
+                    //Prompt a dialog to get the path to export to.
+                    var saveFileDialog = new SaveFileDialog { Filter = "Zip file (*.zip)|*.zip", AddExtension = true, FileName = $"{LocalSongManager.LocalSongs.AccountName }'s songs.zip" };
+                    saveFileDialog.ShowDialog();
+                    if (System.IO.File.Exists(saveFileDialog.FileName))
+                    {
+                        MessageBox.Show($"You have a {saveFileDialog.FileName} in your selected folder. Please move it. If it still exists after pressing OK, it will be overriden.");
+                        if (System.IO.File.Exists(saveFileDialog.FileName))
+                        {
+                            System.IO.File.Delete(saveFileDialog.FileName);
+                        }
+                    }
+                    ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our song files.
+                    System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
+
+                    MessageBox.Show($"Successfully created!");
+                    MainWindow.OpenPage(null);          // Return to homepage.
+                }
+
+            }
+            #endregion
+
             // Check if the user wants to zip the collections.
             if ((bool)exportToZip.IsChecked)
             {
@@ -67,61 +180,34 @@ namespace osu_collection_manager.UI.Pages
 
                 foreach (string i in folderList)                // Check if we have duplicates, If we do, delete em.
                 {
-                    if (File.Exists(Preferences.DownloadsPath + $"/{i}.osz"))
+                    if (System.IO.File.Exists(Preferences.DownloadsPath + $"/{i}.osz"))
                     {
-                        File.Delete(Preferences.DownloadsPath + $"/{i}.osz");
+                        System.IO.File.Delete(Preferences.DownloadsPath + $"/{i}.osz");
                     }
                     ZipFile.CreateFromDirectory(Preferences.SongsPath + $"/{i}", Preferences.DownloadsPath + $"/{i}.osz");
                 }
-                if (!(bool)exportToRepo.IsChecked)
-                {
-                    //Prompt a dialog to get the path to export to.
-                    var saveFileDialog = new SaveFileDialog { Filter = "Zip file (*.zip)|*.zip", AddExtension = true, FileName = $"{LocalSongManager.LocalSongs.AccountName }'s songs.zip"};
-                    saveFileDialog.ShowDialog();
-                    if (File.Exists(saveFileDialog.FileName))
+
+                //Prompt a dialog to get the path to export to.
+                var saveFileDialog = new SaveFileDialog { Filter = "Zip file (*.zip)|*.zip", AddExtension = true, FileName = $"{LocalSongManager.LocalSongs.AccountName }'s songs.zip" };
+                saveFileDialog.ShowDialog();
+                if (System.IO.File.Exists(saveFileDialog.FileName))
                     {
                         MessageBox.Show($"You have a {saveFileDialog.FileName} in your selected folder. Please move it. If it still exists after pressing OK, it will be overriden.");
-                        if (File.Exists(saveFileDialog.FileName))
+                        if (System.IO.File.Exists(saveFileDialog.FileName))
                         {
-                            File.Delete(saveFileDialog.FileName);
+                            System.IO.File.Delete(saveFileDialog.FileName);
                         }
                     }
-                    ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our osz files.
-                    System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
+                ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our osz files.
+                System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
+                MessageBox.Show($"Successfully created!");
 
-                    MessageBox.Show($"Successfully created!");
-                    MainWindow.OpenPage(null);          // Return to homepage.
-                } // if export to repo is not checked
-                else if ((bool)exportToRepo.IsChecked && (bool)exportSave.IsChecked)
+                if ((bool)exportToRepo.IsChecked)
                 {
-                    //Prompt a dialog to get the path to export to.
-                    var saveFileDialog = new SaveFileDialog { Filter = "Zip file (*.zip)|*.zip", AddExtension = true, FileName = $"{LocalSongManager.LocalSongs.AccountName }'s songs.zip" };
-                    saveFileDialog.ShowDialog();
-                    if (File.Exists(saveFileDialog.FileName))
-                    {
-                        MessageBox.Show($"You have a {saveFileDialog.FileName} in your selected folder. Please move it. If it still exists after pressing OK, it will be overriden.");
-                        if (File.Exists(saveFileDialog.FileName))
-                        {
-                            File.Delete(saveFileDialog.FileName);
-                        }
-                    }
-                    ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our osz files.
-                    // System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
-                    MessageBox.Show($"Successfully created!");
-                } // if export to repo is checked and export to pc is checked
-                if (!(bool)exportToZip.IsChecked)
-                {
-                    //Put our collections in our file model
-                    var file = new CollectionsFile(selected) { Name = Tree.Title };
-                    //If saved. Go back to main page
-                    if (!(bool)exportToRepo.IsChecked)
-                    {
-                        if (PromptSave(file)) MainWindow.OpenPage(null);
-                    }
-
-                    if ((bool)exportToRepo.IsChecked) { }
-                    else { MessageBox.Show("upload to db not implemented yet"); } //upload osc to s3
-                } // if export to zip is not checked
+                    MessageBox.Show("Exporting to an online repository has not been implemented yet, sorry!");
+                    if ((bool)exportSave.IsChecked) { } // If export to repo is checked with export to computer
+                    MainWindow.OpenPage(null);
+                } // export to repo, zipped.
             }
         }
         public static bool PromptSave(CollectionsFile file)
@@ -163,6 +249,11 @@ namespace osu_collection_manager.UI.Pages
         private void exportToRepo_Unchecked(object sender, RoutedEventArgs e)
         {
             exportSave.Visibility = Visibility.Hidden;
+        }
+
+        private void exportMP3_Checked(object sender, RoutedEventArgs e)
+        {
+            exportToRepo.Visibility = Visibility.Hidden;
         }
     }
 }
