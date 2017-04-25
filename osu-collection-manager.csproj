@@ -91,6 +91,9 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UI\Pages\BaseModal.cs" />
     <Compile Include="UI\Pages\BasePage.cs" />
+    <Compile Include="UI\Pages\ExportMP3.xaml.cs">
+      <DependentUpon>ExportMP3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\ExportPage.xaml.cs">
       <DependentUpon>ExportPage.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RandomTestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\ExportMP3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,11 +302,4 @@
     <Content Include="Utils\Ookii.Dialogs.Wpf.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\Fody.1.28.3\build\Fody.targets" Condition="Exists('packages\Fody.1.28.3\build\Fody.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Fody.1.28.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.1.28.3\build\Fody.targets'))" />
-  </Target>
 </Project>

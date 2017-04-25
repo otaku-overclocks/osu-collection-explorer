@@ -70,5 +70,11 @@ namespace osu_collection_manager.UI.Pages
         {
             FileUtils.FolderToOsz();
         }
+
+        private void BtnExportMP3_OnClick(object sender, RoutedEventArgs e)
+        {
+            // doesn't work
+            MainWindow.OpenPage(new ExportMP3());
+        }
     }
 }

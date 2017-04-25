@@ -13,6 +13,11 @@
                     Background="{StaticResource SecondaryAccentBrush}"
                     Foreground="{StaticResource SecondaryAccentForegroundBrush}"
                     d:LayoutOverrides="Height" Margin="16" Click="BtnExport_OnClick" />
+            <Button x:Name="BtnExport_Copy" Content="Export Collection mp3 files"
+                BorderBrush="{StaticResource SecondaryAccentBrush}"
+                Background="{StaticResource SecondaryAccentBrush}"
+                Foreground="{StaticResource SecondaryAccentForegroundBrush}"
+                Margin="16" Click="BtnExportMP3_OnClick" />
             <Button x:Name="BtnImport" Content="Import/Edit .osc"
                     BorderBrush="{StaticResource SecondaryAccentBrush}"
                     Background="{StaticResource SecondaryAccentBrush}"

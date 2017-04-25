@@ -73,7 +73,6 @@ namespace osu_collection_manager.UI.Pages
                     }
                     ZipFile.CreateFromDirectory(Preferences.SongsPath + $"/{i}", Preferences.DownloadsPath + $"/{i}.osz");
                 }
-                #region
                 if (!(bool)exportToRepo.IsChecked)
                 {
                     //Prompt a dialog to get the path to export to.
@@ -92,8 +91,7 @@ namespace osu_collection_manager.UI.Pages
 
                     MessageBox.Show($"Successfully created!");
                     MainWindow.OpenPage(null);          // Return to homepage.
-                }
-                #endregion
+                } // if export to repo is not checked
                 else if ((bool)exportToRepo.IsChecked && (bool)exportSave.IsChecked)
                 {
                     //Prompt a dialog to get the path to export to.
@@ -110,9 +108,7 @@ namespace osu_collection_manager.UI.Pages
                     ZipFile.CreateFromDirectory(Preferences.DownloadsPath, saveFileDialog.FileName); // Finally, create a zip file from our osz files.
                     // System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{saveFileDialog.FileName}\"");
                     MessageBox.Show($"Successfully created!");
-                    // S3Manager.storeZip(saveFileDialog.FileName, saveFileDialog.SafeFileName);
-                    MessageBox.Show("S3 Success?");
-                }
+                } // if export to repo is checked and export to pc is checked
                 if (!(bool)exportToZip.IsChecked)
                 {
                     //Put our collections in our file model
@@ -125,7 +121,7 @@ namespace osu_collection_manager.UI.Pages
 
                     if ((bool)exportToRepo.IsChecked) { }
                     else { MessageBox.Show("upload to db not implemented yet"); } //upload osc to s3
-                }
+                } // if export to zip is not checked
             }
         }
         public static bool PromptSave(CollectionsFile file)
