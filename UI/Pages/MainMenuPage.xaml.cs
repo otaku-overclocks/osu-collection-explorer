@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using osu_collection_manager.Models;
 using osu_collection_manager.UI.Pages.Modals;
+using osu_collection_manager.Properties;
 
 namespace osu_collection_manager.UI.Pages
 {
@@ -27,6 +28,15 @@ namespace osu_collection_manager.UI.Pages
         public MainMenuPage()
         {
             InitializeComponent();
+            if (Settings.Default.TourneyMLLoggedOn)
+            {
+                BtnLogOut.IsEnabled = true;
+                LoginStatus.Content = "Logged in as " + Settings.Default.TourneyMLUser;
+            }
+            else
+            {
+                BtnLogOut.IsEnabled = false;
+            }
         }
 
         public void OpenExportPage()
@@ -60,9 +70,30 @@ namespace osu_collection_manager.UI.Pages
 
         private void BtnResetCOnfig_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.OsuPath = Preferences.OsuPath;
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Reload();
+            Settings.Default.OsuPath = Preferences.OsuPath;
+            Settings.Default.Save();
+            Settings.Default.Reload();
+        }
+
+        // show online collections
+        private void BtnTestLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (Settings.Default.TourneyMLLoggedOn)
+            {
+                MainWindow.OpenPage(new Online.CollectionListPage());
+            }
+            else
+            {
+                MainWindow.OpenDialog(new Online.Modals.TournamentMLLoginModal());
+            }
+        }
+
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Content = "Not logged in";
+            BtnLogOut.IsEnabled = false;
+            Settings.Default.TourneyMLLoggedOn = false;
+            Settings.Default.Save();
         }
     }
 }

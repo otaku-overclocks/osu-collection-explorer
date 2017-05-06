@@ -4,25 +4,38 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace osu_collection_manager.Models
 {
-    /// <summary>
-    /// Using DataContract here to be able to serialize it to json
-    /// </summary>
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Collection
     {
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public List<MapSet> MapSets { get; set; }
+        // public properties going to JSON
 
-        public int BeatmapCount => MapSets.Sum(mapSet => mapSet.Maps.Count);
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+        [JsonProperty(PropertyName = "mapsets")]
+        public List<MapSet> Mapsets { get; set; }
+        [JsonProperty(PropertyName = "user_id")]
+        public int CreatorID { get; set; }
+        [JsonProperty(PropertyName = "visibility")]
+        public int Visibility { get; set; }
+
+
+        // -----------------------
+        // properties that don't go to JSON
+
+        public int BeatmapCount => Mapsets.Sum(mapSet => mapSet.Maps.Count);
+
+        // -----------------------
+        // Constructors
 
         public Collection(string name, List<Beatmap> beatmaps)
         {
-            Name = name;
+            Title = name;
             // Loops through all the beatmaps and adds the ones with a same mapset id to the same list to create a
             // Mapset out of it
             var mapSets = new Dictionary<int, MapSet>();
@@ -35,13 +48,13 @@ namespace osu_collection_manager.Models
                 }
                 mapSets[beatmap.Entry.BeatmapSetId].Maps.Add(beatmap);
             }
-            MapSets = mapSets.Values.ToList();
+            Mapsets = mapSets.Values.ToList();
         }
         
         public Collection(string name, List<MapSet> mapSets)
         {
-            Name = name;
-            MapSets = mapSets;
+            Title = name;
+            Mapsets = mapSets;
         }
 
 

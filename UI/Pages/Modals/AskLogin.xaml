@@ -16,9 +16,9 @@
                  FontFamily="{DynamicResource MaterialDesignFont}">
     <StackPanel Margin="16">
         <TextBlock TextWrapping="Wrap" 
-                   Text="We use B1oodcat as standard download website. Would you like to login with your osu account to download from osu's official website? Its faster. B1oodcat will still be used for maps that are deleted. You can always login and logout in settings."></TextBlock>
+                   Text="We use Bloodcat as standard download website. Would you like to login with your osu! account to download from the osu! servers? It's faster. Bloodcat will still be used for maps that cannot be downloaded from osu.ppy.sh anymore (such as deleted maps, or DMCA takedowns). You can always login and logout in settings." TextAlignment="Justify"></TextBlock>
         <Button Content="Login here" Margin="0,16,0,0" Click="Login_OnClick"></Button>
-        <Button Content="Mayby later" Margin="0,16,0,0" Click="Cancel_OnClick"></Button>
+        <Button Content="Maybe later" Margin="0,16,0,0" Click="Cancel_OnClick"></Button>
     </StackPanel>
         
 </pages:BaseModal>

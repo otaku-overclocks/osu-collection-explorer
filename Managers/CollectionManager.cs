@@ -114,10 +114,10 @@ namespace osu_collection_manager.Managers
                     w.Write(_collections.Count);
                     foreach (var collection in _collections)
                     {
-                        w.Write(collection.Name);
+                        w.Write(collection.Title);
                         w.Write(collection.BeatmapCount);
                         // Write hashes from all beatmaps in the hash. Osu does it too
-                        foreach (var mapSet in collection.MapSets)
+                        foreach (var mapSet in collection.Mapsets)
                         {
                             foreach (var map in mapSet.Maps)
                             {
@@ -145,15 +145,15 @@ namespace osu_collection_manager.Managers
             foreach (var collection in cols)
             {
                 //Check for existing collections with same name
-                var existing = Collections.Find(col => col.Name.Equals(collection.Name));
+                var existing = Collections.Find(col => col.Title.Equals(collection.Title));
                 if (existing != null)
                 {
                     //Check for existing mapsets so we dont place duplicates
-                    foreach (var mapSet in collection.MapSets)
+                    foreach (var mapSet in collection.Mapsets)
                     {
                         if (mapSet.Maps.Count == 0) continue;
-                        if (existing.MapSets.Find(set => set.SetID.Equals(mapSet.SetID)) == null)
-                            existing.MapSets.Add(mapSet);
+                        if (existing.Mapsets.Find(set => set.SetID.Equals(mapSet.SetID)) == null)
+                            existing.Mapsets.Add(mapSet);
                     }
                     continue;
                 }

@@ -55,8 +55,8 @@ namespace UnitTests
         {
             foreach (var collection in collections)
             {
-                Debug.WriteLine($"Collection: {collection.Name}");
-                foreach (var set in collection.MapSets)
+                Debug.WriteLine($"Collection: {collection.Title}");
+                foreach (var set in collection.Mapsets)
                 {
                     Debug.WriteLine($"Mapset: {set.Artist} - {set.Title}; Set ID {set.SetID}");
                     if(set.Maps != null)

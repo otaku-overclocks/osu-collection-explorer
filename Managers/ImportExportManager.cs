@@ -22,7 +22,7 @@ namespace osu_collection_manager.Managers
         public static List<MapSet> CheckMissingMapSets(List<Collection> collections) {
             var ret = new List<MapSet>();
             foreach (var collection in collections) {
-                foreach (var mapSet in collection.MapSets) {
+                foreach (var mapSet in collection.Mapsets) {
                     // If no set found in osu.db we add it to the list of not found maps.
                     var found = LocalSongManager.FindSetByID(mapSet.SetID);
                     if (found == null) {

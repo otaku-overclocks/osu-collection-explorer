@@ -6,22 +6,23 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace osu_collection_manager.Models
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class CollectionsFile
     {
         /// <summary>
         /// Version of our program. To be able to change this and still be able to read old files
         /// </summary>
-        [DataMember]
+        [JsonProperty(PropertyName = "version")]
         public int Version { get; set; }
 
-        [DataMember]
+        [JsonProperty(PropertyName = "collections")]
         public List<Collection> Collections { get; set; }
 
-        [DataMember]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; } = "Untitled collection pack";
 
         public CollectionsFile(List<Collection> collections)
@@ -35,19 +36,24 @@ namespace osu_collection_manager.Models
             Version = version;
             Collections = collections;
         }
-
+          
         /// <summary>
         /// Write everything that is in this model to a file in json format.
         /// </summary>
         /// <param name="path"></param>
         public void WriteToFile(string path)
-        {
-            // Serialize to json
-            var file = new DataContractJsonSerializer(typeof(CollectionsFile));
-            //Write to a file
-            using (var stream = File.Create(path))
+        {            
+            //// Serialize to json
+            //var file = new DataContractJsonSerializer(typeof(CollectionsFile));
+            ////Write to a file
+            //using (var stream = File.Create(path))
+            //{
+            //    file.WriteObject(stream, this);
+            //}
+            string json = JsonConvert.SerializeObject(this);
+            using (StreamWriter sr = new StreamWriter(path, true))
             {
-                file.WriteObject(stream, this);
+                sr.WriteLine(json);
             }
         }
 
@@ -57,14 +63,17 @@ namespace osu_collection_manager.Models
         /// <returns></returns>
         public string WriteToString()
         {
-            //Write to memory
-            var stream = new MemoryStream();
-            var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
-            ser.WriteObject(stream, this);
-            stream.Position = 0;
-            var sr = new StreamReader(stream);
-            //Read the whole string from memory
-            return sr.ReadToEnd();
+            ////Write to memory
+            //var stream = new MemoryStream();
+            //var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
+            //ser.WriteObject(stream, this);
+            //stream.Position = 0;
+            //var sr = new StreamReader(stream);
+            ////Read the whole string from memory
+            //return sr.ReadToEnd();
+
+            // well, that was easy
+            return JsonConvert.SerializeObject(this);
         }
 
         /// <summary>
@@ -74,11 +83,18 @@ namespace osu_collection_manager.Models
         /// <returns></returns>
         public static CollectionsFile ReadFromFile(string path)
         {
-            var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
-                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    return (CollectionsFile)ser.ReadObject(stream);
-                }
+            //var ser = new DataContractJsonSerializer(typeof(CollectionsFile));
+            //    using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            //    {
+            //        return (CollectionsFile)ser.ReadObject(stream);
+            //    }
+
+            
+            using (StreamReader sr = new StreamReader(path))
+            {
+                string fileContents = sr.ReadToEnd();
+                return JsonConvert.DeserializeObject<CollectionsFile>(fileContents);
+            }
         }
 
         /// <summary>
@@ -88,11 +104,12 @@ namespace osu_collection_manager.Models
         /// <returns></returns>
         public static CollectionsFile ReadFromString(string json)
         {
-            var deserializer = new DataContractJsonSerializer(typeof(CollectionsFile));
-            using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(json)))
-            {
-                return (CollectionsFile) deserializer.ReadObject(ms);
-            }
+            //var deserializer = new DataContractJsonSerializer(typeof(CollectionsFile));
+            //using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(json)))
+            //{
+            //    return (CollectionsFile) deserializer.ReadObject(ms);
+            //}
+            return JsonConvert.DeserializeObject<CollectionsFile>(json);
         }
     }
 }

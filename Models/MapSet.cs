@@ -5,26 +5,25 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace osu_collection_manager.Models
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MapSet
     {
         private List<Beatmap> _maps = new List<Beatmap>();
 
-        [DataMember]
+        [JsonProperty(PropertyName = "artist")]
         public string Artist { get; set; }
 
-        [DataMember]
+        [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
-        [DataMember]
+        [JsonProperty(PropertyName = "beatmapset_id")]
         public int SetID { get; set; }
 
-        /// <summary>
-        /// Empty when read from file, but never null
-        /// </summary>
+        
         public List<Beatmap> Maps
         {
             get
@@ -55,8 +54,8 @@ namespace osu_collection_manager.Models
 
         public MapSet(string artist, string title, int setId, List<Beatmap> maps)
         {
-            Artist = artist;
-            Title = title;
+            this.Artist = artist;
+            this.Title = title;
             SetID = setId;
             Maps = maps;
         }

@@ -6,9 +6,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using osu_database_reader;
+using Newtonsoft.Json;
 
 namespace osu_collection_manager.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Beatmap
     {
         /// <summary>

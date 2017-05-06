@@ -5,30 +5,22 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:local="clr-namespace:osu_collection_manager.UI.Pages"
                 mc:Ignorable="d"
-                Title="MainMenuPage" Height="401.031" Width="344.33">
+                d:DesignHeight="300" d:DesignWidth="400"
+                Title="MainMenuPage">
     <Grid HorizontalAlignment="Stretch">
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="BtnExport" Content="Export Collections"
-                    BorderBrush="{StaticResource SecondaryAccentBrush}"
-                    Background="{StaticResource SecondaryAccentBrush}"
-                    Foreground="{StaticResource SecondaryAccentForegroundBrush}"
-                    d:LayoutOverrides="Height" Margin="16" Click="BtnExport_OnClick" />
-            <Button x:Name="BtnImport" Content="Import/Edit .osc"
-                    BorderBrush="{StaticResource SecondaryAccentBrush}"
-                    Background="{StaticResource SecondaryAccentBrush}"
-                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" Margin="16"
+            <Button x:Name="BtnExport" Content="Export Collections to .osc" Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                    d:LayoutOverrides="Height" Margin="16,4" Click="BtnExport_OnClick" />
+            <Button x:Name="BtnImport" Content="Import/Edit .osc" Style="{DynamicResource MaterialDesignRaisedAccentButton}" d:LayoutOverrides="Height" Margin="16,4"
                     Click="BtnImport_OnClick" />
-            <Button x:Name="BtnExportBeatmap" Content="Export Beatmaps"
-                BorderBrush="{StaticResource SecondaryAccentBrush}"
-                Background="{StaticResource SecondaryAccentBrush}"
-                Foreground="{StaticResource SecondaryAccentForegroundBrush}"
-                Margin="16" Click="BtnExport_OnClick" />
-            <Button x:Name="BtnResetCOnfig" Content="Reset saved path"
-                    BorderBrush="{StaticResource SecondaryAccentBrush}"
-                    Background="{StaticResource SecondaryAccentBrush}"
-                    Foreground="{StaticResource SecondaryAccentForegroundBrush}" d:LayoutOverrides="Height" Margin="16"
+            <Button x:Name="BtnResetCOnfig" Content="Reset saved path" Style="{DynamicResource MaterialDesignRaisedAccentButton}" d:LayoutOverrides="Height" Margin="16,4"
                     Click="BtnResetCOnfig_Click" />
             <Label Content="osu! collections manager, beta 0.2" HorizontalContentAlignment="Center"/>
+            <Button x:Name="BtnTestLogin" Content="Show online collections" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Margin="16,4"
+                Click="BtnTestLogin_Click" />
+            <Button x:Name="BtnLogOut" Content="Log out" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Margin="16,4"
+                Click="BtnLogOut_Click" IsEnabled="False"/>
+            <Label x:Name="LoginStatus" Content="Not logged in" HorizontalContentAlignment="Center" />
         </StackPanel>
     </Grid>
 </local:BasePage>

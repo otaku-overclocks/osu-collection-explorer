@@ -84,7 +84,6 @@ namespace osu_collection_manager.UI.Windows
                 ShowLogin();
                 return;
             }
-          
             ModalContent.Content = dialog;
             MainDialog.IsOpen = true;
         }
