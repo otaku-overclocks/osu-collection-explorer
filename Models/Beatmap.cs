@@ -20,7 +20,8 @@ namespace osu_collection_manager.Models
         public BeatmapEntry Entry { get; set; }
         public string Difficulty { get; set; }
         public int MapID { get; set; }
-
+        public string AudioFileName { get; set; }
+        public string FolderName { get; set; }
         public string MD5Hash { get; set; } //TODO: if newly added, calc from file
 
         public Beatmap(BeatmapEntry entry)
@@ -29,6 +30,8 @@ namespace osu_collection_manager.Models
             Difficulty = entry.Difficulty;
             MapID = entry.BeatmapId;
             MD5Hash = entry.BeatmapChecksum;
+            AudioFileName = entry.AudioFileName;
+            FolderName = entry.FolderName;
         }
 
         public Beatmap(string hash)

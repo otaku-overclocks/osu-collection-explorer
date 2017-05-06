@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Compression;
+using System.Windows.Forms;
+using Ookii.Dialogs.Wpf;
 
 namespace osu_collection_manager.Utils
 {
@@ -58,7 +60,26 @@ namespace osu_collection_manager.Utils
 
         public static bool FolderToOsz()
         {
-            return false; 
+            VistaFolderBrowserDialog browseFolder = new VistaFolderBrowserDialog();
+            browseFolder.ShowDialog();
+            if (Directory.GetFiles(browseFolder.SelectedPath).Length == 0)
+            {
+                MessageBox.Show("This folder does not contain any files!");
+                return false;
+            }
+            else if (Directory.GetFiles(browseFolder.SelectedPath, "*.osu").Length == 0)
+            {
+                MessageBox.Show("Not a valid folder! A valid folder requires at least 1 .osu file!");
+                return false;
+            }
+            else
+            {
+                VistaSaveFileDialog saveFile = new VistaSaveFileDialog();
+                saveFile.FileName = new DirectoryInfo(browseFolder.SelectedPath).Name;
+                saveFile.Title = "Save your .osz file";
+                ZipFile.CreateFromDirectory(browseFolder.SelectedPath, $"{saveFile.FileName}.osz");
+                return true;
+            }
         }
     }
 }

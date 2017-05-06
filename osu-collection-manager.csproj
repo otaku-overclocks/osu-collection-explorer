@@ -54,6 +54,13 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Utils\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -74,6 +81,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -87,9 +97,12 @@
     <Compile Include="Managers\BackupManager.cs" />
     <Compile Include="Managers\DownloadManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
+<<<<<<< HEAD
     <Compile Include="Managers\S3Manager.cs" />
     <Compile Include="Managers\OnlineManager.cs" />
     <Compile Include="Models\TourneyMLAPI\SessionData.cs" />
+=======
+>>>>>>> 4d1db70392da3cfa5abc074f43ee5632d4f16585
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UI\Pages\BaseModal.cs" />
@@ -308,6 +321,12 @@
     <Resource Include="Images\UI\Minimize.png" />
     <Resource Include="Images\UI\Maximize.png" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup />
+=======
+  <ItemGroup>
+    <Content Include="Utils\Ookii.Dialogs.Wpf.dll" />
+  </ItemGroup>
+>>>>>>> 4d1db70392da3cfa5abc074f43ee5632d4f16585
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
