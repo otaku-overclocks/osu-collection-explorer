@@ -30,7 +30,7 @@ namespace osu_collection_manager
         
 
         // note to devs: this is only testing so i can get something working, and maybe design UI around it
-        // what's in there is most likely working, which means: game folder at c:\users\jérémy\appdata\local\osu! (changed path in Preferences.cs)
+        // what's in there is most likely working
 
         private void readCollection_Click(object sender, RoutedEventArgs e)
         {

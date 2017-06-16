@@ -18,7 +18,7 @@ namespace osu_collection_manager.Models
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
         [JsonProperty(PropertyName = "mapsets")]
-        public List<MapSet> Mapsets { get; set; }
+        public List<MapSet> MapSets { get; set; }
         [JsonProperty(PropertyName = "user_id")]
         public int CreatorID { get; set; }
         [JsonProperty(PropertyName = "visibility")]
@@ -28,7 +28,7 @@ namespace osu_collection_manager.Models
         // -----------------------
         // properties that don't go to JSON
 
-        public int BeatmapCount => Mapsets.Sum(mapSet => mapSet.Maps.Count);
+        public int BeatmapCount => MapSets.Sum(mapSet => mapSet.Maps.Count);
 
         // -----------------------
         // Constructors
@@ -48,13 +48,13 @@ namespace osu_collection_manager.Models
                 }
                 mapSets[beatmap.Entry.BeatmapSetId].Maps.Add(beatmap);
             }
-            Mapsets = mapSets.Values.ToList();
+            MapSets = mapSets.Values.ToList();
         }
         
         public Collection(string name, List<MapSet> mapSets)
         {
             Title = name;
-            Mapsets = mapSets;
+            MapSets = mapSets;
         }
 
 

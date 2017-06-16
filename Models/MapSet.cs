@@ -23,7 +23,7 @@ namespace osu_collection_manager.Models
         [JsonProperty(PropertyName = "beatmapset_id")]
         public int SetID { get; set; }
 
-        
+        [JsonProperty(PropertyName = "beatmaps")]
         public List<Beatmap> Maps
         {
             get

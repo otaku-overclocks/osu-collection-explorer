@@ -209,6 +209,22 @@ namespace osu_collection_manager.UI.Pages
                     MainWindow.OpenPage(null);
                 } // export to repo, zipped.
             }
+
+            // i guess it should export collections to osc if nothing's checked
+            // "exportToZip" 
+            // "exportToRepo"
+            // "exportSave" <--- i suppose that one's for the export osc, but since i'm not sure
+            // "exportMP3" Co
+            if (exportToZip.IsChecked == false &&
+                exportToRepo.IsChecked == false &&
+                exportSave.IsChecked == false &&
+                exportMP3.IsChecked == false) // we're sure everything's unchecked that way hehe
+            {
+                //Put our collections in our file model
+                var file = new CollectionsFile(selected) {Name = Tree.Title};
+                //If saved. Go back to main page
+                if (PromptSave(file)) MainWindow.OpenPage(null);
+            }
         }
         public static bool PromptSave(CollectionsFile file)
         {

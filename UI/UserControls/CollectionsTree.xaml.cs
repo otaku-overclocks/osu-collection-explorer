@@ -143,11 +143,11 @@ namespace osu_collection_manager.UI.UserControls
                 else if (child.Selected == null)
                 {
                     var col = child.GetData(apply);
-                    col.Mapsets.Clear();
+                    col.MapSets.Clear();
                     foreach (var subChild in child.Children)
                     {
                         if (subChild.Selected == true)
-                            col.Mapsets.Add(subChild.Data);
+                            col.MapSets.Add(subChild.Data);
                     }
                     ret.Add(col);
                 }

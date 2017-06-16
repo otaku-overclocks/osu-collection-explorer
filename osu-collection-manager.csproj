@@ -97,10 +97,7 @@
     <Compile Include="Managers\BackupManager.cs" />
     <Compile Include="Managers\DownloadManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
-    <Compile Include="Managers\OnlineManager.cs" />
-    <Compile Include="Models\TourneyMLAPI\SessionData.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="UI\Pages\BaseModal.cs" />
     <Compile Include="UI\Pages\BasePage.cs" />
     <Compile Include="UI\Pages\ExportPage.xaml.cs">
@@ -123,12 +120,6 @@
     </Compile>
     <Compile Include="UI\Pages\Modals\WarningModal.xaml.cs">
       <DependentUpon>WarningModal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Pages\Online\CollectionListPage.xaml.cs">
-      <DependentUpon>CollectionListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Pages\Online\Modals\TournamentMLLoginModal.xaml.cs">
-      <DependentUpon>TournamentMLLoginModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -184,14 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\Modals\WarningModal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\Online\CollectionListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Pages\Online\Modals\TournamentMLLoginModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,6 +302,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Utils\Ookii.Dialogs.Wpf.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\TourneyMLAPI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

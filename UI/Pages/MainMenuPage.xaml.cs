@@ -79,14 +79,15 @@ namespace osu_collection_manager.UI.Pages
         // show online collections
         private void BtnTestLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (Settings.Default.TourneyMLLoggedOn)
-            {
-                MainWindow.OpenPage(new Online.CollectionListPage());
-            }
-            else
-            {
-                MainWindow.OpenDialog(new Online.Modals.TournamentMLLoginModal());
-            }
+            // ok this clearly is broken, i'll have to look through a previous commit to find the OnlineManager, SessionData and online modal pages
+            //if (Settings.Default.TourneyMLLoggedOn)
+            //{
+            //    MainWindow.OpenPage(new Online.CollectionListPage());
+            //}
+            //else
+            //{
+            //    MainWindow.OpenDialog(new Online.Modals.TournamentMLLoginModal());
+            //}
         }
 
         private void BtnLogOut_Click(object sender, RoutedEventArgs e)

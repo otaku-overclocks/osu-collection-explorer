@@ -27,7 +27,7 @@ namespace osu_collection_manager.UI.UserControls.Models
             Name = Data.Title;
 
             Children = new BindingList<MapsetHolder>();
-            foreach (var mapSet in data.Mapsets)
+            foreach (var mapSet in data.MapSets)
             {
                 Children.Add(new MapsetHolder(this, mapSet, selected));
             }
@@ -35,7 +35,7 @@ namespace osu_collection_manager.UI.UserControls.Models
 
         public Collection GetData(bool apply = false)
         {
-            if (!apply) return new Collection(Name, Data.Mapsets);
+            if (!apply) return new Collection(Name, Data.MapSets);
             Data.Title = Name;
             return Data;
         }
